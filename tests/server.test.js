@@ -1,0 +1,21 @@
+import test from 'node:test';
+import assert from 'node:assert/strict';
+import { createServer } from '../src/server.js';
+import { buildDemo } from '../src/demo.js';
+test('HTTP demo serves assets, search, validation and bounded request bodies', async t => {
+  const { index } = await buildDemo(), server = createServer(index);
+  await new Promise(resolve => server.listen(0, '127.0.0.1', resolve));
+  t.after(() => new Promise(resolve => server.close(resolve)));
+  const base = `http://127.0.0.1:${server.address().port}`;
+  const home = await fetch(base); assert.equal(home.status, 200); assert.match(await home.text(), /PALIMPSEST/);
+  assert.match(home.headers.get('content-security-policy'), /script-src 'self'/);
+  for (const asset of ['/style.css', '/app.js']) assert.equal((await fetch(base + asset)).status, 200);
+  const status = await (await fetch(base + '/api/status')).json(); assert.deepEqual(status.versions, ['v1', 'v2', 'v3']);
+  const post = body => fetch(base + '/api/search', { method: 'POST', body });
+  const result = await (await post(JSON.stringify({ query: 'Find fallback without awaiting primaryTool', topK: 1 }))).json();
+  assert.equal(result.results[0].version, 'v2');
+  assert.equal((await post('{')).status, 400); assert.equal((await post('{}')).status, 400);
+  assert.equal((await post('x'.repeat(9000))).status, 413);
+  assert.equal((await fetch(base + '/unknown')).status, 404);
+  assert.equal((await fetch(base, { method: 'DELETE' })).status, 405);
+});
