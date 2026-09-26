@@ -7,7 +7,7 @@ test('HTTP demo serves assets, search, validation and bounded request bodies', a
   await new Promise(resolve => server.listen(0, '127.0.0.1', resolve));
   t.after(() => new Promise(resolve => server.close(resolve)));
   const base = `http://127.0.0.1:${server.address().port}`;
-  const home = await fetch(base); assert.equal(home.status, 200); assert.match(await home.text(), /PALIMPSEST/);
+  const home = await fetch(base); assert.equal(home.status, 200); assert.match(await home.text(), /CodeStrata/);
   assert.match(home.headers.get('content-security-policy'), /script-src 'self'/);
   for (const asset of ['/style.css', '/app.js']) assert.equal((await fetch(base + asset)).status, 200);
   const status = await (await fetch(base + '/api/status')).json(); assert.deepEqual(status.versions, ['v1', 'v2', 'v3']);

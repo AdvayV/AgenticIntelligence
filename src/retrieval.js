@@ -20,7 +20,7 @@ export async function search(index, query, options = {}) {
   const topK = Number(options.topK ?? 10), maxRounds = Number(options.maxRounds ?? 3), maxCandidates = Number(options.maxCandidates ?? 120);
   if (!Number.isInteger(topK) || topK < 1 || topK > 100) throw new Error('topK must be an integer between 1 and 100');
   if (!Number.isInteger(maxRounds) || maxRounds < 1 || maxRounds > 5 || !Number.isInteger(maxCandidates) || maxCandidates < 1 || maxCandidates > 1000) throw new Error('Invalid agent budget');
-  if (options.mode && !['palimpsest', 'hybrid', 'lexical'].includes(options.mode)) throw new Error('Unknown retrieval mode');
+  if (options.mode && !['codestrata', 'hybrid', 'lexical'].includes(options.mode)) throw new Error('Unknown retrieval mode');
   if (options.version && !index.versions.includes(options.version)) throw new Error(`Unknown version: ${options.version}`);
   const plan = planQuery(query), trace = [];
   const rows = options.version ? index.snapshots[options.version].snippets : allSnippets(index);
@@ -36,7 +36,7 @@ export async function search(index, query, options = {}) {
     .filter(c => c.lexical > 0 || c.dense > 0.1).sort((a, b) => b.base - a.base || a.row.id.localeCompare(b.row.id));
   trace.push({ round: 0, action: 'hybrid_retrieve', candidates: candidates.length, reason: 'Fuse lexical and vector ranks; retain original snippets' });
   const inspected = new Map();
-  const useEvidence = !options.mode || options.mode === 'palimpsest';
+  const useEvidence = !options.mode || options.mode === 'codestrata';
   let pending = candidates.slice(0, Math.min(maxCandidates, Math.max(topK * 2, 12))), stopReason = 'candidate_exhaustion';
   for (let round = 1; round <= maxRounds; round++) {
     for (const candidate of pending) {

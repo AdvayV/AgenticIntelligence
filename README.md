@@ -1,8 +1,8 @@
-# PALIMPSEST
+# CodeStrata
 
 **Find the exact code version where behavior changed—even when the difference is a single `await`.**
 
-Agentic Code Intelligence prototype for Samsung PRISM. PALIMPSEST ranks JavaScript snippets using lexical/vector retrieval, parser-derived behavior facts, and historical contrasts. Output is code, file/line locations, version identity, and structured evidence.
+Agentic Code Intelligence prototype for Samsung PRISM. CodeStrata ranks JavaScript snippets using lexical/vector retrieval, parser-derived behavior facts, and historical contrasts. Output is code, file/line locations, version identity, and structured evidence.
 
 ```javascript
 // v1: wait for the permission operation
@@ -16,7 +16,7 @@ openSettings('bluetooth');
 
 Query: **“Where did Bluetooth settings stop waiting for permission checking?”**
 
-PALIMPSEST retrieves `openBluetooth@v2`, identifies the removed `await`, and lets you compare its predecessor. An unawaited invocation is a static pattern, not proof of a runtime race.
+CodeStrata retrieves `openBluetooth@v2`, identifies the removed `await`, and lets you compare its predecessor. An unawaited invocation is a static pattern, not proof of a runtime race.
 
 ## Run locally
 
@@ -46,20 +46,20 @@ npm run search -- --query "Find the version with removed guard for device suppor
 npm run index -- --repo /path/to/repo --version working
 
 # Historical snapshots, ordered oldest to newest; no checkout or code execution
-npm run index -- --repo /path/to/repo --refs COMMIT_OLD,COMMIT_NEW --out .palimpsest/history.json
-npm run search -- --out .palimpsest/history.json --version COMMIT_NEW --query "calls validateInput before executeTool"
+npm run index -- --repo /path/to/repo --refs COMMIT_OLD,COMMIT_NEW --out .codestrata/history.json
+npm run search -- --out .codestrata/history.json --version COMMIT_NEW --query "calls validateInput before executeTool"
 ```
 
 Re-running an existing version replaces that snapshot. Deleted files disappear from active results; unchanged file analyses and snippet vectors are reused. History follows **insertion order**, so supply chronological refs. Use a fresh index when changing embedding modes.
 
-To browse an existing index, set `PALIMPSEST_INDEX` to its path before `npm start`. Example in PowerShell:
+To browse an existing index, set `CODESTRATA_INDEX` to its path before `npm start`. Example in PowerShell:
 
 ```powershell
-$env:PALIMPSEST_INDEX = '.palimpsest/history.json'
+$env:CODESTRATA_INDEX = '.codestrata/history.json'
 npm.cmd start
 ```
 
-The server binds to localhost by default. `PORT` changes the port and `HOST` changes the bind address. The API provides `GET /api/status` and `POST /api/search`, with `{ "query": "...", "version": "optional", "topK": 5, "mode": "palimpsest" }`.
+The server binds to localhost by default. `PORT` changes the port and `HOST` changes the bind address. The API provides `GET /api/status` and `POST /api/search`, with `{ "query": "...", "version": "optional", "topK": 5, "mode": "codestrata" }`.
 
 ## What makes the approach distinctive
 
@@ -97,11 +97,11 @@ For learned embeddings:
 
 ```sh
 npm ci --include=optional
-npm run demo -- --embedding minilm --out .palimpsest/minilm.json
-npm run search -- --out .palimpsest/minilm.json --query "permission checking before opening settings"
+npm run demo -- --embedding minilm --out .codestrata/minilm.json
+npm run search -- --out .codestrata/minilm.json --query "permission checking before opening settings"
 ```
 
-`minilm` uses quantized `Xenova/all-MiniLM-L6-v2` through Transformers.js on CPU. The first call downloads public model files into `.cache/models`; later calls reuse them. Set `PALIMPSEST_MODEL_CACHE` to change that directory. This is a general text embedding model, not a specialized code model. Do not compare results from different embedding modes without reporting the mode.
+`minilm` uses quantized `Xenova/all-MiniLM-L6-v2` through Transformers.js on CPU. The first call downloads public model files into `.cache/models`; later calls reuse them. Set `CODESTRATA_MODEL_CACHE` to change that directory. This is a general text embedding model, not a specialized code model. Do not compare results from different embedding modes without reporting the mode.
 
 ## Evaluate
 
@@ -112,7 +112,7 @@ npm run test:coverage
 npm run evaluate
 ```
 
-The challenge harness compares lexical, hybrid, and PALIMPSEST retrieval with 1,000 distractors. It writes query-level NDCG@10, MRR, precision, recall, correct-version top-1, latency, indexing statistics, and RSS to `evaluation-results/challenge.json`. Set `DISTRACTORS` or `EVAL_OUT` to change the corpus size/output.
+The challenge harness compares lexical, hybrid, and CodeStrata retrieval with 1,000 distractors. It writes query-level NDCG@10, MRR, precision, recall, correct-version top-1, latency, indexing statistics, and RSS to `evaluation-results/challenge.json`. Set `DISTRACTORS` or `EVAL_OUT` to change the corpus size/output.
 
 **This is a synthetic development challenge; queries overlap demo cases. It is not CoIR and does not establish generalization.** See [measured results and limitations](docs/validation.md).
 
@@ -139,8 +139,8 @@ The encoder independently preprocesses each input; unparseable/non-JavaScript te
 ## Docker
 
 ```sh
-docker build -t palimpsest .
-docker run --rm -p 127.0.0.1:3000:3000 palimpsest
+docker build -t codestrata .
+docker run --rm -p 127.0.0.1:3000:3000 codestrata
 ```
 
 The image uses the offline CPU demo. Python evaluation and learned-model downloads are separate. Docker execution was not verified in the initial environment.

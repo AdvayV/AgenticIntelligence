@@ -19,7 +19,7 @@ export async function createEmbedder(mode = 'features') {
   if (mode !== 'minilm') throw new Error(`Unknown embedding mode: ${mode}`);
   if (!learnedEmbedder) learnedEmbedder = (async () => {
     const { pipeline, env } = await import('@huggingface/transformers');
-    env.cacheDir = path.resolve(process.env.PALIMPSEST_MODEL_CACHE ?? '.cache/models');
+    env.cacheDir = path.resolve(process.env.CODESTRATA_MODEL_CACHE ?? '.cache/models');
     const extract = await pipeline('feature-extraction', 'Xenova/all-MiniLM-L6-v2', { device: 'cpu', dtype: 'q8' });
     return { name: 'Xenova/all-MiniLM-L6-v2:q8', encode: async texts => {
       if (!texts.length) return [];

@@ -44,9 +44,9 @@ def main():
     from mteb.models.abs_encoder import AbsEncoder
     from mteb.models.model_meta import ModelMeta
 
-    class PalimpsestEncoder(AbsEncoder):
+    class CodeStrataEncoder(AbsEncoder):
         mteb_model_meta = ModelMeta.create_empty(overwrites={
-            "name": f"palimpsest-{args.mode}-{'raw' if args.raw else 'enriched'}",
+            "name": f"codestrata-{args.mode}-{'raw' if args.raw else 'enriched'}",
             "revision": "0.1.0",
         })
 
@@ -57,7 +57,7 @@ def main():
             return np.concatenate(batches, axis=0) if batches else np.empty((0, 384), dtype=np.float32)
 
     task = mteb.get_task("AppsRetrieval")
-    results = mteb.evaluate(PalimpsestEncoder(), [task], encode_kwargs={"batch_size": 64})
+    results = mteb.evaluate(CodeStrataEncoder(), [task], encode_kwargs={"batch_size": 64})
     task_result = list(results.task_results)[0]
     output = Path(args.output)
     output.parent.mkdir(parents=True, exist_ok=True)

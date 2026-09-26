@@ -23,7 +23,7 @@ async function boot(t, options = {}) {
   const { window } = dom, calls = [], mediaListeners = [];
   const media = { matches: options.reduced ?? false, addEventListener: (name, fn) => mediaListeners.push(fn) };
   window.matchMedia = () => media;
-  if (options.paused) window.localStorage.setItem('palimpsest-motion', 'paused');
+  if (options.paused) window.localStorage.setItem('codestrata-motion', 'paused');
   window.fetch = async (url, init) => {
     if (url === '/api/status') return response({ versions: index.versions, snippets: 16, embedding: index.embedding });
     const input = JSON.parse(init.body);
@@ -110,7 +110,7 @@ test('motion controls persist and respond to reduced-motion preference changes',
   toggle.click();
   assert.equal(document.body.classList.contains('motion-paused'), true);
   assert.equal(toggle.getAttribute('aria-pressed'), 'true');
-  assert.equal(window.localStorage.getItem('palimpsest-motion'), 'paused');
+  assert.equal(window.localStorage.getItem('codestrata-motion'), 'paused');
   toggle.click();
   assert.equal(document.body.classList.contains('motion-paused'), false);
   media.matches = true; mediaListeners.forEach(listener => listener());

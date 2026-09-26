@@ -19,7 +19,7 @@ const cases = [
   { query: 'Where is the settings://device deeplink used?', relevant: [['launchDevice', 'v1'], ['launchDevice', 'v2'], ['launchDevice', 'v3']] },
 ];
 const result = { generatedAt: new Date().toISOString(), dataset: 'Controlled synthetic development challenge; NOT CoIR AppsRetrieval', corpusSnippets: allSnippets(index).length, distractors, embedding: index.embedding, indexing, modes: {}, limitations: ['Queries overlap demo development cases; these results do not establish generalization.', 'Latency includes one query execution per case, not a production load test.', 'No official screening scores are claimed.'] };
-for (const mode of ['lexical', 'hybrid', 'palimpsest']) {
+for (const mode of ['lexical', 'hybrid', 'codestrata']) {
   const runs = [];
   for (const item of cases) {
     const relevance = Object.fromEntries(allSnippets(index).filter(s => item.relevant.some(([name, version]) => s.name === name && s.version === version)).map(s => [s.id, 1]));

@@ -4,7 +4,7 @@ Initial implementation was developed with OpenAI Codex in collaboration with the
 
 | Activity | Origin | Output and human review required |
 |---|---|---|
-| Idea generation | AI-assisted | PALIMPSEST concept: retrieve behavior changes across near-identical versions. Team reviews novelty claims and scope. |
+| Idea generation | AI-assisted | CodeStrata concept: retrieve behavior changes across near-identical versions. Team reviews novelty claims and scope. |
 | Architecture and code | AI-generated initial implementation | Parser analysis, index, retrieval agent, web UI, CLI, benchmark adapters. Team reviews code and assumptions. |
 | Tests and debugging | AI-generated | Static-analysis counterexamples, retrieval/version tests, HTTP and bridge tests. Team expands held-out validation. |
 | Documentation/UI | AI-generated | README, architecture, demo script, checklist, interface. Team supplies actual team details and presentation assets. |

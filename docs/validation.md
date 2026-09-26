@@ -10,7 +10,7 @@ Seven queries over 16 demo snippets across three versions, plus 1,000 synthetic 
 |---|---:|---:|---:|
 | Lexical | 0.8133 | 0.7381 | 4/7 |
 | Hybrid feature-vector baseline | 0.7475 | 0.6905 | 3/7 |
-| PALIMPSEST with static/version evidence | 1.0000 | 1.0000 | 7/7 |
+| CodeStrata with static/version evidence | 1.0000 | 1.0000 | 7/7 |
 
 One initial run averaged roughly 8–12 ms per query across modes with process RSS around 84 MiB. These are single-run observations and not latency guarantees. Run `npm run evaluate` to regenerate timings and query-level metrics on your machine.
 

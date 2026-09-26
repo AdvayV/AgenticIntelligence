@@ -52,7 +52,7 @@ for (const eventName of ['pointerover', 'focusin', 'click']) document.addEventLi
 
 const motionQuery = window.matchMedia?.('(prefers-reduced-motion: reduce)');
 let motionPaused = false;
-try { motionPaused = localStorage.getItem('palimpsest-motion') === 'paused'; } catch { /* Private storage may be unavailable. */ }
+try { motionPaused = localStorage.getItem('codestrata-motion') === 'paused'; } catch { /* Private storage may be unavailable. */ }
 function updateMotion() {
   const reduced = Boolean(motionQuery?.matches);
   document.body.classList.toggle('motion-paused', motionPaused || reduced);
@@ -66,7 +66,7 @@ updateMotion();
 motionQuery?.addEventListener?.('change', updateMotion);
 $('motion-toggle').addEventListener('click', () => {
   motionPaused = !motionPaused;
-  try { localStorage.setItem('palimpsest-motion', motionPaused ? 'paused' : 'running'); } catch { /* Motion remains controllable without storage. */ }
+  try { localStorage.setItem('codestrata-motion', motionPaused ? 'paused' : 'running'); } catch { /* Motion remains controllable without storage. */ }
   updateMotion();
 });
 

@@ -38,7 +38,7 @@ test('line positions are refreshed when only preceding text moves', async () => 
   assert.equal(index.snapshots.new.snippets[0].startLine, 3); assert.equal(stats.embeddedSnippets, 0);
 });
 test('index persists with schema checking', async t => {
-  const dir = await mkdtemp(path.join(os.tmpdir(), 'palimpsest-')); t.after(() => rm(dir, { recursive: true, force: true }));
+  const dir = await mkdtemp(path.join(os.tmpdir(), 'codestrata-')); t.after(() => rm(dir, { recursive: true, force: true }));
   const file = path.join(dir, 'index.json'), index = emptyIndex(); await indexVersion(index, { version: 'v', files });
   await saveIndex(index, file); assert.deepEqual(await loadIndex(file), index);
   await writeFile(file, '{"schema":99}'); await assert.rejects(loadIndex(file), /schema/);
@@ -65,13 +65,13 @@ test('a deleted then reintroduced symbol is not assumed to have continuous linea
   assert.equal(evolution(index, index.snapshots.new.snippets[0]).previousVersion, null);
 });
 test('directory indexing excludes dependencies and includes JSX', async t => {
-  const dir = await mkdtemp(path.join(os.tmpdir(), 'palimpsest-')); t.after(() => rm(dir, { recursive: true, force: true }));
+  const dir = await mkdtemp(path.join(os.tmpdir(), 'codestrata-')); t.after(() => rm(dir, { recursive: true, force: true }));
   await mkdir(path.join(dir, 'node_modules')); await writeFile(path.join(dir, 'node_modules', 'bad.js'), 'bad');
   await writeFile(path.join(dir, 'view.jsx'), 'const View = () => <div/>;');
   assert.deepEqual(Object.keys(await directoryFiles(dir)), ['view.jsx']);
 });
 test('reads real Git snapshots without checking out or running repository code', async t => {
-  const dir = await mkdtemp(path.join(os.tmpdir(), 'palimpsest-git-')); t.after(() => rm(dir, { recursive: true, force: true }));
+  const dir = await mkdtemp(path.join(os.tmpdir(), 'codestrata-git-')); t.after(() => rm(dir, { recursive: true, force: true }));
   const git = args => execFileSync('git', ['-C', dir, ...args], { encoding: 'utf8' });
   git(['init', '-b', 'main']); git(['config', 'user.name', 'Test']); git(['config', 'user.email', 'test@example.com']);
   await writeFile(path.join(dir, 'a.js'), files['a.js']); git(['add', '.']); git(['commit', '-m', 'old']);

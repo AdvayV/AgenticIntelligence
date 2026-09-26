@@ -4,7 +4,7 @@ import { execFileSync } from 'node:child_process';
 import { analyzeFile, hash } from './analyze.js';
 import { createEmbedder } from './vector.js';
 
-const excluded = new Set(['node_modules', '.git', '.palimpsest', 'coverage', 'dist', 'build']);
+const excluded = new Set(['node_modules', '.git', '.codestrata', 'coverage', 'dist', 'build']);
 export function emptyIndex() {
   return { schema: 1, embedding: null, versions: [], files: {}, analyses: {}, vectors: {}, snapshots: {} };
 }

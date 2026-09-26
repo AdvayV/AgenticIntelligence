@@ -4,7 +4,7 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="theme-color" content="#f7f8fc">
-  <title>PALIMPSEST · Code has a memory</title>
+  <title>CodeStrata · Code has a memory</title>
   <link rel="stylesheet" href="/style.css">
   <script type="module" src="/app.js"></script>
 </head>
@@ -13,7 +13,7 @@
   <div class="ambient ambient-one" aria-hidden="true"></div>
   <div class="ambient ambient-two" aria-hidden="true"></div>
   <header class="site-header">
-    <a class="brand" href="/" aria-label="PALIMPSEST home"><span class="brand-mark" aria-hidden="true"><i></i><i></i><i></i></span><span>palimpsest<span class="brand-period">.</span></span></a>
+    <a class="brand" href="/" aria-label="CodeStrata home"><span class="brand-mark" aria-hidden="true"><i></i><i></i><i></i></span><span>CodeStrata<span class="brand-period">.</span></span></a>
     <nav aria-label="Main navigation"><a class="nav-active" href="#workspace">Workspace</a><a href="#how-it-works">How it works</a></nav>
     <div class="header-actions"><button id="motion-toggle" class="motion-toggle" type="button" aria-pressed="false" data-help="motion"><span class="motion-symbol" aria-hidden="true">Ⅱ</span><span id="motion-label">Pause motion</span></button><a class="repo-link" href="https://github.com/AdvayV/AgenticIntelligence" target="_blank" rel="noopener noreferrer">GitHub <span aria-hidden="true">↗</span></a></div>
   </header>
@@ -45,7 +45,7 @@
       <form id="search-form">
         <div class="query-label"><label for="query">What changed? What are you looking for?</label><button class="help-trigger" type="button" data-help="query" aria-label="Explain natural-language search" aria-controls="help-panel">?</button></div>
         <div class="query-shell" data-help="query"><span class="query-symbol" aria-hidden="true">⌕</span><textarea id="query" rows="2" required maxlength="2000" spellcheck="false">Where did Bluetooth settings stop waiting for permission checking?</textarea><button id="submit" class="search-button" type="submit"><span class="button-text">Trace behavior</span><span class="button-arrow" aria-hidden="true">↗</span><span class="button-spinner" aria-hidden="true"></span></button></div>
-        <div class="search-controls"><div class="control-group" data-help="version"><label for="version">History</label><select id="version"><option value="">All versions</option></select><button class="help-trigger" type="button" data-help="version" aria-label="Explain version filtering" aria-controls="help-panel">?</button></div><div class="control-group" data-help="mode"><label for="mode">Search lens</label><select id="mode"><option value="palimpsest">Behavior + evidence</option><option value="hybrid">Hybrid baseline</option><option value="lexical">Lexical baseline</option></select><button class="help-trigger" type="button" data-help="mode" aria-label="Explain retrieval modes" aria-controls="help-panel">?</button></div><span class="keyboard-hint"><kbd>Ctrl</kbd> + <kbd>Enter</kbd> to trace</span></div>
+        <div class="search-controls"><div class="control-group" data-help="version"><label for="version">History</label><select id="version"><option value="">All versions</option></select><button class="help-trigger" type="button" data-help="version" aria-label="Explain version filtering" aria-controls="help-panel">?</button></div><div class="control-group" data-help="mode"><label for="mode">Search lens</label><select id="mode"><option value="codestrata">Behavior + evidence</option><option value="hybrid">Hybrid baseline</option><option value="lexical">Lexical baseline</option></select><button class="help-trigger" type="button" data-help="mode" aria-label="Explain retrieval modes" aria-controls="help-panel">?</button></div><span class="keyboard-hint"><kbd>Ctrl</kbd> + <kbd>Enter</kbd> to trace</span></div>
       </form>
       <div class="examples"><span class="examples-label">EXPLORE A PATTERN</span><button type="button" data-query="Find calls validateInput before executeTool" data-help="order" aria-pressed="false"><span aria-hidden="true">⇄</span> Call order</button><button type="button" data-query="Find the version with removed guard for device supported" data-help="guard" aria-pressed="false"><span aria-hidden="true">◇</span> Missing guard</button><button type="button" data-query="Find fallback without awaiting primaryTool" data-help="await" aria-pressed="false"><span aria-hidden="true">↯</span> Missing await</button><button type="button" data-query="Where is the settings://device deeplink used?" data-help="usage" aria-pressed="false"><span aria-hidden="true">↗</span> Deeplink usage</button></div>
       <div class="search-progress" aria-hidden="true"><span></span></div>
@@ -66,6 +66,6 @@
       </aside>
     </div>
   </main>
-  <footer><span class="footer-brand">palimpsest<span>.</span></span><p>Every version has a story. Find the lines that tell it.</p><span class="footer-status"><i aria-hidden="true"></i> Built for code that evolves</span></footer>
+  <footer><span class="footer-brand">CodeStrata<span>.</span></span><p>Every version has a story. Find the lines that tell it.</p><span class="footer-status"><i aria-hidden="true"></i> Built for code that evolves</span></footer>
 </body>
 </html>

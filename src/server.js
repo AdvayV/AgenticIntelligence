@@ -20,7 +20,7 @@ export function createServer(index, indexStats = []) {
         for await (const chunk of request) { body += chunk; if (Buffer.byteLength(body) > 8192) return json(413, { error: 'Request too large' }); }
         let input;
         try { input = JSON.parse(body); } catch { return json(400, { error: 'Invalid JSON' }); }
-        try { return json(200, await search(index, input.query, { topK: input.topK ?? 5, version: input.version || undefined, mode: input.mode ?? 'palimpsest' })); }
+        try { return json(200, await search(index, input.query, { topK: input.topK ?? 5, version: input.version || undefined, mode: input.mode ?? 'codestrata' })); }
         catch (error) { return json(400, { error: error.message }); }
       }
       if (request.method !== 'GET') return json(405, { error: 'Method not allowed' });
@@ -30,9 +30,9 @@ export function createServer(index, indexStats = []) {
   });
 }
 if (process.argv[1] && path.resolve(process.argv[1]) === fileURLToPath(import.meta.url)) {
-  const file = process.env.PALIMPSEST_INDEX;
+  const file = process.env.CODESTRATA_INDEX;
   const { index, stats } = file ? { index: await loadIndex(file), stats: [] } : await buildDemo();
   const port = Number(process.env.PORT ?? 3000);
   const host = process.env.HOST ?? '127.0.0.1';
-  createServer(index, stats).listen(port, host, () => console.log(`PALIMPSEST ready at http://${host}:${port}`));
+  createServer(index, stats).listen(port, host, () => console.log(`CodeStrata ready at http://${host}:${port}`));
 }
