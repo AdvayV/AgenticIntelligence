@@ -1,8 +1,71 @@
 <!doctype html>
-<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>PALIMPSEST · Behavioral code archaeology</title><link rel="stylesheet" href="/style.css"><script type="module" src="/app.js"></script></head>
-<body><header><a class="brand" href="/">P<span> / </span>PALIMPSEST</a><span class="badge">CPU · LOCAL · VERSION AWARE</span></header><main>
-<section class="intro"><p class="eyebrow">AGENTIC CODE INTELLIGENCE / 01</p><h1>Same code.<br><em>Different behavior.</em></h1><p class="lede">Find the version where a guard disappeared, a call moved, or a single <code>await</code> changed everything.</p></section>
-<form id="search-form"><label for="query">What behavior are you looking for?</label><div class="search-row"><textarea id="query" rows="2" required maxlength="2000">Where did Bluetooth settings stop waiting for permission checking?</textarea><button id="submit" type="submit">Trace behavior ↗</button></div><div class="controls"><label>Version <select id="version"><option value="">All versions</option></select></label><label>Retriever <select id="mode"><option value="palimpsest">PALIMPSEST + evidence</option><option value="hybrid">Hybrid baseline</option><option value="lexical">Lexical baseline</option></select></label><span id="status">Loading index…</span></div></form>
-<div class="examples"><button data-query="Find calls validateInput before executeTool">Call order</button><button data-query="Find the version with removed guard for device supported">Removed guard</button><button data-query="Find fallback without awaiting primaryTool">Unawaited tool</button><button data-query="Where is the settings://device deeplink used?">Deeplink usage</button></div><p id="error" role="alert" hidden></p>
-<div class="workspace"><section><div class="section-title"><h2>Retrieved evidence</h2><span id="summary">Run a query to inspect code</span></div><div id="results"></div></section><aside><h2>Agent decisions</h2><p class="muted">Search → inspect → refine → stop</p><ol id="trace"></ol><div class="note"><strong>Evidence boundary</strong><p>Static syntax matches. Unawaited calls do not prove a runtime race. Complex control flow remains uncertain.</p></div><div class="note"><strong>Demo corpus</strong><p>Three controlled versions of a JavaScript assistant. Compare the baseline against behavior-aware ranking.</p></div></aside></div>
-</main><footer>PALIMPSEST / Evidence-aware evolutionary retrieval <span id="embedding"></span></footer></body></html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#f7f8fc">
+  <title>PALIMPSEST · Code has a memory</title>
+  <link rel="stylesheet" href="/style.css">
+  <script type="module" src="/app.js"></script>
+</head>
+<body>
+  <a class="skip-link" href="#query">Skip to code search</a>
+  <div class="ambient ambient-one" aria-hidden="true"></div>
+  <div class="ambient ambient-two" aria-hidden="true"></div>
+  <header class="site-header">
+    <a class="brand" href="/" aria-label="PALIMPSEST home"><span class="brand-mark" aria-hidden="true"><i></i><i></i><i></i></span><span>palimpsest<span class="brand-period">.</span></span></a>
+    <nav aria-label="Main navigation"><a class="nav-active" href="#workspace">Workspace</a><a href="#how-it-works">How it works</a></nav>
+    <div class="header-actions"><button id="motion-toggle" class="motion-toggle" type="button" aria-pressed="false" data-help="motion"><span class="motion-symbol" aria-hidden="true">Ⅱ</span><span id="motion-label">Pause motion</span></button><a class="repo-link" href="https://github.com/AdvayV/AgenticIntelligence" target="_blank" rel="noopener noreferrer">GitHub <span aria-hidden="true">↗</span></a></div>
+  </header>
+  <main>
+    <section class="hero" aria-labelledby="hero-title">
+      <div class="hero-copy">
+        <p class="eyebrow"><span class="live-dot" aria-hidden="true"></span>AGENTIC CODE INTELLIGENCE<span class="edition">01 / EVOLUTION</span></p>
+        <h1 id="hero-title">Code has a memory.<br>Find the <em>turning point.</em></h1>
+        <p class="hero-description">One missing <code>await</code>. A guard that vanished. A call that moved.<br class="desktop-break"> Trace the small changes that create a different behavior.</p>
+        <div class="hero-features"><span><b aria-hidden="true">◈</b> Version aware</span><span><b aria-hidden="true">◎</b> Evidence attached</span><span><b aria-hidden="true">↯</b> Runs on CPU</span></div>
+      </div>
+      <div class="memory-scene" data-help="illustration" role="img" aria-label="Illustration: three versions of the same function, with await removed and then restored">
+        <div class="scene-grid" aria-hidden="true"></div>
+        <div class="scene-orbit orbit-one" aria-hidden="true"></div><div class="scene-orbit orbit-two" aria-hidden="true"></div>
+        <div class="scene-label" aria-hidden="true"><span class="tiny-star">✧</span> EVERY CHANGE LEAVES A TRACE</div>
+        <div class="version-path" aria-hidden="true"><span></span><i></i><i></i></div>
+        <div class="version-stack" aria-hidden="true">
+          <div class="version-card version-card-back"><div class="version-card-top"><span class="version-number">v1</span><span class="state-dot"></span><span>permission awaited</span></div><div class="mini-code"><span class="mini-keyword">await</span> checkPermission();</div><div class="mini-code muted-code">openSettings('bluetooth');</div></div>
+          <div class="version-card version-card-middle"><div class="version-card-top"><span class="version-number">v3</span><span class="state-dot"></span><span>waiting restored</span></div><div class="mini-code"><span class="mini-keyword">await</span> checkPermission();</div><div class="mini-code muted-code">openSettings('bluetooth');</div></div>
+          <div class="version-card version-card-front"><div class="version-card-top"><span class="version-number active-version">v2</span><span class="change-label">BEHAVIOR CHANGED</span><span class="window-dots">•••</span></div><div class="mini-code"><span class="removed-token">await</span> checkPermission();</div><div class="mini-code">openSettings(<span class="mini-string">'bluetooth'</span>);</div><div class="version-card-bottom"><span class="diff-symbol">−</span> One keyword. A different path.<span class="small-arrow">↗</span></div></div>
+        </div>
+        <div class="floating-note note-top" aria-hidden="true"><span>↗</span> Same function</div><div class="floating-note note-bottom" aria-hidden="true"><span class="note-check">✓</span> Exact version found</div>
+        <span class="scene-caption">ILLUSTRATIVE VERSION HISTORY</span>
+      </div>
+    </section>
+
+    <section class="search-studio" id="workspace" aria-label="Code search workspace">
+      <div class="studio-heading"><span class="studio-icon" aria-hidden="true">⌘</span><span>Your code, in context</span><span class="index-status" id="status" role="status"><span class="status-dot" aria-hidden="true"></span><span id="status-text">Connecting to index…</span></span></div>
+      <form id="search-form">
+        <div class="query-label"><label for="query">What changed? What are you looking for?</label><button class="help-trigger" type="button" data-help="query" aria-label="Explain natural-language search" aria-controls="help-panel">?</button></div>
+        <div class="query-shell" data-help="query"><span class="query-symbol" aria-hidden="true">⌕</span><textarea id="query" rows="2" required maxlength="2000" spellcheck="false">Where did Bluetooth settings stop waiting for permission checking?</textarea><button id="submit" class="search-button" type="submit"><span class="button-text">Trace behavior</span><span class="button-arrow" aria-hidden="true">↗</span><span class="button-spinner" aria-hidden="true"></span></button></div>
+        <div class="search-controls"><div class="control-group" data-help="version"><label for="version">History</label><select id="version"><option value="">All versions</option></select><button class="help-trigger" type="button" data-help="version" aria-label="Explain version filtering" aria-controls="help-panel">?</button></div><div class="control-group" data-help="mode"><label for="mode">Search lens</label><select id="mode"><option value="palimpsest">Behavior + evidence</option><option value="hybrid">Hybrid baseline</option><option value="lexical">Lexical baseline</option></select><button class="help-trigger" type="button" data-help="mode" aria-label="Explain retrieval modes" aria-controls="help-panel">?</button></div><span class="keyboard-hint"><kbd>Ctrl</kbd> + <kbd>Enter</kbd> to trace</span></div>
+      </form>
+      <div class="examples"><span class="examples-label">EXPLORE A PATTERN</span><button type="button" data-query="Find calls validateInput before executeTool" data-help="order" aria-pressed="false"><span aria-hidden="true">⇄</span> Call order</button><button type="button" data-query="Find the version with removed guard for device supported" data-help="guard" aria-pressed="false"><span aria-hidden="true">◇</span> Missing guard</button><button type="button" data-query="Find fallback without awaiting primaryTool" data-help="await" aria-pressed="false"><span aria-hidden="true">↯</span> Missing await</button><button type="button" data-query="Where is the settings://device deeplink used?" data-help="usage" aria-pressed="false"><span aria-hidden="true">↗</span> Deeplink usage</button></div>
+      <div class="search-progress" aria-hidden="true"><span></span></div>
+    </section>
+
+    <p id="error" class="error-banner" role="alert" hidden></p>
+    <div class="workspace-grid">
+      <section class="results-region" aria-labelledby="results-title" aria-busy="false">
+        <div class="results-header"><div><p class="eyebrow section-eyebrow">FOLLOW THE EVIDENCE</p><h2 id="results-title">The code behind the behavior<span class="result-count" id="result-count">—</span></h2></div><span class="results-caption" id="summary" role="status">Your results will appear here</span></div>
+        <div class="query-metrics" id="query-metrics" hidden><button class="metric-chip" type="button" data-help="latency"><span class="metric-icon" aria-hidden="true">↯</span><strong id="metric-latency">—</strong><span>query time</span></button><button class="metric-chip" type="button" data-help="inspected"><span class="metric-icon" aria-hidden="true">◎</span><strong id="metric-inspected">—</strong><span>inspected</span></button><button class="metric-chip" type="button" data-help="evidence"><span class="metric-icon" aria-hidden="true">✓</span><strong id="metric-supported">—</strong><span>supported patterns</span></button></div>
+        <div id="results"><div class="empty-state"><div class="empty-orbit" aria-hidden="true">⌕</div><h3>A little context goes a long way.</h3><p>Describe a behavior, or choose a pattern above.<br>We’ll bring back the code and its history.</p></div></div>
+      </section>
+      <aside class="insight-sidebar" aria-label="Context and search explanations">
+        <section class="help-panel" id="help-panel" aria-labelledby="help-title"><div class="help-kicker"><span class="help-spark" aria-hidden="true">✦</span><span>WHY THIS MATTERS</span><span class="help-live-dot" aria-hidden="true"></span></div><div id="help-content" aria-live="polite"><h2 id="help-title">A guide, right beside you.</h2><p id="help-body">Hover a control, a highlighted line, or a result badge to discover what it means and why it is here.</p><div class="help-example"><span id="help-example-label">TRY IT</span><p id="help-example">Hover “History” to explore how version filtering changes your search.</p></div></div><div class="help-footer"><span aria-hidden="true">↖</span> Hover, focus, or tap a <span class="inline-help">?</span></div></section>
+        <section class="agent-panel" id="how-it-works" aria-labelledby="agent-title"><div class="side-heading"><h2 id="agent-title">Inside the search</h2><button class="help-trigger" type="button" data-help="agent" aria-label="Explain agent decisions" aria-controls="help-panel">?</button></div><div class="pipeline" aria-hidden="true"><span>Search</span><i>→</i><span>Inspect</span><i>→</i><span>Refine</span></div><ol id="trace"><li class="trace-placeholder">Run a query to see the decisions behind its results.</li></ol></section>
+        <details class="boundary-note" data-help="boundary"><summary><span aria-hidden="true">◈</span> What the evidence can tell you</summary><p>Matches describe supported code patterns. They do not prove runtime execution, promise completion, or a race. Complex control flow remains uncertain.</p></details>
+        <div class="corpus-note" data-help="corpus"><span class="corpus-icon" aria-hidden="true">▤</span><div><strong>Small changes. Real distinctions.</strong><p>Explore three controlled versions of a JavaScript assistant.</p><span id="embedding">Local CPU retrieval</span></div></div>
+      </aside>
+    </div>
+  </main>
+  <footer><span class="footer-brand">palimpsest<span>.</span></span><p>Every version has a story. Find the lines that tell it.</p><span class="footer-status"><i aria-hidden="true"></i> Built for code that evolves</span></footer>
+</body>
+</html>

@@ -18,7 +18,8 @@ One initial run averaged roughly 8–12 ms per query across modes with process R
 
 ## Executed checks
 
-- Node test suite: 47 passing tests covering parser, evolutionary retrieval, version isolation, update/deletion, Git snapshots, metrics, encoder bridge, and HTTP integration.
+- Node test suite: 57 passing tests covering parser, evolutionary retrieval, version isolation, update/deletion, Git snapshots, metrics, encoder bridge, HTTP integration, and the light interface's interactions.
+- Ten UI tests cover hover/focus/tap explanations, live filter changes, syntax and predecessor rendering, motion preferences, code escaping, request cancellation, stale-response isolation, and failed/empty states. These are DOM interaction tests, not screenshot comparisons.
 - JavaScript syntax checks.
 - CLI demo index and exact-version retrieval.
 - Python encoder bridge smoke with offline features and quantized MiniLM on CPU. Natural-language, JavaScript, and non-JavaScript fallback inputs all produced finite normalized vectors with preserved row counts.

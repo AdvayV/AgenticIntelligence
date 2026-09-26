@@ -20,7 +20,7 @@ PALIMPSEST retrieves `openBluetooth@v2`, identifies the removed `await`, and let
 
 ## Run locally
 
-Requires Node.js 22+; Git is needed only for repository-history indexing. No GPU, API key, or Python is required for the application.
+Requires Node.js 22.22.2+ on the Node 22 release line, Node 24.15+, or Node 26+ (matching the UI test dependency's supported runtimes). Git is needed only for repository-history indexing. No GPU, API key, or Python is required for the application.
 
 ```sh
 npm ci --omit=optional
@@ -28,7 +28,7 @@ npm test
 npm start
 ```
 
-Open **http://127.0.0.1:3000**. The server loads three controlled demo versions automatically. Compare PALIMPSEST against hybrid and lexical baselines, filter a version, inspect source lines, and expand predecessor comparisons. On Windows PowerShell, use `npm.cmd` if execution policy blocks `npm.ps1`.
+Open **http://127.0.0.1:3000**. The server loads three controlled demo versions automatically. The light workspace includes animated version layers, syntax-highlighted code, measured search statistics, and predecessor comparisons. Hover, focus, or tap help controls to explain the interface in the side panel. Version and lens changes rerun the search automatically; Ctrl+Enter submits the query. Pause motion with the header control; system reduced-motion preferences are respected. On Windows PowerShell, use `npm.cmd` if execution policy blocks `npm.ps1`.
 
 CLI:
 
@@ -116,7 +116,7 @@ The challenge harness compares lexical, hybrid, and PALIMPSEST retrieval with 1,
 
 **This is a synthetic development challenge; queries overlap demo cases. It is not CoIR and does not establish generalization.** See [measured results and limitations](docs/validation.md).
 
-Tests cover exact source locations, near-identical versions, reversed order, mutually exclusive branches, loops, early returns, exception paths, nested callbacks, promise handling, deletion/reindexing, real Git snapshots, the encoder bridge, ranking metrics, request validation, and HTTP assets/search. GitHub Actions verifies the core on Linux and Windows.
+Tests cover exact source locations, near-identical versions, reversed order, mutually exclusive branches, loops, early returns, exception paths, nested callbacks, promise handling, deletion/reindexing, real Git snapshots, the encoder bridge, ranking metrics, request validation, and HTTP assets/search. UI interaction tests execute the trusted application in jsdom with real retrieval results, checking hover/focus/tap help, filters, predecessor expansion, motion preferences, safe code rendering, and stale-request handling. GitHub Actions verifies the core and UI interactions on Linux and Windows.
 
 ## Official AppsRetrieval screening
 
