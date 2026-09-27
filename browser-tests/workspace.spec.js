@@ -22,7 +22,9 @@ test('investigate a refactor, inspect history and navigate an imported helper', 
   await page.getByRole('button', { name: 'Close source inspector' }).click();
   await page.getByRole('button', { name: 'Explain version filtering' }).click();
   await expect(page.locator('#help-title')).toHaveText('The right code. In the right version.');
-  expect(await page.evaluate(() => document.documentElement.scrollWidth <= window.innerWidth + 1)).toBe(true);
+  const layout = await page.evaluate(() => ({ viewport: innerWidth, width: document.documentElement.scrollWidth,
+    overflowing: [...document.querySelectorAll('main, header, footer, .workspace-grid, .results-region, .insight-sidebar')].filter(node => node.getBoundingClientRect().right > innerWidth + 1).map(node => node.className || node.tagName) }));
+  expect(layout.width, JSON.stringify(layout)).toBeLessThanOrEqual(layout.viewport + 1);
   await page.screenshot({ path: testInfo.outputPath('workspace.png'), fullPage: true, animations: 'disabled' });
   expect(failures).toEqual([]);
 });
