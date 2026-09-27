@@ -1,0 +1,4 @@
+[
+  { "name": "async", "repo": "caolan/async", "revision": "85fb18f3d319d14d893ec24648929ff0eb908768", "prefixes": ["lib/"], "license": "MIT" },
+  { "name": "express", "repo": "expressjs/express", "revision": "cd7d4397c398a3f3ecadeaf9ef6ac1377bd414c4", "prefixes": ["lib/"], "license": "MIT" }
+]

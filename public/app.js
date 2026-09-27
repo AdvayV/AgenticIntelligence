@@ -6,6 +6,10 @@ const make = (tag, text, className) => {
   return element;
 };
 const HELP = {
+  lineage: { title: 'Follow behavior through a refactor.', body: 'When a symbol disappears and another appears, we compare preserved AST structure and call targets. A unique, separated match can link a rename or move. Ambiguous matches stay unlinked.', example: 'connectDevice in devices/connect.js becomes pairDevice in flows/pair.js. This is an inferred structural match, not a proof of identity.' },
+  timeline: { title: 'Each stop is an indexed source version.', body: 'Select a point to inspect its exact source without losing your search. This timeline follows supported symbol links through the indexed snapshots; missing or ambiguous history stops the chain.', example: 'A highlighted point is the retrieved version. Changes describe the transition from the preceding indexed snapshot.' },
+  contrast: { title: 'Why the similar version is not the answer.', body: 'The counterexample is real source from a neighboring version. Its highlighted evidence contradicts at least one requested static pattern. It helps you inspect what similarity ranking alone can miss.', example: 'An awaited permission call conflicts with a request for a version that no longer directly awaits it.' },
+  connections: { title: 'Follow a statically resolved call.', body: 'These links resolve local functions and relative ES-module imports within the same snapshot. Click to inspect the helper. A call link does not prove execution order or completion across functions.', example: 'Unresolved packages, dynamic dispatch, nested scopes, and shadowed bindings are not presented as resolved links.' },
   query: { title: 'Search for a behavior, not just a name.', body: 'A function name can stay the same while its behavior changes. Describe the relationship you need: a missing await, a removed guard, or one call before another.', example: '“Where did Bluetooth settings stop waiting for permission checking?”' },
   version: { title: 'The right code. In the right version.', body: 'Nearly identical versions can behave differently. Choose a snapshot to narrow the returned results, or search the full history. Predecessor evidence can still come from an earlier version.', example: 'Choose v2 to see the snapshot where the permission await was removed.' },
   mode: { title: 'Three ways to look at the same code.', body: 'Behavior + evidence checks requested patterns and historical changes. Hybrid combines keyword and vector rankings. Lexical uses keyword ranking. Switch lenses to inspect the difference.', example: 'Compare the same call-order query across lenses. The baseline does not check structural constraints.' },
@@ -19,7 +23,7 @@ const HELP = {
   contradicted: { title: 'Similar code can be the wrong match.', body: 'At least one requested constraint conflicts with the available evidence. This distinction helps separate almost-identical snippets that implement different behavior.', example: 'A version that awaits permission contradicts a query asking for its removed await.' },
   semantic: { title: 'Related by ranking, without a certificate.', body: 'This result was ranked by keywords and vectors, or no structural constraint was requested. A semantic match does not certify call order, guards, or waiting behavior.', example: 'Use the behavior lens with a supported structural query to inspect stronger evidence.' },
   lines: { title: 'Go directly to the lines that matter.', body: 'Source locations belong to this result’s own snapshot. Highlighted lines identify the calls or conditions used as evidence; they are not a full execution trace.', example: 'A version-specific line location stays correct even when earlier lines were added or removed.' },
-  history: { title: 'See the neighboring version, not just the diff.', body: 'The preceding indexed version helps distinguish an existing pattern from a new change. Expand the comparison to inspect the original code and its exact location.', example: 'Symbol matching currently uses the same file, function name, and ordinal. Refactors can require manual inspection.' },
+  history: { title: 'See the neighboring version, not just the diff.', body: 'The preceding indexed version helps distinguish an existing pattern from a new change. Expand the comparison to inspect the original code and its exact location.', example: 'Direct symbol links and inferred refactor links are labeled separately. Ambiguous renames remain unlinked.' },
   signals: { title: 'Why did this snippet rank here?', body: 'Keyword and vector signals retrieve candidates. In the behavior lens, supported constraints raise a candidate and contradictions lower it. The numbers are ranking signals, not probability estimates.', example: 'The offline vector baseline uses deterministic feature hashing, not trained semantic embeddings.' },
   latency: { title: 'Fast retrieval keeps exploration moving.', body: 'This is the measured time inside the search engine for the current query. It excludes browser rendering and network time. It is an observation, not a promised response time.', example: 'Try a different lens or version and compare the measured query time.' },
   inspected: { title: 'Search broadly. Inspect selectively.', body: 'The agent inspects a bounded candidate set and expands it when evidence is insufficient. This number counts inspected candidates; initial scoring can still scan the indexed corpus.', example: 'A stop can mean enough supported results, exhausted candidates, or a reached budget.' },
@@ -123,7 +127,33 @@ function resultCard(result) {
   badge.setAttribute('aria-label', 'Explain: ' + label);
   badge.setAttribute('aria-controls', 'help-panel');
   header.append(make('span', String(result.rank).padStart(2, '0'), 'rank-marker'), metadata, badge);
-  card.append(header, codeView(result.code, result.startLine, new Set(result.evidence.flatMap(e => e.lines)), location));
+  card.append(header);
+  if (result.rank === 1 && result.timeline?.length > 1) {
+    const timeline = make('div', undefined, 'version-timeline');
+    timeline.setAttribute('aria-label', 'Inspect symbol history');
+    for (const point of result.timeline) {
+      const button = make('button', undefined, 'timeline-point' + (point.selected ? ' selected' : ''));
+      button.type = 'button'; button.dataset.help = 'timeline'; button.dataset.snippet = point.id; button.dataset.version = point.version;
+      button.setAttribute('aria-label', 'Inspect ' + point.name + ' at ' + point.version);
+      button.append(make('span', point.version, 'timeline-version'), make('strong', point.name), make('span', point.changes.length ? point.changes.map(change => change.replaceAll('_', ' ')).join(' · ') : 'First linked snapshot', 'timeline-change'));
+      timeline.append(button);
+    }
+    card.append(timeline);
+  }
+  const currentCode = codeView(result.code, result.startLine, new Set(result.evidence.flatMap(e => e.lines)), location);
+  if (result.rank === 1 && result.counterexample && result.certainty === 'supported-static-pattern') {
+    const alternative = result.counterexample, comparison = make('div', undefined, 'contrast-grid');
+    const match = make('section', undefined, 'contrast-match'), other = make('section', undefined, 'contrast-other');
+    match.append(make('div', '✓ RETRIEVED · ' + result.version, 'contrast-label'), currentCode);
+    const alternativePath = alternative.file + ':' + alternative.startLine + ' · ' + alternative.version;
+    const alternateCode = codeView(alternative.code, alternative.startLine, new Set(alternative.evidence.filter(item => item.status === 'contradicted').flatMap(item => item.lines)), alternativePath);
+    other.dataset.help = 'contrast';
+    other.append(make('div', '↔ COUNTEREXAMPLE · ' + alternative.version, 'contrast-label'), alternateCode);
+    for (const item of alternative.evidence.filter(item => item.status === 'contradicted')) other.append(make('p', item.details, 'contrast-reason'));
+    currentCode.addEventListener('scroll', () => { alternateCode.scrollLeft = currentCode.scrollLeft; });
+    alternateCode.addEventListener('scroll', () => { currentCode.scrollLeft = alternateCode.scrollLeft; });
+    comparison.append(match, other); card.append(comparison);
+  } else card.append(currentCode);
   const footer = make('div', undefined, 'evidence-footer');
   for (const item of result.evidence) {
     const row = make('div', undefined, 'evidence-row ' + item.status);
@@ -138,6 +168,21 @@ function resultCard(result) {
     footer.append(row);
   }
   const history = result.history;
+  if (history.confidence === 'inferred-structural-match') {
+    const note = make('p', '↗ Inferred rename / move · unique structural match. Inspect both versions to confirm identity.', 'lineage-note');
+    note.dataset.help = 'lineage'; footer.append(note);
+  }
+  if (result.related?.length) {
+    const connections = make('div', undefined, 'call-connections');
+    connections.dataset.help = 'connections'; connections.append(make('span', 'CONNECTED CODE', 'connections-label'));
+    for (const edge of result.related) {
+      const button = make('button', (edge.direction === 'calls' ? '→ ' : '← ') + edge.name, 'connection-link');
+      button.type = 'button'; button.dataset.snippet = edge.id; button.dataset.version = edge.version;
+      button.dataset.help = 'connections'; button.dataset.detail = edge.file + ':' + edge.startLine + ' · ' + edge.version;
+      connections.append(button);
+    }
+    footer.append(connections);
+  }
   if (history.previousVersion) {
     const strip = make('div', undefined, 'history-strip');
     strip.dataset.help = 'history';
@@ -164,6 +209,10 @@ function resultCard(result) {
   return card;
 }
 const actions = {
+  plan: 'Plan the investigation',
+  lexical_retrieve: 'Search lexical postings',
+  follow_imports: 'Follow code connections',
+  compare_counterexamples: 'Check competing versions',
   hybrid_retrieve: 'Find relevant candidates',
   inspect: 'Inspect the evidence',
   expand_version_relatives: 'Explore related versions',
@@ -192,17 +241,43 @@ function render(data) {
     $('results').append(empty);
   }
   $('trace').replaceChildren();
-  data.trace.forEach((step, i) => {
+  data.trace.forEach(appendTrace);
+}
+function appendTrace(step) {
+    const i = $('trace').children.length;
     const row = make('li'), content = make('div', undefined, 'trace-content');
     row.dataset.help = 'agent';
     const description = stopReasons[step.reason] ?? step.reason ?? '';
     content.append(make('strong', actions[step.action] ?? step.action.replaceAll('_', ' ')), make('p', description));
     row.append(make('span', String(i + 1).padStart(2, '0'), 'trace-number'), content);
     $('trace').append(row);
-  });
 }
 
-let requestSequence = 0, activeRequest;
+let requestSequence = 0, activeRequest, supportsStreaming = false;
+async function readSearch(response, sequence) {
+  if (!supportsStreaming || !response.ok || !response.body?.getReader) return response.json();
+  const reader = response.body.getReader(), decoder = new TextDecoder();
+  let pending = '', result;
+  const consume = line => {
+    if (!line.trim() || sequence !== requestSequence) return;
+    const event = JSON.parse(line);
+    if (event.type === 'step') appendTrace(event.step);
+    if (event.type === 'result') result = event.data;
+    if (event.type === 'error') throw new Error(event.error);
+  };
+  try {
+    while (true) {
+      const { done, value } = await reader.read();
+      pending += done ? decoder.decode() : decoder.decode(value, { stream: true });
+      let newline;
+      while ((newline = pending.indexOf('\n')) >= 0) { consume(pending.slice(0, newline)); pending = pending.slice(newline + 1); }
+      if (done) break;
+    }
+    consume(pending);
+  } finally { reader.releaseLock(); }
+  if (sequence === requestSequence && !result) throw new Error('The search ended before returning results. Please retry.');
+  return result;
+}
 function setLoading(loading) {
   $('submit').disabled = loading;
   $('workspace').classList.toggle('is-searching', loading);
@@ -216,10 +291,11 @@ async function run(event) {
   activeRequest?.abort();
   activeRequest = new AbortController();
   setLoading(true); $('error').hidden = true;
+  $('trace').replaceChildren();
   document.querySelectorAll('[data-query]').forEach(button => button.setAttribute('aria-pressed', String(button.dataset.query === $('query').value)));
   try {
-    const response = await fetch('/api/search', { method: 'POST', headers: { 'Content-Type': 'application/json' }, signal: activeRequest.signal, body: JSON.stringify({ query: $('query').value, version: $('version').value, mode: $('mode').value, topK: 5 }) });
-    const data = await response.json();
+    const response = await fetch(supportsStreaming ? '/api/search/stream' : '/api/search', { method: 'POST', headers: { 'Content-Type': 'application/json' }, signal: activeRequest.signal, body: JSON.stringify({ query: $('query').value, version: $('version').value, mode: $('mode').value, topK: 5 }) });
+    const data = await readSearch(response, sequence);
     if (sequence !== requestSequence) return;
     if (!response.ok) throw new Error(data.error ?? 'Search is unavailable. Please try again.');
     render(data);
@@ -235,11 +311,37 @@ $('query').addEventListener('keydown', event => { if (event.key === 'Enter' && (
 document.querySelectorAll('[data-query]').forEach(button => button.addEventListener('click', () => { $('query').value = button.dataset.query; run(); }));
 for (const id of ['version', 'mode']) $(id).addEventListener('change', run);
 
+let inspectorSequence = 0, inspectorRequest, inspectorTrigger;
+document.addEventListener('click', async event => {
+  const trigger = event.target instanceof Element ? event.target.closest('[data-snippet]') : null;
+  if (!trigger) return;
+  const sequence = ++inspectorSequence;
+  inspectorRequest?.abort(); inspectorRequest = new AbortController(); inspectorTrigger = trigger;
+  $('snippet-inspector').hidden = false; $('inspector-title').textContent = 'Opening source…'; $('inspector-body').replaceChildren();
+  try {
+    const response = await fetch('/api/snippet?' + new URLSearchParams({ id: trigger.dataset.snippet, version: trigger.dataset.version }), { signal: inspectorRequest.signal });
+    const data = await response.json();
+    if (sequence !== inspectorSequence) return;
+    if (!response.ok) throw new Error(data.error ?? 'Source unavailable');
+    $('inspector-title').textContent = data.name + ' · ' + data.version;
+    const location = data.file + ':' + data.startLine + '–' + data.endLine;
+    $('inspector-body').append(make('p', location, 'comparison-label'), codeView(data.code, data.startLine, new Set(), location));
+    $('inspector-title').focus();
+  } catch (error) {
+    if (sequence !== inspectorSequence || error.name === 'AbortError') return;
+    $('inspector-title').textContent = 'Source unavailable'; $('inspector-body').append(make('p', error.message));
+  }
+});
+$('close-inspector').addEventListener('click', () => {
+  inspectorSequence++; inspectorRequest?.abort(); $('snippet-inspector').hidden = true; inspectorTrigger?.focus();
+});
+
 async function initialize() {
   try {
     const response = await fetch('/api/status');
     const data = await response.json();
     if (!response.ok) throw new Error('Index unavailable');
+    supportsStreaming = data.capabilities?.streaming === true;
     for (const version of data.versions) {
       const option = make('option', version); option.value = version; $('version').append(option);
     }

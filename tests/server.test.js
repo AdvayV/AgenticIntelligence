@@ -19,3 +19,21 @@ test('HTTP demo serves assets, search, validation and bounded request bodies', a
   assert.equal((await fetch(base + '/unknown')).status, 404);
   assert.equal((await fetch(base, { method: 'DELETE' })).status, 405);
 });
+
+test('streamed investigation finishes with real results and version-specific source navigation', async t => {
+  const { index } = await buildDemo(), server = createServer(index);
+  await new Promise(resolve => server.listen(0, '127.0.0.1', resolve));
+  t.after(() => new Promise(resolve => server.close(resolve)));
+  const base = `http://127.0.0.1:${server.address().port}`;
+  const response = await fetch(base + '/api/search/stream', { method: 'POST', body: JSON.stringify({ query: 'Where did device pairing stop waiting for policyCheck?', topK: 1 }) });
+  assert.match(response.headers.get('content-type'), /ndjson/);
+  const events = (await response.text()).trim().split('\n').map(line => JSON.parse(line));
+  assert.equal(events[0].step.action, 'plan'); assert.equal(events.at(-1).type, 'result');
+  const result = events.at(-1).data.results[0];
+  assert.equal(result.name, 'pairDevice'); assert.equal(result.version, 'v2');
+  const point = result.timeline[0];
+  const snippet = await (await fetch(base + '/api/snippet?' + new URLSearchParams({ id: point.id, version: point.version }))).json();
+  assert.equal(snippet.name, 'connectDevice'); assert.match(snippet.code, /await policyCheck/);
+  assert.equal((await fetch(base + '/api/snippet?version=v2&id=missing')).status, 404);
+  for (const body of ['null', '[]', '{}']) assert.equal((await fetch(base + '/api/search/stream', { method: 'POST', body })).status, 400);
+});

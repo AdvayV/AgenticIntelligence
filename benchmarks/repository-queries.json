@@ -1,0 +1,666 @@
+{
+  "description": "Frozen source-reviewed retrieval queries; AI-assisted labels require team review. Not CoIR. No ranking parameters are tuned on these queries.",
+  "version": 1,
+  "cases": [
+    {
+      "id": "async-01",
+      "repo": "async",
+      "query": "Adapt a synchronous function or promise-returning function to a callback interface",
+      "relevant": [
+        {
+          "file": "lib/asyncify.js",
+          "name": "asyncify"
+        }
+      ]
+    },
+    {
+      "id": "async-02",
+      "repo": "async",
+      "query": "Schedule asynchronous tasks according to their dependency graph",
+      "relevant": [
+        {
+          "file": "lib/auto.js",
+          "name": "auto"
+        }
+      ]
+    },
+    {
+      "id": "async-03",
+      "repo": "async",
+      "query": "Infer task dependencies from function parameter names",
+      "relevant": [
+        {
+          "file": "lib/autoInject.js",
+          "name": "autoInject"
+        }
+      ]
+    },
+    {
+      "id": "async-04",
+      "repo": "async",
+      "query": "Process queued jobs together in batches with a maximum payload size",
+      "relevant": [
+        {
+          "file": "lib/cargo.js",
+          "name": "cargo"
+        }
+      ]
+    },
+    {
+      "id": "async-05",
+      "repo": "async",
+      "query": "Run multiple batches of queued tasks with a concurrency limit",
+      "relevant": [
+        {
+          "file": "lib/cargoQueue.js",
+          "name": "cargo"
+        }
+      ]
+    },
+    {
+      "id": "async-06",
+      "repo": "async",
+      "query": "Compose asynchronous functions from right to left",
+      "relevant": [
+        {
+          "file": "lib/compose.js",
+          "name": "compose"
+        }
+      ]
+    },
+    {
+      "id": "async-07",
+      "repo": "async",
+      "query": "Transform a collection asynchronously and flatten the returned arrays",
+      "relevant": [
+        {
+          "file": "lib/concat.js",
+          "name": "concat"
+        }
+      ]
+    },
+    {
+      "id": "async-08",
+      "repo": "async",
+      "query": "Flatten asynchronous mapping results while limiting concurrent workers",
+      "relevant": [
+        {
+          "file": "lib/concatLimit.js",
+          "name": "concatLimit"
+        }
+      ]
+    },
+    {
+      "id": "async-09",
+      "repo": "async",
+      "query": "Concatenate asynchronous mapping results one item at a time",
+      "relevant": [
+        {
+          "file": "lib/concatSeries.js",
+          "name": "concatSeries"
+        }
+      ]
+    },
+    {
+      "id": "async-10",
+      "repo": "async",
+      "query": "Find the first collection item that passes an asynchronous truth test",
+      "relevant": [
+        {
+          "file": "lib/detect.js",
+          "name": "detect"
+        }
+      ]
+    },
+    {
+      "id": "async-11",
+      "repo": "async",
+      "query": "Find a matching item with a limited number of concurrent predicate checks",
+      "relevant": [
+        {
+          "file": "lib/detectLimit.js",
+          "name": "detectLimit"
+        }
+      ]
+    },
+    {
+      "id": "async-12",
+      "repo": "async",
+      "query": "Test collection items in sequence until one matches",
+      "relevant": [
+        {
+          "file": "lib/detectSeries.js",
+          "name": "detectSeries"
+        }
+      ]
+    },
+    {
+      "id": "async-13",
+      "repo": "async",
+      "query": "Run an asynchronous operation at least once and repeat until a condition becomes true",
+      "relevant": [
+        {
+          "file": "lib/doUntil.js",
+          "name": "doUntil"
+        }
+      ]
+    },
+    {
+      "id": "async-14",
+      "repo": "async",
+      "query": "Repeat an asynchronous operation while the condition stays true, testing after each execution",
+      "relevant": [
+        {
+          "file": "lib/doWhilst.js",
+          "name": "doWhilst"
+        }
+      ]
+    },
+    {
+      "id": "async-15",
+      "repo": "async",
+      "query": "Apply an asynchronous operation to every item with bounded concurrency",
+      "relevant": [
+        {
+          "file": "lib/eachLimit.js",
+          "name": "eachLimit"
+        }
+      ]
+    },
+    {
+      "id": "async-16",
+      "repo": "async",
+      "query": "Process collection items sequentially without collecting transformed values",
+      "relevant": [
+        {
+          "file": "lib/eachSeries.js",
+          "name": "eachSeries"
+        }
+      ]
+    },
+    {
+      "id": "async-17",
+      "repo": "async",
+      "query": "Prevent a callback from firing synchronously in the current event-loop turn",
+      "relevant": [
+        {
+          "file": "lib/ensureAsync.js",
+          "name": "ensureAsync"
+        }
+      ]
+    },
+    {
+      "id": "async-18",
+      "repo": "async",
+      "query": "Check whether all collection items satisfy an asynchronous predicate",
+      "relevant": [
+        {
+          "file": "lib/every.js",
+          "name": "every"
+        }
+      ]
+    },
+    {
+      "id": "async-19",
+      "repo": "async",
+      "query": "Keep collection values whose asynchronous predicate returns true",
+      "relevant": [
+        {
+          "file": "lib/filter.js",
+          "name": "filter"
+        }
+      ]
+    },
+    {
+      "id": "async-20",
+      "repo": "async",
+      "query": "Filter values using asynchronous tests with bounded parallelism",
+      "relevant": [
+        {
+          "file": "lib/filterLimit.js",
+          "name": "filterLimit"
+        }
+      ]
+    },
+    {
+      "id": "async-21",
+      "repo": "async",
+      "query": "Keep running an asynchronous function until it reports an error",
+      "relevant": [
+        {
+          "file": "lib/forever.js",
+          "name": "forever"
+        }
+      ]
+    },
+    {
+      "id": "async-22",
+      "repo": "async",
+      "query": "Group collection items by an asynchronously computed key",
+      "relevant": [
+        {
+          "file": "lib/groupBy.js",
+          "name": "groupBy"
+        }
+      ]
+    },
+    {
+      "id": "async-23",
+      "repo": "async",
+      "query": "Compute asynchronous results for every collection item while preserving order",
+      "relevant": [
+        {
+          "file": "lib/map.js",
+          "name": "map"
+        }
+      ]
+    },
+    {
+      "id": "async-24",
+      "repo": "async",
+      "query": "Transform collection items with a cap on simultaneous asynchronous work",
+      "relevant": [
+        {
+          "file": "lib/mapLimit.js",
+          "name": "mapLimit"
+        }
+      ]
+    },
+    {
+      "id": "async-25",
+      "repo": "async",
+      "query": "Transform items one at a time and collect their results",
+      "relevant": [
+        {
+          "file": "lib/mapSeries.js",
+          "name": "mapSeries"
+        }
+      ]
+    },
+    {
+      "id": "async-26",
+      "repo": "async",
+      "query": "Cache asynchronous function results and combine concurrent requests for the same key",
+      "relevant": [
+        {
+          "file": "lib/memoize.js",
+          "name": "memoize"
+        }
+      ]
+    },
+    {
+      "id": "async-27",
+      "repo": "async",
+      "query": "Execute independent asynchronous tasks concurrently and collect their results",
+      "relevant": [
+        {
+          "file": "lib/parallel.js",
+          "name": "parallel"
+        }
+      ]
+    },
+    {
+      "id": "async-28",
+      "repo": "async",
+      "query": "Run a task collection concurrently with a maximum number in flight",
+      "relevant": [
+        {
+          "file": "lib/parallelLimit.js",
+          "name": "parallelLimit"
+        }
+      ]
+    },
+    {
+      "id": "async-29",
+      "repo": "async",
+      "query": "Return the result of whichever asynchronous task finishes first",
+      "relevant": [
+        {
+          "file": "lib/race.js",
+          "name": "race"
+        }
+      ]
+    },
+    {
+      "id": "async-30",
+      "repo": "async",
+      "query": "Accumulate a collection into one value using an asynchronous reducer",
+      "relevant": [
+        {
+          "file": "lib/reduce.js",
+          "name": "reduce"
+        }
+      ]
+    },
+    {
+      "id": "async-31",
+      "repo": "async",
+      "query": "Reduce collection values asynchronously from the rightmost item",
+      "relevant": [
+        {
+          "file": "lib/reduceRight.js",
+          "name": "reduceRight"
+        }
+      ]
+    },
+    {
+      "id": "async-32",
+      "repo": "async",
+      "query": "Wrap a task so errors are returned as result objects instead of stopping parallel work",
+      "relevant": [
+        {
+          "file": "lib/reflect.js",
+          "name": "reflect"
+        }
+      ]
+    },
+    {
+      "id": "async-33",
+      "repo": "async",
+      "query": "Retry a failing asynchronous operation with configurable attempts and intervals",
+      "relevant": [
+        {
+          "file": "lib/retry.js",
+          "name": "retry"
+        }
+      ]
+    },
+    {
+      "id": "async-34",
+      "repo": "async",
+      "query": "Create a reusable wrapper that retries an asynchronous task",
+      "relevant": [
+        {
+          "file": "lib/retryable.js",
+          "name": "retryable"
+        }
+      ]
+    },
+    {
+      "id": "async-35",
+      "repo": "async",
+      "query": "Run asynchronous tasks in sequence and collect all their results",
+      "relevant": [
+        {
+          "file": "lib/series.js",
+          "name": "series"
+        }
+      ]
+    },
+    {
+      "id": "async-36",
+      "repo": "async",
+      "query": "Sort values according to asynchronously computed criteria",
+      "relevant": [
+        {
+          "file": "lib/sortBy.js",
+          "name": "sortBy"
+        }
+      ]
+    },
+    {
+      "id": "async-37",
+      "repo": "async",
+      "query": "Fail an asynchronous operation if its callback takes too long",
+      "relevant": [
+        {
+          "file": "lib/timeout.js",
+          "name": "timeout"
+        }
+      ]
+    },
+    {
+      "id": "async-38",
+      "repo": "async",
+      "query": "Try alternative asynchronous tasks in order until one succeeds",
+      "relevant": [
+        {
+          "file": "lib/tryEach.js",
+          "name": "tryEach"
+        }
+      ]
+    },
+    {
+      "id": "async-39",
+      "repo": "async",
+      "query": "Bypass the cache of a memoized asynchronous function",
+      "relevant": [
+        {
+          "file": "lib/unmemoize.js",
+          "name": "unmemoize"
+        }
+      ]
+    },
+    {
+      "id": "async-40",
+      "repo": "async",
+      "query": "Pass each asynchronous task result as arguments to the next task",
+      "relevant": [
+        {
+          "file": "lib/waterfall.js",
+          "name": "waterfall"
+        }
+      ]
+    },
+    {
+      "id": "express-01",
+      "repo": "express",
+      "query": "Validate and assign an HTTP response status code",
+      "relevant": [
+        {
+          "file": "lib/response.js",
+          "name": "status"
+        }
+      ]
+    },
+    {
+      "id": "express-02",
+      "repo": "express",
+      "query": "Send an HTTP response body and set its content length",
+      "relevant": [
+        {
+          "file": "lib/response.js",
+          "name": "send"
+        }
+      ]
+    },
+    {
+      "id": "express-03",
+      "repo": "express",
+      "query": "Serialize an object as a JSON HTTP response",
+      "relevant": [
+        {
+          "file": "lib/response.js",
+          "name": "json"
+        }
+      ]
+    },
+    {
+      "id": "express-04",
+      "repo": "express",
+      "query": "Send JSON wrapped in a requested JSONP callback",
+      "relevant": [
+        {
+          "file": "lib/response.js",
+          "name": "jsonp"
+        }
+      ]
+    },
+    {
+      "id": "express-05",
+      "repo": "express",
+      "query": "Send an HTTP status code with its standard status message as the body",
+      "relevant": [
+        {
+          "file": "lib/response.js",
+          "name": "sendStatus"
+        }
+      ]
+    },
+    {
+      "id": "express-06",
+      "repo": "express",
+      "query": "Transfer a file to the HTTP client and handle transfer errors",
+      "relevant": [
+        {
+          "file": "lib/response.js",
+          "name": "sendFile"
+        }
+      ]
+    },
+    {
+      "id": "express-07",
+      "repo": "express",
+      "query": "Send a file as a downloadable attachment with an optional alternate filename",
+      "relevant": [
+        {
+          "file": "lib/response.js",
+          "name": "download"
+        }
+      ]
+    },
+    {
+      "id": "express-08",
+      "repo": "express",
+      "query": "Set Content-Disposition to attachment for a file",
+      "relevant": [
+        {
+          "file": "lib/response.js",
+          "name": "attachment"
+        }
+      ]
+    },
+    {
+      "id": "express-09",
+      "repo": "express",
+      "query": "Append additional values to an existing HTTP response header",
+      "relevant": [
+        {
+          "file": "lib/response.js",
+          "name": "append"
+        }
+      ]
+    },
+    {
+      "id": "express-10",
+      "repo": "express",
+      "query": "Expire a browser cookie by clearing its value and expiration",
+      "relevant": [
+        {
+          "file": "lib/response.js",
+          "name": "clearCookie"
+        }
+      ]
+    },
+    {
+      "id": "express-11",
+      "repo": "express",
+      "query": "Set a response cookie including optional signing and expiration",
+      "relevant": [
+        {
+          "file": "lib/response.js",
+          "name": "res.cookie"
+        }
+      ]
+    },
+    {
+      "id": "express-12",
+      "repo": "express",
+      "query": "Redirect an HTTP client to another URL with an appropriate status",
+      "relevant": [
+        {
+          "file": "lib/response.js",
+          "name": "redirect"
+        }
+      ]
+    },
+    {
+      "id": "express-13",
+      "repo": "express",
+      "query": "Add a header field to the response Vary set without duplicates",
+      "relevant": [
+        {
+          "file": "lib/response.js",
+          "name": "res.vary"
+        }
+      ]
+    },
+    {
+      "id": "express-14",
+      "repo": "express",
+      "query": "Serialize JSON while escaping characters that can trigger HTML sniffing",
+      "relevant": [
+        {
+          "file": "lib/response.js",
+          "name": "stringify"
+        }
+      ]
+    },
+    {
+      "id": "express-15",
+      "repo": "express",
+      "query": "Negotiate a requested language from the Accept-Language header",
+      "relevant": [
+        {
+          "file": "lib/request.js",
+          "name": "req.acceptsLanguages"
+        }
+      ]
+    },
+    {
+      "id": "express-16",
+      "repo": "express",
+      "query": "Parse a Range header against the size of the requested resource",
+      "relevant": [
+        {
+          "file": "lib/request.js",
+          "name": "range"
+        }
+      ]
+    },
+    {
+      "id": "express-17",
+      "repo": "express",
+      "query": "Register a rendering engine for a template file extension",
+      "relevant": [
+        {
+          "file": "lib/application.js",
+          "name": "engine"
+        }
+      ]
+    },
+    {
+      "id": "express-18",
+      "repo": "express",
+      "query": "Mount middleware or a sub-application on a path",
+      "relevant": [
+        {
+          "file": "lib/application.js",
+          "name": "use"
+        }
+      ]
+    },
+    {
+      "id": "express-19",
+      "repo": "express",
+      "query": "Create an HTTP server and start listening for incoming connections",
+      "relevant": [
+        {
+          "file": "lib/application.js",
+          "name": "listen"
+        }
+      ]
+    },
+    {
+      "id": "express-20",
+      "repo": "express",
+      "query": "Locate a template view file under configured view directories",
+      "relevant": [
+        {
+          "file": "lib/view.js",
+          "name": "lookup"
+        }
+      ]
+    }
+  ]
+}

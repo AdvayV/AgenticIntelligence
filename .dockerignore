@@ -4,3 +4,9 @@ node_modules
 .codestrata
 evaluation-results
 .env*
+.cache
+.venv
+test-results
+playwright-report
+coverage
+__pycache__

@@ -23,9 +23,15 @@ async function boot(t, options = {}) {
   const { window } = dom, calls = [], mediaListeners = [];
   const media = { matches: options.reduced ?? false, addEventListener: (name, fn) => mediaListeners.push(fn) };
   window.matchMedia = () => media;
+  window.TextDecoder = TextDecoder;
   if (options.paused) window.localStorage.setItem('codestrata-motion', 'paused');
   window.fetch = async (url, init) => {
-    if (url === '/api/status') return response({ versions: index.versions, snippets: 16, embedding: index.embedding });
+    if (url === '/api/status') return response({ versions: index.versions, snippets: 25, embedding: index.embedding, capabilities: { streaming: options.streaming ?? false } });
+    if (url.startsWith('/api/snippet?')) {
+      const parameters = new URL(url, 'http://localhost').searchParams;
+      const row = index.snapshots[parameters.get('version')]?.snippets.find(item => item.id === parameters.get('id'));
+      return response(row ?? { error: 'Unknown snippet' }, Boolean(row));
+    }
     const input = JSON.parse(init.body);
     const call = { input, signal: init.signal };
     calls.push(call);
@@ -41,7 +47,7 @@ test('light workspace renders actual retrieval, syntax highlighting, evidence an
   const { document } = await boot(t);
   assert.equal(document.querySelector('.result-card .card-title').textContent, 'openBluetooth');
   assert.equal(document.querySelector('.result-card .version-tag').textContent, 'v2');
-  assert.match(document.querySelector('#status-text').textContent, /16 snippets · 3 versions/);
+  assert.match(document.querySelector('#status-text').textContent, /25 snippets · 3 versions/);
   assert.match(document.querySelector('.certainty-badge').textContent, /Pattern supported/);
   assert.ok(document.querySelector('.code-line.hit'));
   assert.ok(document.querySelector('.token-function'));
@@ -73,6 +79,44 @@ test('dynamically rendered evidence explains its own result and location on focu
   document.querySelector('.code-line.hit').focus();
   assert.match(document.querySelector('#help-example').textContent, /evidence on line 2/);
   assert.match(document.querySelector('#help-body').textContent, /not a full execution trace/);
+});
+
+test('refactor investigation exposes counterexamples, history navigation, and resolved helpers', async t => {
+  const { document, calls } = await boot(t);
+  document.querySelector('.spotlight button').click();
+  await settle(() => calls.length === 2 && !document.querySelector('#submit').disabled);
+  assert.equal(document.querySelector('.card-title').textContent, 'pairDevice');
+  assert.match(document.querySelector('.lineage-note').textContent, /Inferred rename/);
+  assert.match(document.querySelector('.contrast-other').textContent, /await policyCheck/);
+  assert.equal(document.querySelectorAll('.result-card:first-child .timeline-point').length, 3);
+  const previous = document.querySelector('.timeline-point');
+  previous.click();
+  await settle(() => document.querySelector('#inspector-title').textContent === 'connectDevice · v1');
+  assert.match(document.querySelector('#inspector-body').textContent, /devices\/connect.js:3/);
+  document.querySelector('#close-inspector').click();
+  assert.equal(document.querySelector('#snippet-inspector').hidden, true);
+  assert.equal(document.activeElement, previous);
+  document.querySelector('.connection-link').click();
+  await settle(() => document.querySelector('#inspector-title').textContent === 'policyCheck · v2');
+  assert.match(document.querySelector('#inspector-body').textContent, /requestConsent/);
+});
+
+test('streamed search handles split UTF-8 chunks and displays recorded agent events', async t => {
+  const payload = JSON.stringify({ type: 'step', step: { action: 'plan', reason: 'Inspect → versions' } }) + '\n' + JSON.stringify({ type: 'result', data: initialResult }) + '\n';
+  const bytes = new TextEncoder().encode(payload);
+  const { document } = await boot(t, { streaming: true, fetchSearch: async () => ({ ok: true, body: new ReadableStream({ start(controller) {
+    for (let offset = 0; offset < bytes.length; offset += 7) controller.enqueue(bytes.slice(offset, offset + 7));
+    controller.close();
+  } }) }) });
+  assert.equal(document.querySelector('.card-title').textContent, 'openBluetooth');
+  assert.match(document.querySelector('#trace').textContent, /Check competing versions/);
+  assert.equal(document.querySelector('.results-region').getAttribute('aria-busy'), 'false');
+});
+
+test('a truncated investigation stream reports failure and releases the submit button', async t => {
+  const { document } = await boot(t, { streaming: true, fetchSearch: async () => ({ ok: true, body: new ReadableStream({ start(controller) { controller.close(); } }) }) });
+  assert.match(document.querySelector('#error').textContent, /ended before returning results/);
+  assert.equal(document.querySelector('#submit').disabled, false);
 });
 
 test('version and lens changes automatically rerun the current query', async t => {

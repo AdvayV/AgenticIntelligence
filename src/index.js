@@ -2,9 +2,11 @@ import { readFile, readdir, writeFile, mkdir, rename } from 'node:fs/promises';
 import path from 'node:path';
 import { execFileSync } from 'node:child_process';
 import { analyzeFile, hash } from './analyze.js';
-import { createEmbedder } from './vector.js';
+import { createEmbedder, validateVectors } from './vector.js';
+import { buildLexical } from './lexical.js';
+import { previousSymbol } from './lineage.js';
 
-const excluded = new Set(['node_modules', '.git', '.codestrata', 'coverage', 'dist', 'build']);
+const excluded = new Set(['node_modules', '.git', '.codestrata', '.cache', '.venv', '.npm-cache', 'test-results', 'playwright-report', 'coverage', 'dist', 'build']);
 export function emptyIndex() {
   return { schema: 1, embedding: null, versions: [], files: {}, analyses: {}, vectors: {}, snapshots: {} };
 }
@@ -49,50 +51,64 @@ export function gitFiles(root, ref) {
   }
   return { files, commit };
 }
+export function gitHistory(root, limit = 20, ref = 'HEAD') {
+  if (!Number.isInteger(limit) || limit < 1 || limit > 200) throw new Error('History must contain 1–200 commits');
+  const git = args => execFileSync('git', ['-C', root, ...args], { encoding: 'utf8' });
+  const commit = git(['rev-parse', '--verify', '--end-of-options', `${ref}^{commit}`]).trim();
+  return git(['rev-list', '--first-parent', `--max-count=${limit}`, '--reverse', commit]).trim().split('\n').filter(Boolean);
+}
 export async function indexVersion(index, { version, files, commit = null, embedder }) {
   if (!version || typeof version !== 'string') throw new Error('A version label is required');
   if (['__proto__', 'constructor', 'prototype'].includes(version)) throw new Error('Reserved version label');
   embedder ??= await createEmbedder();
   if (index.embedding && index.embedding !== embedder.name) throw new Error('Embedding mode differs from existing index; create a new index');
-  index.embedding = embedder.name;
   const started = performance.now();
   const stats = { parsedFiles: 0, reusedFiles: 0, embeddedSnippets: 0, reusedVectors: 0, deletedFiles: 0 };
-  const rows = [], diagnostics = [], manifest = {};
+  const rows = [], diagnostics = [], manifest = {}, modules = {}, pendingVectors = new Map();
   const previousFiles = index.files[version] ?? {};
   stats.deletedFiles = Object.keys(previousFiles).filter(f => !(f in files)).length;
   for (const [file, source] of Object.entries(files).sort(([a], [b]) => a.localeCompare(b))) {
-    const key = hash(`${file}\0${source}`);
+    const key = hash(`analyzer-v5\0${file}\0${source}`);
     manifest[file] = key;
     if (!index.analyses[key]) { index.analyses[key] = analyzeFile(source, file); stats.parsedFiles++; }
     else stats.reusedFiles++;
     const analysis = index.analyses[key];
+    modules[file] = analysis.module ?? { imports: [], exports: [] };
     diagnostics.push(...analysis.diagnostics);
     const occurrences = new Map();
     for (const snippet of analysis.snippets) {
       const ordinal = occurrences.get(snippet.name) ?? 0;
       occurrences.set(snippet.name, ordinal + 1);
       const lineage = `${file}::${snippet.name}::${ordinal}`;
-      const vectorKey = hash(`${embedder.name}\0${snippet.code}\0${snippet.behaviorText}`);
-      if (!index.vectors[vectorKey]) {
-        index.vectors[vectorKey] = (await embedder.encode([snippet.code + '\n' + snippet.behaviorText]))[0];
+      const vectorKey = hash(`${embedder.name}\0${snippet.documentation ?? ''}\0${snippet.code}\0${snippet.behaviorText}`);
+      if (!index.vectors[vectorKey] && !pendingVectors.has(vectorKey)) {
+        pendingVectors.set(vectorKey, (snippet.documentation ? snippet.documentation + '\n' : '') + snippet.code + '\n' + snippet.behaviorText);
         stats.embeddedSnippets++;
       } else stats.reusedVectors++;
       rows.push({ ...snippet, id: hash(`${version}\0${lineage}`).slice(0, 24), version, commit, lineage, vectorKey });
     }
   }
+  const entries = [...pendingVectors.entries()], completedVectors = {};
+  for (let offset = 0; offset < entries.length; offset += 16) {
+    const batch = entries.slice(offset, offset + 16);
+    const vectors = validateVectors(await embedder.encode(batch.map(([, text]) => text)), batch.length);
+    batch.forEach(([key], i) => { completedVectors[key] = vectors[i]; });
+  }
+  Object.assign(index.vectors, completedVectors);
+  index.embedding = embedder.name;
   if (!index.versions.includes(version)) index.versions.push(version);
   index.files[version] = manifest;
-  index.snapshots[version] = { commit, snippets: rows, diagnostics };
+  index.snapshots[version] = { commit, snippets: rows, diagnostics, modules, lexical: buildLexical(rows) };
+  index.revision = (index.revision ?? 0) + 1;
   stats.snippets = rows.length;
   stats.elapsedMs = Number((performance.now() - started).toFixed(2));
   return stats;
 }
 export function allSnippets(index) { return index.versions.flatMap(v => index.snapshots[v].snippets); }
 export function evolution(index, snippet) {
-  const current = index.versions.indexOf(snippet.version);
-  for (let i = current - 1; i >= 0; i--) {
-    const previous = index.snapshots[index.versions[i]].snippets.find(s => s.lineage === snippet.lineage);
-    if (!previous) break;
+  const link = previousSymbol(index, snippet);
+  const previous = link.previous;
+  if (previous) {
     const changes = [];
     const grouped = new Map();
     for (const call of previous.facts.calls) {
@@ -114,7 +130,9 @@ export function evolution(index, snippet) {
     for (const condition of newGuards) if (!oldGuards.includes(condition)) changes.push({ type: 'added_guard', condition });
     const oldOrder = previous.facts.calls.map(c => c.target), newOrder = snippet.facts.calls.map(c => c.target);
     if (oldOrder.length === newOrder.length && [...oldOrder].sort().join() === [...newOrder].sort().join() && oldOrder.join() !== newOrder.join()) changes.push({ type: 'changed_call_order', before: oldOrder, after: newOrder });
-    return { previousVersion: previous.version, previousId: previous.id, previousLocation: { file: previous.file, startLine: previous.startLine, endLine: previous.endLine }, previousCode: previous.code, changes, confidence: 'same-file-symbol-ordinal' };
+    if (previous.file !== snippet.file) changes.push({ type: 'moved_file', before: previous.file, after: snippet.file });
+    if (previous.name !== snippet.name) changes.push({ type: 'renamed_symbol', before: previous.name, after: snippet.name });
+    return { previousVersion: previous.version, previousId: previous.id, previousLocation: { file: previous.file, startLine: previous.startLine, endLine: previous.endLine }, previousCode: previous.code, changes, confidence: link.confidence, similarity: link.similarity };
   }
-  return { previousVersion: null, changes: [], confidence: 'no-predecessor' };
+  return { previousVersion: null, changes: [], confidence: link.confidence };
 }

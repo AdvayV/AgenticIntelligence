@@ -57,11 +57,17 @@ function containsUnsupported(node) {
   return unknown;
 }
 function factsFor(fn, source) {
-  const calls = [], guards = [];
+  const calls = [], guards = [], literals = [];
+  const locals = new Set();
+  const bind = node => { if (node) walk(node, n => { if (n.type === 'Identifier') locals.add(n.name); }); };
+  fn.params.forEach(bind);
   let uncertain = false;
   const bindings = new Map(), awaitedBindings = new Set();
   function scan(node) {
-    if (node !== fn && functionTypes.has(node.type)) return;
+    if (node !== fn && functionTypes.has(node.type)) { if (node.id) locals.add(node.id.name); return; }
+    if (node.type === 'StringLiteral') literals.push({ value: node.value, line: node.loc.start.line });
+    if (node.type === 'TemplateLiteral' && !node.expressions.length) literals.push({ value: node.quasis.map(part => part.value.cooked).join(''), line: node.loc.start.line });
+    if (node.type === 'VariableDeclarator') bind(node.id);
     if (node.type === 'VariableDeclarator' && node.id.type === 'Identifier' && node.init?.type === 'CallExpression') bindings.set(node.id.name, node.init.start);
     if (node.type === 'AwaitExpression' && node.argument.type === 'Identifier') awaitedBindings.add(node.argument.name);
     for (const child of children(node)) scan(child);
@@ -107,7 +113,39 @@ function factsFor(fn, source) {
   const linear = fn.body.type === 'BlockStatement' && fn.body.body.every((stmt, i, all) =>
     !containsUnsupported(stmt) && stmt.type !== 'IfStatement' &&
     (stmt.type !== 'ReturnStatement' || i === all.length - 1));
-  return { calls, guards, linear, uncertain };
+  return { calls, guards, literals, linear, uncertain, locals: [...locals] };
+}
+
+function moduleInfo(ast) {
+  const imports = [], exports = [], definitions = new Set();
+  function declaration(node, exported = false, defaultExport = false) {
+    if (!node) return;
+    if (node.type === 'FunctionDeclaration') {
+      definitions.add(node.start);
+      if (exported && node.id) exports.push({ exported: defaultExport ? 'default' : node.id.name, local: node.id.name });
+    }
+    if (node.type === 'VariableDeclaration') for (const item of node.declarations) {
+      if (item.id.type === 'Identifier' && functionTypes.has(item.init?.type)) definitions.add(item.init.start);
+      if (exported && item.id.type === 'Identifier') exports.push({ exported: item.id.name, local: item.id.name });
+    }
+  }
+  for (const node of ast.program.body) {
+    if (node.type === 'ImportDeclaration') for (const item of node.specifiers) imports.push({ local: item.local.name, imported: item.type === 'ImportDefaultSpecifier' ? 'default' : item.type === 'ImportNamespaceSpecifier' ? '*' : item.imported.name ?? item.imported.value, source: node.source.value });
+    if (node.type === 'ExportNamedDeclaration' || node.type === 'ExportDefaultDeclaration') {
+      declaration(node.declaration, true, node.type === 'ExportDefaultDeclaration');
+      if (!node.source) for (const item of node.specifiers ?? []) exports.push({ exported: item.exported.name ?? item.exported.value, local: item.local.name });
+      if (node.type === 'ExportDefaultDeclaration' && node.declaration.type === 'Identifier') exports.push({ exported: 'default', local: node.declaration.name });
+    } else declaration(node);
+  }
+  return { imports, exports, definitions };
+}
+
+function documentationFor(node, source, comments) {
+  const preceding = comments.filter(comment => comment.end <= node.start).at(-1);
+  if (!preceding) return '';
+  const gap = source.slice(preceding.end, node.start).trimStart();
+  if (gap.length > 160 || !/^(?:(?:export\s+)?(?:default\s+)?(?:async\s+)?|(?:(?:const|let|var)\s+)?[\w.$]+\s*=\s*)$/.test(gap)) return '';
+  return preceding.value.replace(/^\s*\* ?/gm, '').trim().slice(0, 2000);
 }
 
 export function analyzeFile(source, file = 'snippet.js') {
@@ -117,15 +155,15 @@ export function analyzeFile(source, file = 'snippet.js') {
   } catch (error) {
     return { snippets: [], diagnostics: [{ file, line: error.loc?.line ?? 1, message: error.message }] };
   }
-  const snippets = [];
+  const snippets = [], module = moduleInfo(ast);
   walk(ast, (node, parent) => {
     if (!functionTypes.has(node.type)) return;
     const code = source.slice(node.start, node.end), normalized = normalize(node);
     const facts = factsFor(node, source);
     const name = nameOf(node, parent, source);
-    snippets.push({ name, file, startLine: node.loc.start.line, endLine: node.loc.end.line, code, normalized,
+    snippets.push({ name, file, startLine: node.loc.start.line, endLine: node.loc.end.line, code, normalized, documentation: documentationFor(node, source, ast.comments ?? []), moduleLevel: module.definitions.has(node.start),
       contentHash: hash(code), shapeHash: hash(normalized), facts,
       behaviorText: [name, ...facts.calls.flatMap(c => [c.target, ...c.arguments, c.awaited ? `await waits completion ${c.target}` : `unawaited does not wait ${c.target}`, ...c.guards]), ...facts.guards.map(g => g.condition)].join(' ') });
   });
-  return { snippets, diagnostics: [] };
+  return { snippets, diagnostics: [], module: { imports: module.imports, exports: module.exports } };
 }

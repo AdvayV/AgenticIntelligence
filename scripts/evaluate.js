@@ -10,6 +10,7 @@ const distractors = Number(process.env.DISTRACTORS ?? 1000);
 if (!Number.isInteger(distractors) || distractors < 0 || distractors > 20000) throw new Error('DISTRACTORS must be 0–20000');
 indexing.push({ version: 'noise', ...await indexVersion(index, { version: 'noise', files: { 'utilities.js': Array.from({ length: distractors }, (_, i) => `function utility${i}(value) { return Math.max(value, ${i}); }`).join('\n') } }) });
 const cases = [
+  { query: 'Where did device pairing stop waiting for policyCheck?', relevant: [['pairDevice', 'v2']] },
   { query: 'Where did Bluetooth settings stop waiting for permission checking?', relevant: [['openBluetooth', 'v2']] },
   { query: 'Find calls validateInput before executeTool', relevant: [['handleInput', 'v1'], ['handleInput', 'v3']] },
   { query: 'Find the version with removed guard for device supported', relevant: [['launchDevice', 'v2']] },
