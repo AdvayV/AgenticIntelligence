@@ -1,13 +1,19 @@
-# Five-minute walkthrough
+# Five-minute demo
 
-**0:00–0:40 — The problem.** Show two almost identical functions; removing one `await` changes waiting behavior. Explain why finding the right file is insufficient when the wrong version looks almost identical.
+Prepare with `npm ci --omit=optional`, `npm test`, and `npm start`. Open localhost:3000. Use the offline mode for predictable startup; predownload BGE if demonstrating learned retrieval and label the mode.
 
-**0:40–1:40 — Retrieval.** Run the Bluetooth query using the hybrid baseline, then CodeStrata. Show ranked code and exact locations. Expand the predecessor comparison and the `removed_await` evidence.
+**0:00?0:35 ? Problem.** A refactor moved and renamed a function while removing one await. Explain why finding the correct version matters.
 
-**1:40–2:30 — Structural discrimination.** Query `calls validateInput before executeTool`. Show that reversed order is contradicted and the mutually exclusive branch example remains uncertain.
+**0:35?1:35 ? Investigation.** Click "Investigate the refactor." Show the streamed agent decisions, pairDevice at v2, exact path/lines, and the removed direct await. Do not claim this proves a runtime race.
 
-**2:30–3:10 — Evolution.** Query the removed device-support guard. Filter to a version. Explain the chronological snapshot index and reuse counters from `npm run demo`.
+**1:35?2:25 ? Counterexample.** Compare with connectDevice at v1. Explain that this version contradicts "stopped waiting." Show the inferred rename/move label. Open v1 and v3 using the timeline.
 
-**3:10–4:10 — How it works.** Walk through the planner, rank fusion, inspection, historical expansion, and bounded stopping trace. State that the current agent policy is deterministic and local.
+**2:25?3:00 ? Follow evidence.** Open the imported policyCheck helper. Its link resolves an import, not cross-function execution. Demonstrate hover explanations, version filtering, and motion controls.
 
-**4:10–5:00 — Evidence and limits.** Show the measured challenge JSON, label it synthetic, then show passing tests. Separate official AppsRetrieval evaluation from temporal challenge evaluation. State the lack of general runtime proofs and the heuristic lineage limitation.
+**3:00?3:40 ? Agent design.** Show search, inspection, expansion, and stop decisions. This is a bounded deterministic local agent. Source and uncertainty are the output.
+
+**3:40?4:30 ? Results.** Show docs/validation.md. Separate 8 controlled queries, 60 real-repository queries, and official AppsRetrieval. State the weak official NDCG@10 of 0.0505; never substitute favorable development metrics.
+
+**4:30?5:00 ? Next research.** Show CI and CPU setup. Prioritize code-specific embeddings and independently labeled multi-commit repositories. Close with the concrete value: tracing behavioral changes through refactors with reviewable evidence.
+
+Recording remains a team action. Add the actual video URL to the presentation and checklist after recording.

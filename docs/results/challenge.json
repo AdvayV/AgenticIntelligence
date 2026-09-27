@@ -1,0 +1,345 @@
+{
+  "generatedAt": "2026-09-27T15:36:49.901Z",
+  "dataset": "Controlled synthetic development challenge; NOT CoIR AppsRetrieval",
+  "corpusSnippets": 1025,
+  "distractors": 1000,
+  "embedding": "feature-hash-384",
+  "indexing": [
+    {
+      "version": "v1",
+      "parsedFiles": 3,
+      "reusedFiles": 0,
+      "embeddedSnippets": 8,
+      "reusedVectors": 0,
+      "deletedFiles": 0,
+      "snippets": 8,
+      "elapsedMs": 24.17
+    },
+    {
+      "version": "v2",
+      "parsedFiles": 2,
+      "reusedFiles": 1,
+      "embeddedSnippets": 5,
+      "reusedVectors": 3,
+      "deletedFiles": 0,
+      "snippets": 8,
+      "elapsedMs": 3.49
+    },
+    {
+      "version": "v3",
+      "parsedFiles": 2,
+      "reusedFiles": 1,
+      "embeddedSnippets": 2,
+      "reusedVectors": 7,
+      "deletedFiles": 0,
+      "snippets": 9,
+      "elapsedMs": 2.42
+    },
+    {
+      "version": "noise",
+      "parsedFiles": 1,
+      "reusedFiles": 0,
+      "embeddedSnippets": 1000,
+      "reusedVectors": 0,
+      "deletedFiles": 0,
+      "snippets": 1000,
+      "elapsedMs": 180.68
+    }
+  ],
+  "modes": {
+    "lexical": {
+      "meanNdcg10": 0.7406416196693306,
+      "meanMrr": 0.6493055555555556,
+      "top1Accuracy": 0.5,
+      "meanLatencyMs": 23.300000000000004,
+      "runs": [
+        {
+          "query": "Where did device pairing stop waiting for policyCheck?",
+          "ndcg": 0.43067655807339306,
+          "mrr": 0.25,
+          "precision": 0.1,
+          "recall": 1,
+          "correctTop1": false,
+          "elapsedMs": 167.58,
+          "inspected": 15,
+          "top1": "policyCheck@v2"
+        },
+        {
+          "query": "Where did Bluetooth settings stop waiting for permission checking?",
+          "ndcg": 1,
+          "mrr": 1,
+          "precision": 0.1,
+          "recall": 1,
+          "correctTop1": true,
+          "elapsedMs": 3.78,
+          "inspected": 9,
+          "top1": "openBluetooth@v2"
+        },
+        {
+          "query": "Find calls validateInput before executeTool",
+          "ndcg": 1,
+          "mrr": 1,
+          "precision": 0.2,
+          "recall": 1,
+          "correctTop1": true,
+          "elapsedMs": 3.78,
+          "inspected": 10,
+          "top1": "handleInput@v3"
+        },
+        {
+          "query": "Find the version with removed guard for device supported",
+          "ndcg": 0.3010299956639812,
+          "mrr": 0.1111111111111111,
+          "precision": 0.1,
+          "recall": 1,
+          "correctTop1": false,
+          "elapsedMs": 3.16,
+          "inspected": 12,
+          "top1": "launchDevice@v3"
+        },
+        {
+          "query": "Find fallback without awaiting primaryTool",
+          "ndcg": 1,
+          "mrr": 1,
+          "precision": 0.1,
+          "recall": 1,
+          "correctTop1": true,
+          "elapsedMs": 1.8,
+          "inspected": 7,
+          "top1": "runPrimary@v2"
+        },
+        {
+          "query": "Find calls executeTool before validateInput",
+          "ndcg": 0.5,
+          "mrr": 0.3333333333333333,
+          "precision": 0.1,
+          "recall": 1,
+          "correctTop1": false,
+          "elapsedMs": 2.13,
+          "inspected": 10,
+          "top1": "handleInput@v3"
+        },
+        {
+          "query": "Find Bluetooth settings waiting for permission checking",
+          "ndcg": 0.6934264036172708,
+          "mrr": 0.5,
+          "precision": 0.2,
+          "recall": 1,
+          "correctTop1": false,
+          "elapsedMs": 2.02,
+          "inspected": 9,
+          "top1": "openBluetooth@v2"
+        },
+        {
+          "query": "Where is the settings://device deeplink used?",
+          "ndcg": 1,
+          "mrr": 1,
+          "precision": 0.3,
+          "recall": 1,
+          "correctTop1": true,
+          "elapsedMs": 2.15,
+          "inspected": 15,
+          "top1": "launchDevice@v2"
+        }
+      ]
+    },
+    "hybrid": {
+      "meanNdcg10": 0.6775142052386588,
+      "meanMrr": 0.6013888888888889,
+      "top1Accuracy": 0.375,
+      "meanLatencyMs": 4.46125,
+      "runs": [
+        {
+          "query": "Where did device pairing stop waiting for policyCheck?",
+          "ndcg": 0.38685280723454163,
+          "mrr": 0.2,
+          "precision": 0.1,
+          "recall": 1,
+          "correctTop1": false,
+          "elapsedMs": 7.94,
+          "inspected": 20,
+          "top1": "policyCheck@v1"
+        },
+        {
+          "query": "Where did Bluetooth settings stop waiting for permission checking?",
+          "ndcg": 0.6309297535714575,
+          "mrr": 0.5,
+          "precision": 0.1,
+          "recall": 1,
+          "correctTop1": false,
+          "elapsedMs": 7.67,
+          "inspected": 20,
+          "top1": "openBluetooth@v1"
+        },
+        {
+          "query": "Find calls validateInput before executeTool",
+          "ndcg": 0.9197207891481876,
+          "mrr": 1,
+          "precision": 0.2,
+          "recall": 1,
+          "correctTop1": true,
+          "elapsedMs": 7.27,
+          "inspected": 20,
+          "top1": "handleInput@v1"
+        },
+        {
+          "query": "Find the version with removed guard for device supported",
+          "ndcg": 0.3010299956639812,
+          "mrr": 0.1111111111111111,
+          "precision": 0.1,
+          "recall": 1,
+          "correctTop1": false,
+          "elapsedMs": 2.7,
+          "inspected": 20,
+          "top1": "launchDevice@v1"
+        },
+        {
+          "query": "Find fallback without awaiting primaryTool",
+          "ndcg": 0.6309297535714575,
+          "mrr": 0.5,
+          "precision": 0.1,
+          "recall": 1,
+          "correctTop1": false,
+          "elapsedMs": 2.41,
+          "inspected": 20,
+          "top1": "runPrimary@v1"
+        },
+        {
+          "query": "Find calls executeTool before validateInput",
+          "ndcg": 0.6309297535714575,
+          "mrr": 0.5,
+          "precision": 0.1,
+          "recall": 1,
+          "correctTop1": false,
+          "elapsedMs": 2.48,
+          "inspected": 20,
+          "top1": "handleInput@v1"
+        },
+        {
+          "query": "Find Bluetooth settings waiting for permission checking",
+          "ndcg": 0.9197207891481876,
+          "mrr": 1,
+          "precision": 0.2,
+          "recall": 1,
+          "correctTop1": true,
+          "elapsedMs": 2.48,
+          "inspected": 20,
+          "top1": "openBluetooth@v1"
+        },
+        {
+          "query": "Where is the settings://device deeplink used?",
+          "ndcg": 1,
+          "mrr": 1,
+          "precision": 0.3,
+          "recall": 1,
+          "correctTop1": true,
+          "elapsedMs": 2.74,
+          "inspected": 20,
+          "top1": "launchDevice@v2"
+        }
+      ]
+    },
+    "codestrata": {
+      "meanNdcg10": 1,
+      "meanMrr": 1,
+      "top1Accuracy": 1,
+      "meanLatencyMs": 5.755,
+      "runs": [
+        {
+          "query": "Where did device pairing stop waiting for policyCheck?",
+          "ndcg": 1,
+          "mrr": 1,
+          "precision": 0.1,
+          "recall": 1,
+          "correctTop1": true,
+          "elapsedMs": 9.71,
+          "inspected": 59,
+          "top1": "pairDevice@v2"
+        },
+        {
+          "query": "Where did Bluetooth settings stop waiting for permission checking?",
+          "ndcg": 1,
+          "mrr": 1,
+          "precision": 0.1,
+          "recall": 1,
+          "correctTop1": true,
+          "elapsedMs": 6.24,
+          "inspected": 64,
+          "top1": "openBluetooth@v2"
+        },
+        {
+          "query": "Find calls validateInput before executeTool",
+          "ndcg": 1,
+          "mrr": 1,
+          "precision": 0.2,
+          "recall": 1,
+          "correctTop1": true,
+          "elapsedMs": 6.15,
+          "inspected": 46,
+          "top1": "handleInput@v1"
+        },
+        {
+          "query": "Find the version with removed guard for device supported",
+          "ndcg": 1,
+          "mrr": 1,
+          "precision": 0.1,
+          "recall": 1,
+          "correctTop1": true,
+          "elapsedMs": 4.35,
+          "inspected": 45,
+          "top1": "launchDevice@v2"
+        },
+        {
+          "query": "Find fallback without awaiting primaryTool",
+          "ndcg": 1,
+          "mrr": 1,
+          "precision": 0.1,
+          "recall": 1,
+          "correctTop1": true,
+          "elapsedMs": 3.46,
+          "inspected": 28,
+          "top1": "runPrimary@v2"
+        },
+        {
+          "query": "Find calls executeTool before validateInput",
+          "ndcg": 1,
+          "mrr": 1,
+          "precision": 0.1,
+          "recall": 1,
+          "correctTop1": true,
+          "elapsedMs": 5.76,
+          "inspected": 45,
+          "top1": "handleInput@v2"
+        },
+        {
+          "query": "Find Bluetooth settings waiting for permission checking",
+          "ndcg": 1,
+          "mrr": 1,
+          "precision": 0.2,
+          "recall": 1,
+          "correctTop1": true,
+          "elapsedMs": 5.29,
+          "inspected": 56,
+          "top1": "openBluetooth@v1"
+        },
+        {
+          "query": "Where is the settings://device deeplink used?",
+          "ndcg": 1,
+          "mrr": 1,
+          "precision": 0.3,
+          "recall": 1,
+          "correctTop1": true,
+          "elapsedMs": 5.08,
+          "inspected": 45,
+          "top1": "launchDevice@v2"
+        }
+      ]
+    }
+  },
+  "limitations": [
+    "Queries overlap demo development cases; these results do not establish generalization.",
+    "Latency includes one query execution per case, not a production load test.",
+    "No official screening scores are claimed."
+  ],
+  "rssMiB": 88.46
+}

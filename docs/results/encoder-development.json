@@ -1,0 +1,30 @@
+{
+  "dataset": "CoIR Apps train development subset; NOT official screening",
+  "revision": "f22508f96b7a36c2415181ed8bb76f76e04ae2d5",
+  "queries": 128,
+  "documents": 1000,
+  "device": "cpu",
+  "threads": 2,
+  "selection": "SHA-256 ordered training queries and training-only distractors",
+  "models": {
+    "features": {
+      "ndcg_at_10": 0.07920967245551719,
+      "mrr_at_10": 0.06740451388888889,
+      "recall_at_10": 0.1171875,
+      "seconds_including_cache": 0.73
+    },
+    "minilm": {
+      "ndcg_at_10": 0.5083277904376164,
+      "mrr_at_10": 0.4843501984126984,
+      "recall_at_10": 0.5859375,
+      "seconds_including_cache": 108.64
+    },
+    "bge": {
+      "ndcg_at_10": 0.5737104999695899,
+      "mrr_at_10": 0.5476438492063492,
+      "recall_at_10": 0.65625,
+      "seconds_including_cache": 197.44
+    }
+  },
+  "selected": "bge"
+}

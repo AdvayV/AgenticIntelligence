@@ -1,42 +1,40 @@
-# Design notes
+# Architecture
 
-## Evidence contract
+## Indexing
 
-A result's `certainty` is `semantic-match`, `supported-static-pattern`, `uncertain`, or `contradicted`. A supported pattern is deliberately narrower than a proof of runtime behavior. No confidence percentage is invented.
+Babel extracts function source and exact locations, direct calls/await relationships, condition text, literals, local bindings, and ESM module metadata. Leading documentation enters retrieval text; executable facts remain separately derived from syntax. Parse failures become diagnostics.
 
-Calls inside nested functions belong to their own snippets. Arguments precede their enclosing invocation in the collected call order. A direct await applies to its enclosing invocation, not every argument call. A deferred await or awaited promise combinator makes the affected argument/invocation uncertain rather than asserting fire-and-forget behavior.
+Snapshots store lexical postings and source rows. Content-addressed analyses include the analyzer version; vectors include embedding identity and exact input. Vectors are validated before publishing a snapshot. Reindexing invalidates lexical, graph, and lineage views. Saving uses a temporary file and rename; concurrent writers are unsupported. Old index snapshots may lack new metadata: reindex to enable literal evidence and import navigation.
 
-Order certificates require a straight-line function. Branches, early returns, loops, exceptions, short circuits, and unresolved invocation targets prevent certification. Source position is never substituted for runtime completion order.
+## Bounded retrieval agent
 
-## Retrieval policy
+1. Parse supported await, guard, order, and exact-literal constraints; warn on unsupported structural phrasing.
+2. Fuse persistent BM25 postings and normalized vector ranks.
+3. Inspect candidates for supported, contradicted, or unknown constraints.
+4. If needed, expand version relatives, resolved import neighbors, and remaining ranked candidates.
+5. Inspect historical counterexamples within the same total candidate budget.
+6. Stop on sufficient evidence, exhaustion, cancellation, or budget limits.
 
-1. Parse supported natural-language constraints.
-2. Fuse BM25 and vector rank lists with RRF constant 60.
-3. Inspect a bounded initial batch.
-4. Compare against preceding indexed versions and check constraint evidence.
-5. If too few matches satisfy all constraints, expand historical relatives and inspect remaining candidates.
-6. Stop on sufficient evidence, candidate exhaustion, candidate budget, or round budget.
+The planner is deterministic, not an LLM. Cross-file links locate source without transferring execution guarantees. No repository code is executed and no fixes are generated.
 
-Default limits: 3 rounds and 120 inspected snippets. Hard limits: 5 rounds and 1,000 snippets. Corpus candidate scoring is outside the inspected-candidate budget; this prototype does not promise sublinear corpus search.
+## Conservative lineage
 
-The current reranking increments are fixed development heuristics. Calibrate them on held-out development data; never tune against the official screening test split.
+Unique same-file/name pairs link directly. Unmatched removed/added symbols use normalized AST bigrams and call-target overlap. Only sufficiently similar, unambiguous mutual matches link. Matching omits direct await wrappers to preserve identity across await changes; evidence inspection still uses original source.
 
-## Versioning and cache invalidation
+Retained originals with new copies, competing matches, duplicate symbols, and deleted-version gaps do not receive invented predecessors. Structural links expose inferred confidence and similarity. Significant refactors may remain unresolved; this is not a formal identity proof.
 
-File analyses use SHA-256 of file path and source. Vector keys include the embedding identity, original snippet source, and behavior representation. Source locations are reconstructed from each snapshot's own file analysis. Reindexing a label replaces its file manifest and snippets, so removed files cannot appear in active retrieval.
+## CPU representations
 
-Evolution is computed at query time, so edits to an earlier snapshot cannot leave stale cached deltas. Label insertion order specifies chronology. A same-file/name/ordinal match is heuristic lineage, not a refactoring-aware semantic identity.
+Features are deterministic hashes, not trained embeddings. MiniLM and BGE use quantized general-text models through Transformers.js. BGE mean-pools at most four overlapping 1,200-character windows, including the tail, and uses instructed queries. Very long functions may lose intermediate text. Model inference uses 512 tokens per BGE window and two CPU threads by default.
 
-## Benchmark boundary
+Model loading is lazy and retryable. Indexing uses bounded batches. A persistent JSON-lines Node worker serves the Python adapter, with validated NumPy caches keyed by input/configuration. Official encoding preserves corpus order and independently encodes each item.
 
-`evaluate_mteb.py` implements independent encoding. It does not use query-conditioned constraint checking or Git history. `scripts/evaluate.js` exercises the complete retriever on a separately labeled controlled development corpus. Their metrics must remain separate.
+## Workspace
 
-## References
+The server streams NDJSON step/result/error records during retrieval. The UI handles partial UTF-8 chunks, interrupted streams, canceled searches, and JSON fallback for older servers. Source inspection is separately cancelable.
 
-- [Babel parser API](https://babeljs.io/docs/babel-parser)
-- [Transformers.js pipelines](https://huggingface.co/docs/transformers.js/api/pipelines)
-- [MTEB evaluation](https://docs.mteb.org/get_started/usage/running_the_evaluation/)
-- [MTEB AbsEncoder interface](https://github.com/embeddings-benchmark/mteb/blob/main/mteb/models/abs_encoder.py)
-- [CoIR](https://github.com/CoIR-team/CoIR)
-- [Sourcegraph Deep Search](https://sourcegraph.com/docs/deep-search)
-- [CodeQL JavaScript analysis](https://codeql.github.com/docs/codeql-language-guides/codeql-library-for-javascript/)
+The light interface connects ranked evidence, clickable version timelines, synchronized comparisons, and imported helpers. Hover/focus/tap explanations and reduced-motion support explain both functionality and uncertainty.
+
+## Evaluation boundaries
+
+MTEB evaluates independent AppsRetrieval encoding, excluding historical reranking. The synthetic challenge tests version discrimination. Pinned real-repository queries test broad retrieval with partial AI-assisted labels. These three evaluations must not be combined into a single accuracy claim.

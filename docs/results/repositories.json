@@ -1,0 +1,3055 @@
+{
+  "dataset": "Frozen source-reviewed repository queries; NOT CoIR",
+  "querySetSha256": "d8d725368bf5c15a603458aae332da77a0f6e54eff140d11220fd366b7cf7d3e",
+  "queries": 60,
+  "hardware": {
+    "cpu": "11th Gen Intel(R) Core(TM) i5-1135G7 @ 2.40GHz",
+    "ramGiB": 8
+  },
+  "repositories": [
+    {
+      "name": "async",
+      "repo": "caolan/async",
+      "revision": "85fb18f3d319d14d893ec24648929ff0eb908768",
+      "prefixes": [
+        "lib/"
+      ],
+      "license": "MIT",
+      "measurements": {
+        "features": {
+          "snippets": 327,
+          "indexing": {
+            "parsedFiles": 102,
+            "reusedFiles": 0,
+            "embeddedSnippets": 326,
+            "reusedVectors": 1,
+            "deletedFiles": 0,
+            "snippets": 327,
+            "elapsedMs": 217.01
+          },
+          "modes": {
+            "lexical": {
+              "ndcg_at_10": 0.5958695318548933,
+              "mrr_at_10": 0.5316964285714285,
+              "recall_at_10": 0.8,
+              "precision_at_10": 0.08000000000000004,
+              "meanLatencyMs": 1.1500000000000004,
+              "p95LatencyMs": 1.67,
+              "runs": [
+                {
+                  "id": "async-01",
+                  "ndcg": 1,
+                  "mrr": 1,
+                  "precision": 0.1,
+                  "recall": 1,
+                  "elapsedMs": 25.95,
+                  "top1": {
+                    "file": "lib/asyncify.js",
+                    "name": "asyncify"
+                  }
+                },
+                {
+                  "id": "async-02",
+                  "ndcg": 0.6309297535714575,
+                  "mrr": 0.5,
+                  "precision": 0.1,
+                  "recall": 1,
+                  "elapsedMs": 1.7,
+                  "top1": {
+                    "file": "lib/auto.js",
+                    "name": "anonymous@198"
+                  }
+                },
+                {
+                  "id": "async-03",
+                  "ndcg": 1,
+                  "mrr": 1,
+                  "precision": 0.1,
+                  "recall": 1,
+                  "elapsedMs": 1.08,
+                  "top1": {
+                    "file": "lib/autoInject.js",
+                    "name": "autoInject"
+                  }
+                },
+                {
+                  "id": "async-04",
+                  "ndcg": 0.6309297535714575,
+                  "mrr": 0.5,
+                  "precision": 0.1,
+                  "recall": 1,
+                  "elapsedMs": 0.76,
+                  "top1": {
+                    "file": "lib/cargoQueue.js",
+                    "name": "cargo"
+                  }
+                },
+                {
+                  "id": "async-05",
+                  "ndcg": 1,
+                  "mrr": 1,
+                  "precision": 0.1,
+                  "recall": 1,
+                  "elapsedMs": 0.64,
+                  "top1": {
+                    "file": "lib/cargoQueue.js",
+                    "name": "cargo"
+                  }
+                },
+                {
+                  "id": "async-06",
+                  "ndcg": 1,
+                  "mrr": 1,
+                  "precision": 0.1,
+                  "recall": 1,
+                  "elapsedMs": 0.46,
+                  "top1": {
+                    "file": "lib/compose.js",
+                    "name": "compose"
+                  }
+                },
+                {
+                  "id": "async-07",
+                  "ndcg": 0.3333333333333333,
+                  "mrr": 0.14285714285714285,
+                  "precision": 0.1,
+                  "recall": 1,
+                  "elapsedMs": 0.4,
+                  "top1": {
+                    "file": "lib/transform.js",
+                    "name": "transform"
+                  }
+                },
+                {
+                  "id": "async-08",
+                  "ndcg": 0,
+                  "mrr": 0,
+                  "precision": 0,
+                  "recall": 0,
+                  "elapsedMs": 0.36,
+                  "top1": {
+                    "file": "lib/cargoQueue.js",
+                    "name": "cargo"
+                  }
+                },
+                {
+                  "id": "async-09",
+                  "ndcg": 0.38685280723454163,
+                  "mrr": 0.2,
+                  "precision": 0.1,
+                  "recall": 1,
+                  "elapsedMs": 1.67,
+                  "top1": {
+                    "file": "lib/mapLimit.js",
+                    "name": "mapLimit"
+                  }
+                },
+                {
+                  "id": "async-10",
+                  "ndcg": 1,
+                  "mrr": 1,
+                  "precision": 0.1,
+                  "recall": 1,
+                  "elapsedMs": 0.76,
+                  "top1": {
+                    "file": "lib/detect.js",
+                    "name": "detect"
+                  }
+                },
+                {
+                  "id": "async-11",
+                  "ndcg": 1,
+                  "mrr": 1,
+                  "precision": 0.1,
+                  "recall": 1,
+                  "elapsedMs": 0.81,
+                  "top1": {
+                    "file": "lib/detectLimit.js",
+                    "name": "detectLimit"
+                  }
+                },
+                {
+                  "id": "async-12",
+                  "ndcg": 0,
+                  "mrr": 0,
+                  "precision": 0,
+                  "recall": 0,
+                  "elapsedMs": 0.35,
+                  "top1": {
+                    "file": "lib/queue.js",
+                    "name": "anonymous@146"
+                  }
+                },
+                {
+                  "id": "async-13",
+                  "ndcg": 0.43067655807339306,
+                  "mrr": 0.25,
+                  "precision": 0.1,
+                  "recall": 1,
+                  "elapsedMs": 0.37,
+                  "top1": {
+                    "file": "lib/cargoQueue.js",
+                    "name": "cargo"
+                  }
+                },
+                {
+                  "id": "async-14",
+                  "ndcg": 1,
+                  "mrr": 1,
+                  "precision": 0.1,
+                  "recall": 1,
+                  "elapsedMs": 0.34,
+                  "top1": {
+                    "file": "lib/doWhilst.js",
+                    "name": "doWhilst"
+                  }
+                },
+                {
+                  "id": "async-15",
+                  "ndcg": 0,
+                  "mrr": 0,
+                  "precision": 0,
+                  "recall": 0,
+                  "elapsedMs": 0.3,
+                  "top1": {
+                    "file": "lib/everySeries.js",
+                    "name": "everySeries"
+                  }
+                },
+                {
+                  "id": "async-16",
+                  "ndcg": 0,
+                  "mrr": 0,
+                  "precision": 0,
+                  "recall": 0,
+                  "elapsedMs": 0.25,
+                  "top1": {
+                    "file": "lib/mapValuesSeries.js",
+                    "name": "mapValuesSeries"
+                  }
+                },
+                {
+                  "id": "async-17",
+                  "ndcg": 0.5,
+                  "mrr": 0.3333333333333333,
+                  "precision": 0.1,
+                  "recall": 1,
+                  "elapsedMs": 0.32,
+                  "top1": {
+                    "file": "lib/map.js",
+                    "name": "map"
+                  }
+                },
+                {
+                  "id": "async-18",
+                  "ndcg": 0,
+                  "mrr": 0,
+                  "precision": 0,
+                  "recall": 0,
+                  "elapsedMs": 0.24,
+                  "top1": {
+                    "file": "lib/mapSeries.js",
+                    "name": "mapSeries"
+                  }
+                },
+                {
+                  "id": "async-19",
+                  "ndcg": 0,
+                  "mrr": 0,
+                  "precision": 0,
+                  "recall": 0,
+                  "elapsedMs": 0.25,
+                  "top1": {
+                    "file": "lib/groupBySeries.js",
+                    "name": "groupBySeries"
+                  }
+                },
+                {
+                  "id": "async-20",
+                  "ndcg": 0.31546487678572877,
+                  "mrr": 0.125,
+                  "precision": 0.1,
+                  "recall": 1,
+                  "elapsedMs": 0.23,
+                  "top1": {
+                    "file": "lib/filter.js",
+                    "name": "filter"
+                  }
+                },
+                {
+                  "id": "async-21",
+                  "ndcg": 0.5,
+                  "mrr": 0.3333333333333333,
+                  "precision": 0.1,
+                  "recall": 1,
+                  "elapsedMs": 0.35,
+                  "top1": {
+                    "file": "lib/until.js",
+                    "name": "until"
+                  }
+                },
+                {
+                  "id": "async-22",
+                  "ndcg": 0.5,
+                  "mrr": 0.3333333333333333,
+                  "precision": 0.1,
+                  "recall": 1,
+                  "elapsedMs": 0.25,
+                  "top1": {
+                    "file": "lib/groupBySeries.js",
+                    "name": "groupBySeries"
+                  }
+                },
+                {
+                  "id": "async-23",
+                  "ndcg": 1,
+                  "mrr": 1,
+                  "precision": 0.1,
+                  "recall": 1,
+                  "elapsedMs": 0.31,
+                  "top1": {
+                    "file": "lib/map.js",
+                    "name": "map"
+                  }
+                },
+                {
+                  "id": "async-24",
+                  "ndcg": 0.38685280723454163,
+                  "mrr": 0.2,
+                  "precision": 0.1,
+                  "recall": 1,
+                  "elapsedMs": 0.31,
+                  "top1": {
+                    "file": "lib/transform.js",
+                    "name": "transform"
+                  }
+                },
+                {
+                  "id": "async-25",
+                  "ndcg": 0.43067655807339306,
+                  "mrr": 0.25,
+                  "precision": 0.1,
+                  "recall": 1,
+                  "elapsedMs": 0.28,
+                  "top1": {
+                    "file": "lib/mapLimit.js",
+                    "name": "mapLimit"
+                  }
+                },
+                {
+                  "id": "async-26",
+                  "ndcg": 1,
+                  "mrr": 1,
+                  "precision": 0.1,
+                  "recall": 1,
+                  "elapsedMs": 0.36,
+                  "top1": {
+                    "file": "lib/memoize.js",
+                    "name": "memoize"
+                  }
+                },
+                {
+                  "id": "async-27",
+                  "ndcg": 0.2890648263178879,
+                  "mrr": 0.1,
+                  "precision": 0.1,
+                  "recall": 1,
+                  "elapsedMs": 0.75,
+                  "top1": {
+                    "file": "lib/auto.js",
+                    "name": "auto"
+                  }
+                },
+                {
+                  "id": "async-28",
+                  "ndcg": 1,
+                  "mrr": 1,
+                  "precision": 0.1,
+                  "recall": 1,
+                  "elapsedMs": 0.31,
+                  "top1": {
+                    "file": "lib/parallelLimit.js",
+                    "name": "parallelLimit"
+                  }
+                },
+                {
+                  "id": "async-29",
+                  "ndcg": 0.5,
+                  "mrr": 0.3333333333333333,
+                  "precision": 0.1,
+                  "recall": 1,
+                  "elapsedMs": 0.37,
+                  "top1": {
+                    "file": "lib/tryEach.js",
+                    "name": "tryEach"
+                  }
+                },
+                {
+                  "id": "async-30",
+                  "ndcg": 1,
+                  "mrr": 1,
+                  "precision": 0.1,
+                  "recall": 1,
+                  "elapsedMs": 0.28,
+                  "top1": {
+                    "file": "lib/reduce.js",
+                    "name": "reduce"
+                  }
+                },
+                {
+                  "id": "async-31",
+                  "ndcg": 1,
+                  "mrr": 1,
+                  "precision": 0.1,
+                  "recall": 1,
+                  "elapsedMs": 0.28,
+                  "top1": {
+                    "file": "lib/reduceRight.js",
+                    "name": "reduceRight"
+                  }
+                },
+                {
+                  "id": "async-32",
+                  "ndcg": 0,
+                  "mrr": 0,
+                  "precision": 0,
+                  "recall": 0,
+                  "elapsedMs": 0.6,
+                  "top1": {
+                    "file": "lib/series.js",
+                    "name": "series"
+                  }
+                },
+                {
+                  "id": "async-33",
+                  "ndcg": 0,
+                  "mrr": 0,
+                  "precision": 0,
+                  "recall": 0,
+                  "elapsedMs": 0.5,
+                  "top1": {
+                    "file": "lib/retryable.js",
+                    "name": "retryable"
+                  }
+                },
+                {
+                  "id": "async-34",
+                  "ndcg": 1,
+                  "mrr": 1,
+                  "precision": 0.1,
+                  "recall": 1,
+                  "elapsedMs": 0.88,
+                  "top1": {
+                    "file": "lib/retryable.js",
+                    "name": "retryable"
+                  }
+                },
+                {
+                  "id": "async-35",
+                  "ndcg": 1,
+                  "mrr": 1,
+                  "precision": 0.1,
+                  "recall": 1,
+                  "elapsedMs": 0.52,
+                  "top1": {
+                    "file": "lib/series.js",
+                    "name": "series"
+                  }
+                },
+                {
+                  "id": "async-36",
+                  "ndcg": 1,
+                  "mrr": 1,
+                  "precision": 0.1,
+                  "recall": 1,
+                  "elapsedMs": 0.43,
+                  "top1": {
+                    "file": "lib/sortBy.js",
+                    "name": "sortBy"
+                  }
+                },
+                {
+                  "id": "async-37",
+                  "ndcg": 0.5,
+                  "mrr": 0.3333333333333333,
+                  "precision": 0.1,
+                  "recall": 1,
+                  "elapsedMs": 0.57,
+                  "top1": {
+                    "file": "lib/map.js",
+                    "name": "map"
+                  }
+                },
+                {
+                  "id": "async-38",
+                  "ndcg": 1,
+                  "mrr": 1,
+                  "precision": 0.1,
+                  "recall": 1,
+                  "elapsedMs": 0.42,
+                  "top1": {
+                    "file": "lib/tryEach.js",
+                    "name": "tryEach"
+                  }
+                },
+                {
+                  "id": "async-39",
+                  "ndcg": 0.5,
+                  "mrr": 0.3333333333333333,
+                  "precision": 0.1,
+                  "recall": 1,
+                  "elapsedMs": 0.5,
+                  "top1": {
+                    "file": "lib/memoize.js",
+                    "name": "memoize"
+                  }
+                },
+                {
+                  "id": "async-40",
+                  "ndcg": 1,
+                  "mrr": 1,
+                  "precision": 0.1,
+                  "recall": 1,
+                  "elapsedMs": 0.49,
+                  "top1": {
+                    "file": "lib/waterfall.js",
+                    "name": "waterfall"
+                  }
+                }
+              ]
+            },
+            "codestrata": {
+              "ndcg_at_10": 0.41239434573277745,
+              "mrr_at_10": 0.33739087301587295,
+              "recall_at_10": 0.65,
+              "precision_at_10": 0.06500000000000003,
+              "meanLatencyMs": 1.6482499999999998,
+              "p95LatencyMs": 3.51,
+              "runs": [
+                {
+                  "id": "async-01",
+                  "ndcg": 1,
+                  "mrr": 1,
+                  "precision": 0.1,
+                  "recall": 1,
+                  "elapsedMs": 4.85,
+                  "top1": {
+                    "file": "lib/asyncify.js",
+                    "name": "asyncify"
+                  }
+                },
+                {
+                  "id": "async-02",
+                  "ndcg": 0.5,
+                  "mrr": 0.3333333333333333,
+                  "precision": 0.1,
+                  "recall": 1,
+                  "elapsedMs": 3.02,
+                  "top1": {
+                    "file": "lib/auto.js",
+                    "name": "checkForDeadlocks"
+                  }
+                },
+                {
+                  "id": "async-03",
+                  "ndcg": 1,
+                  "mrr": 1,
+                  "precision": 0.1,
+                  "recall": 1,
+                  "elapsedMs": 2.24,
+                  "top1": {
+                    "file": "lib/autoInject.js",
+                    "name": "autoInject"
+                  }
+                },
+                {
+                  "id": "async-04",
+                  "ndcg": 0,
+                  "mrr": 0,
+                  "precision": 0,
+                  "recall": 0,
+                  "elapsedMs": 2.96,
+                  "top1": {
+                    "file": "lib/sortBy.js",
+                    "name": "sortBy"
+                  }
+                },
+                {
+                  "id": "async-05",
+                  "ndcg": 0.6309297535714575,
+                  "mrr": 0.5,
+                  "precision": 0.1,
+                  "recall": 1,
+                  "elapsedMs": 2.34,
+                  "top1": {
+                    "file": "lib/parallelLimit.js",
+                    "name": "parallelLimit"
+                  }
+                },
+                {
+                  "id": "async-06",
+                  "ndcg": 1,
+                  "mrr": 1,
+                  "precision": 0.1,
+                  "recall": 1,
+                  "elapsedMs": 2.11,
+                  "top1": {
+                    "file": "lib/compose.js",
+                    "name": "compose"
+                  }
+                },
+                {
+                  "id": "async-07",
+                  "ndcg": 0.3562071871080222,
+                  "mrr": 0.16666666666666666,
+                  "precision": 0.1,
+                  "recall": 1,
+                  "elapsedMs": 2.39,
+                  "top1": {
+                    "file": "lib/transform.js",
+                    "name": "transform"
+                  }
+                },
+                {
+                  "id": "async-08",
+                  "ndcg": 0.38685280723454163,
+                  "mrr": 0.2,
+                  "precision": 0.1,
+                  "recall": 1,
+                  "elapsedMs": 2.07,
+                  "top1": {
+                    "file": "lib/concatLimit.js",
+                    "name": "anonymous@32"
+                  }
+                },
+                {
+                  "id": "async-09",
+                  "ndcg": 0.31546487678572877,
+                  "mrr": 0.125,
+                  "precision": 0.1,
+                  "recall": 1,
+                  "elapsedMs": 2.42,
+                  "top1": {
+                    "file": "lib/mapLimit.js",
+                    "name": "mapLimit"
+                  }
+                },
+                {
+                  "id": "async-10",
+                  "ndcg": 1,
+                  "mrr": 1,
+                  "precision": 0.1,
+                  "recall": 1,
+                  "elapsedMs": 3.51,
+                  "top1": {
+                    "file": "lib/detect.js",
+                    "name": "detect"
+                  }
+                },
+                {
+                  "id": "async-11",
+                  "ndcg": 1,
+                  "mrr": 1,
+                  "precision": 0.1,
+                  "recall": 1,
+                  "elapsedMs": 2.03,
+                  "top1": {
+                    "file": "lib/detectLimit.js",
+                    "name": "detectLimit"
+                  }
+                },
+                {
+                  "id": "async-12",
+                  "ndcg": 0,
+                  "mrr": 0,
+                  "precision": 0,
+                  "recall": 0,
+                  "elapsedMs": 1.35,
+                  "top1": {
+                    "file": "lib/until.js",
+                    "name": "until"
+                  }
+                },
+                {
+                  "id": "async-13",
+                  "ndcg": 0,
+                  "mrr": 0,
+                  "precision": 0,
+                  "recall": 0,
+                  "elapsedMs": 1.33,
+                  "top1": {
+                    "file": "lib/race.js",
+                    "name": "race"
+                  }
+                },
+                {
+                  "id": "async-14",
+                  "ndcg": 0.6309297535714575,
+                  "mrr": 0.5,
+                  "precision": 0.1,
+                  "recall": 1,
+                  "elapsedMs": 5.78,
+                  "top1": {
+                    "file": "lib/whilst.js",
+                    "name": "whilst"
+                  }
+                },
+                {
+                  "id": "async-15",
+                  "ndcg": 0,
+                  "mrr": 0,
+                  "precision": 0,
+                  "recall": 0,
+                  "elapsedMs": 1.11,
+                  "top1": {
+                    "file": "lib/everySeries.js",
+                    "name": "everySeries"
+                  }
+                },
+                {
+                  "id": "async-16",
+                  "ndcg": 0,
+                  "mrr": 0,
+                  "precision": 0,
+                  "recall": 0,
+                  "elapsedMs": 1.05,
+                  "top1": {
+                    "file": "lib/mapValuesSeries.js",
+                    "name": "mapValuesSeries"
+                  }
+                },
+                {
+                  "id": "async-17",
+                  "ndcg": 0,
+                  "mrr": 0,
+                  "precision": 0,
+                  "recall": 0,
+                  "elapsedMs": 1.74,
+                  "top1": {
+                    "file": "lib/map.js",
+                    "name": "map"
+                  }
+                },
+                {
+                  "id": "async-18",
+                  "ndcg": 0,
+                  "mrr": 0,
+                  "precision": 0,
+                  "recall": 0,
+                  "elapsedMs": 1.3,
+                  "top1": {
+                    "file": "lib/mapSeries.js",
+                    "name": "mapSeries"
+                  }
+                },
+                {
+                  "id": "async-19",
+                  "ndcg": 0,
+                  "mrr": 0,
+                  "precision": 0,
+                  "recall": 0,
+                  "elapsedMs": 1.21,
+                  "top1": {
+                    "file": "lib/mapValuesSeries.js",
+                    "name": "mapValuesSeries"
+                  }
+                },
+                {
+                  "id": "async-20",
+                  "ndcg": 0.43067655807339306,
+                  "mrr": 0.25,
+                  "precision": 0.1,
+                  "recall": 1,
+                  "elapsedMs": 0.98,
+                  "top1": {
+                    "file": "lib/filterSeries.js",
+                    "name": "filterSeries"
+                  }
+                },
+                {
+                  "id": "async-21",
+                  "ndcg": 0.6309297535714575,
+                  "mrr": 0.5,
+                  "precision": 0.1,
+                  "recall": 1,
+                  "elapsedMs": 1.23,
+                  "top1": {
+                    "file": "lib/until.js",
+                    "name": "until"
+                  }
+                },
+                {
+                  "id": "async-22",
+                  "ndcg": 0.5,
+                  "mrr": 0.3333333333333333,
+                  "precision": 0.1,
+                  "recall": 1,
+                  "elapsedMs": 0.88,
+                  "top1": {
+                    "file": "lib/groupBySeries.js",
+                    "name": "groupBySeries"
+                  }
+                },
+                {
+                  "id": "async-23",
+                  "ndcg": 1,
+                  "mrr": 1,
+                  "precision": 0.1,
+                  "recall": 1,
+                  "elapsedMs": 0.92,
+                  "top1": {
+                    "file": "lib/map.js",
+                    "name": "map"
+                  }
+                },
+                {
+                  "id": "async-24",
+                  "ndcg": 0.5,
+                  "mrr": 0.3333333333333333,
+                  "precision": 0.1,
+                  "recall": 1,
+                  "elapsedMs": 0.89,
+                  "top1": {
+                    "file": "lib/mapSeries.js",
+                    "name": "mapSeries"
+                  }
+                },
+                {
+                  "id": "async-25",
+                  "ndcg": 0.6309297535714575,
+                  "mrr": 0.5,
+                  "precision": 0.1,
+                  "recall": 1,
+                  "elapsedMs": 0.85,
+                  "top1": {
+                    "file": "lib/mapLimit.js",
+                    "name": "mapLimit"
+                  }
+                },
+                {
+                  "id": "async-26",
+                  "ndcg": 1,
+                  "mrr": 1,
+                  "precision": 0.1,
+                  "recall": 1,
+                  "elapsedMs": 0.96,
+                  "top1": {
+                    "file": "lib/memoize.js",
+                    "name": "memoize"
+                  }
+                },
+                {
+                  "id": "async-27",
+                  "ndcg": 0,
+                  "mrr": 0,
+                  "precision": 0,
+                  "recall": 0,
+                  "elapsedMs": 0.83,
+                  "top1": {
+                    "file": "lib/reflectAll.js",
+                    "name": "reflectAll"
+                  }
+                },
+                {
+                  "id": "async-28",
+                  "ndcg": 0.6309297535714575,
+                  "mrr": 0.5,
+                  "precision": 0.1,
+                  "recall": 1,
+                  "elapsedMs": 1.39,
+                  "top1": {
+                    "file": "lib/filterLimit.js",
+                    "name": "filterLimit"
+                  }
+                },
+                {
+                  "id": "async-29",
+                  "ndcg": 0,
+                  "mrr": 0,
+                  "precision": 0,
+                  "recall": 0,
+                  "elapsedMs": 0.96,
+                  "top1": {
+                    "file": "lib/tryEach.js",
+                    "name": "tryEach"
+                  }
+                },
+                {
+                  "id": "async-30",
+                  "ndcg": 0.43067655807339306,
+                  "mrr": 0.25,
+                  "precision": 0.1,
+                  "recall": 1,
+                  "elapsedMs": 0.9,
+                  "top1": {
+                    "file": "lib/mapValues.js",
+                    "name": "mapValues"
+                  }
+                },
+                {
+                  "id": "async-31",
+                  "ndcg": 1,
+                  "mrr": 1,
+                  "precision": 0.1,
+                  "recall": 1,
+                  "elapsedMs": 0.85,
+                  "top1": {
+                    "file": "lib/reduceRight.js",
+                    "name": "reduceRight"
+                  }
+                },
+                {
+                  "id": "async-32",
+                  "ndcg": 0,
+                  "mrr": 0,
+                  "precision": 0,
+                  "recall": 0,
+                  "elapsedMs": 1.15,
+                  "top1": {
+                    "file": "lib/parallel.js",
+                    "name": "parallel"
+                  }
+                },
+                {
+                  "id": "async-33",
+                  "ndcg": 0,
+                  "mrr": 0,
+                  "precision": 0,
+                  "recall": 0,
+                  "elapsedMs": 0.93,
+                  "top1": {
+                    "file": "lib/mapValuesSeries.js",
+                    "name": "mapValuesSeries"
+                  }
+                },
+                {
+                  "id": "async-34",
+                  "ndcg": 0,
+                  "mrr": 0,
+                  "precision": 0,
+                  "recall": 0,
+                  "elapsedMs": 0.89,
+                  "top1": {
+                    "file": "lib/detect.js",
+                    "name": "detect"
+                  }
+                },
+                {
+                  "id": "async-35",
+                  "ndcg": 0.5,
+                  "mrr": 0.3333333333333333,
+                  "precision": 0.1,
+                  "recall": 1,
+                  "elapsedMs": 0.89,
+                  "top1": {
+                    "file": "lib/reflectAll.js",
+                    "name": "reflectAll"
+                  }
+                },
+                {
+                  "id": "async-36",
+                  "ndcg": 0.3333333333333333,
+                  "mrr": 0.14285714285714285,
+                  "precision": 0.1,
+                  "recall": 1,
+                  "elapsedMs": 1.11,
+                  "top1": {
+                    "file": "lib/sortBy.js",
+                    "name": "anonymous@158"
+                  }
+                },
+                {
+                  "id": "async-37",
+                  "ndcg": 0,
+                  "mrr": 0,
+                  "precision": 0,
+                  "recall": 0,
+                  "elapsedMs": 1.22,
+                  "top1": {
+                    "file": "lib/ensureAsync.js",
+                    "name": "ensureAsync"
+                  }
+                },
+                {
+                  "id": "async-38",
+                  "ndcg": 0.3010299956639812,
+                  "mrr": 0.1111111111111111,
+                  "precision": 0.1,
+                  "recall": 1,
+                  "elapsedMs": 1.22,
+                  "top1": {
+                    "file": "lib/reflectAll.js",
+                    "name": "reflectAll"
+                  }
+                },
+                {
+                  "id": "async-39",
+                  "ndcg": 0.3562071871080222,
+                  "mrr": 0.16666666666666666,
+                  "precision": 0.1,
+                  "recall": 1,
+                  "elapsedMs": 0.89,
+                  "top1": {
+                    "file": "lib/compose.js",
+                    "name": "compose"
+                  }
+                },
+                {
+                  "id": "async-40",
+                  "ndcg": 0.43067655807339306,
+                  "mrr": 0.25,
+                  "precision": 0.1,
+                  "recall": 1,
+                  "elapsedMs": 1.18,
+                  "top1": {
+                    "file": "lib/auto.js",
+                    "name": "auto"
+                  }
+                }
+              ]
+            }
+          }
+        },
+        "bge": {
+          "snippets": 327,
+          "indexing": {
+            "parsedFiles": 102,
+            "reusedFiles": 0,
+            "embeddedSnippets": 326,
+            "reusedVectors": 1,
+            "deletedFiles": 0,
+            "snippets": 327,
+            "elapsedMs": 56731.97
+          },
+          "modes": {
+            "hybrid": {
+              "ndcg_at_10": 0.6717006195714895,
+              "mrr_at_10": 0.5917261904761905,
+              "recall_at_10": 0.925,
+              "precision_at_10": 0.09250000000000005,
+              "meanLatencyMs": 13.060750000000002,
+              "p95LatencyMs": 17.1,
+              "runs": [
+                {
+                  "id": "async-01",
+                  "ndcg": 1,
+                  "mrr": 1,
+                  "precision": 0.1,
+                  "recall": 1,
+                  "elapsedMs": 65.98,
+                  "top1": {
+                    "file": "lib/asyncify.js",
+                    "name": "asyncify"
+                  }
+                },
+                {
+                  "id": "async-02",
+                  "ndcg": 1,
+                  "mrr": 1,
+                  "precision": 0.1,
+                  "recall": 1,
+                  "elapsedMs": 13.47,
+                  "top1": {
+                    "file": "lib/auto.js",
+                    "name": "auto"
+                  }
+                },
+                {
+                  "id": "async-03",
+                  "ndcg": 1,
+                  "mrr": 1,
+                  "precision": 0.1,
+                  "recall": 1,
+                  "elapsedMs": 8.24,
+                  "top1": {
+                    "file": "lib/autoInject.js",
+                    "name": "autoInject"
+                  }
+                },
+                {
+                  "id": "async-04",
+                  "ndcg": 0.6309297535714575,
+                  "mrr": 0.5,
+                  "precision": 0.1,
+                  "recall": 1,
+                  "elapsedMs": 9.48,
+                  "top1": {
+                    "file": "lib/cargoQueue.js",
+                    "name": "cargo"
+                  }
+                },
+                {
+                  "id": "async-05",
+                  "ndcg": 0.5,
+                  "mrr": 0.3333333333333333,
+                  "precision": 0.1,
+                  "recall": 1,
+                  "elapsedMs": 9,
+                  "top1": {
+                    "file": "lib/queue.js",
+                    "name": "anonymous@146"
+                  }
+                },
+                {
+                  "id": "async-06",
+                  "ndcg": 1,
+                  "mrr": 1,
+                  "precision": 0.1,
+                  "recall": 1,
+                  "elapsedMs": 8.63,
+                  "top1": {
+                    "file": "lib/compose.js",
+                    "name": "compose"
+                  }
+                },
+                {
+                  "id": "async-07",
+                  "ndcg": 0.3333333333333333,
+                  "mrr": 0.14285714285714285,
+                  "precision": 0.1,
+                  "recall": 1,
+                  "elapsedMs": 8.94,
+                  "top1": {
+                    "file": "lib/transform.js",
+                    "name": "transform"
+                  }
+                },
+                {
+                  "id": "async-08",
+                  "ndcg": 0.3562071871080222,
+                  "mrr": 0.16666666666666666,
+                  "precision": 0.1,
+                  "recall": 1,
+                  "elapsedMs": 8.33,
+                  "top1": {
+                    "file": "lib/internal/queue.js",
+                    "name": "queue"
+                  }
+                },
+                {
+                  "id": "async-09",
+                  "ndcg": 0.6309297535714575,
+                  "mrr": 0.5,
+                  "precision": 0.1,
+                  "recall": 1,
+                  "elapsedMs": 9.63,
+                  "top1": {
+                    "file": "lib/concatLimit.js",
+                    "name": "concatLimit"
+                  }
+                },
+                {
+                  "id": "async-10",
+                  "ndcg": 1,
+                  "mrr": 1,
+                  "precision": 0.1,
+                  "recall": 1,
+                  "elapsedMs": 17.1,
+                  "top1": {
+                    "file": "lib/detect.js",
+                    "name": "detect"
+                  }
+                },
+                {
+                  "id": "async-11",
+                  "ndcg": 1,
+                  "mrr": 1,
+                  "precision": 0.1,
+                  "recall": 1,
+                  "elapsedMs": 17.81,
+                  "top1": {
+                    "file": "lib/detectLimit.js",
+                    "name": "detectLimit"
+                  }
+                },
+                {
+                  "id": "async-12",
+                  "ndcg": 0.3562071871080222,
+                  "mrr": 0.16666666666666666,
+                  "precision": 0.1,
+                  "recall": 1,
+                  "elapsedMs": 15.79,
+                  "top1": {
+                    "file": "lib/everySeries.js",
+                    "name": "everySeries"
+                  }
+                },
+                {
+                  "id": "async-13",
+                  "ndcg": 0.5,
+                  "mrr": 0.3333333333333333,
+                  "precision": 0.1,
+                  "recall": 1,
+                  "elapsedMs": 12.19,
+                  "top1": {
+                    "file": "lib/race.js",
+                    "name": "race"
+                  }
+                },
+                {
+                  "id": "async-14",
+                  "ndcg": 0.38685280723454163,
+                  "mrr": 0.2,
+                  "precision": 0.1,
+                  "recall": 1,
+                  "elapsedMs": 9.58,
+                  "top1": {
+                    "file": "lib/whilst.js",
+                    "name": "whilst"
+                  }
+                },
+                {
+                  "id": "async-15",
+                  "ndcg": 0,
+                  "mrr": 0,
+                  "precision": 0,
+                  "recall": 0,
+                  "elapsedMs": 9.17,
+                  "top1": {
+                    "file": "lib/everySeries.js",
+                    "name": "everySeries"
+                  }
+                },
+                {
+                  "id": "async-16",
+                  "ndcg": 0,
+                  "mrr": 0,
+                  "precision": 0,
+                  "recall": 0,
+                  "elapsedMs": 9.49,
+                  "top1": {
+                    "file": "lib/map.js",
+                    "name": "map"
+                  }
+                },
+                {
+                  "id": "async-17",
+                  "ndcg": 1,
+                  "mrr": 1,
+                  "precision": 0.1,
+                  "recall": 1,
+                  "elapsedMs": 11.66,
+                  "top1": {
+                    "file": "lib/ensureAsync.js",
+                    "name": "ensureAsync"
+                  }
+                },
+                {
+                  "id": "async-18",
+                  "ndcg": 0.38685280723454163,
+                  "mrr": 0.2,
+                  "precision": 0.1,
+                  "recall": 1,
+                  "elapsedMs": 9.29,
+                  "top1": {
+                    "file": "lib/mapSeries.js",
+                    "name": "mapSeries"
+                  }
+                },
+                {
+                  "id": "async-19",
+                  "ndcg": 0,
+                  "mrr": 0,
+                  "precision": 0,
+                  "recall": 0,
+                  "elapsedMs": 9.84,
+                  "top1": {
+                    "file": "lib/someSeries.js",
+                    "name": "someSeries"
+                  }
+                },
+                {
+                  "id": "async-20",
+                  "ndcg": 0.38685280723454163,
+                  "mrr": 0.2,
+                  "precision": 0.1,
+                  "recall": 1,
+                  "elapsedMs": 10.09,
+                  "top1": {
+                    "file": "lib/internal/filter.js",
+                    "name": "filterArray"
+                  }
+                },
+                {
+                  "id": "async-21",
+                  "ndcg": 0.3562071871080222,
+                  "mrr": 0.16666666666666666,
+                  "precision": 0.1,
+                  "recall": 1,
+                  "elapsedMs": 11.36,
+                  "top1": {
+                    "file": "lib/doUntil.js",
+                    "name": "doUntil"
+                  }
+                },
+                {
+                  "id": "async-22",
+                  "ndcg": 0.5,
+                  "mrr": 0.3333333333333333,
+                  "precision": 0.1,
+                  "recall": 1,
+                  "elapsedMs": 13.24,
+                  "top1": {
+                    "file": "lib/groupBySeries.js",
+                    "name": "groupBySeries"
+                  }
+                },
+                {
+                  "id": "async-23",
+                  "ndcg": 0.38685280723454163,
+                  "mrr": 0.2,
+                  "precision": 0.1,
+                  "recall": 1,
+                  "elapsedMs": 10.35,
+                  "top1": {
+                    "file": "lib/everySeries.js",
+                    "name": "everySeries"
+                  }
+                },
+                {
+                  "id": "async-24",
+                  "ndcg": 0.5,
+                  "mrr": 0.3333333333333333,
+                  "precision": 0.1,
+                  "recall": 1,
+                  "elapsedMs": 15.42,
+                  "top1": {
+                    "file": "lib/transform.js",
+                    "name": "transform"
+                  }
+                },
+                {
+                  "id": "async-25",
+                  "ndcg": 1,
+                  "mrr": 1,
+                  "precision": 0.1,
+                  "recall": 1,
+                  "elapsedMs": 9.31,
+                  "top1": {
+                    "file": "lib/mapSeries.js",
+                    "name": "mapSeries"
+                  }
+                },
+                {
+                  "id": "async-26",
+                  "ndcg": 1,
+                  "mrr": 1,
+                  "precision": 0.1,
+                  "recall": 1,
+                  "elapsedMs": 9.7,
+                  "top1": {
+                    "file": "lib/memoize.js",
+                    "name": "memoize"
+                  }
+                },
+                {
+                  "id": "async-27",
+                  "ndcg": 0.6309297535714575,
+                  "mrr": 0.5,
+                  "precision": 0.1,
+                  "recall": 1,
+                  "elapsedMs": 13.91,
+                  "top1": {
+                    "file": "lib/auto.js",
+                    "name": "auto"
+                  }
+                },
+                {
+                  "id": "async-28",
+                  "ndcg": 1,
+                  "mrr": 1,
+                  "precision": 0.1,
+                  "recall": 1,
+                  "elapsedMs": 12.15,
+                  "top1": {
+                    "file": "lib/parallelLimit.js",
+                    "name": "parallelLimit"
+                  }
+                },
+                {
+                  "id": "async-29",
+                  "ndcg": 1,
+                  "mrr": 1,
+                  "precision": 0.1,
+                  "recall": 1,
+                  "elapsedMs": 14.64,
+                  "top1": {
+                    "file": "lib/race.js",
+                    "name": "race"
+                  }
+                },
+                {
+                  "id": "async-30",
+                  "ndcg": 0.6309297535714575,
+                  "mrr": 0.5,
+                  "precision": 0.1,
+                  "recall": 1,
+                  "elapsedMs": 15.6,
+                  "top1": {
+                    "file": "lib/reflectAll.js",
+                    "name": "reflectAll"
+                  }
+                },
+                {
+                  "id": "async-31",
+                  "ndcg": 1,
+                  "mrr": 1,
+                  "precision": 0.1,
+                  "recall": 1,
+                  "elapsedMs": 8.73,
+                  "top1": {
+                    "file": "lib/reduceRight.js",
+                    "name": "reduceRight"
+                  }
+                },
+                {
+                  "id": "async-32",
+                  "ndcg": 0.3333333333333333,
+                  "mrr": 0.14285714285714285,
+                  "precision": 0.1,
+                  "recall": 1,
+                  "elapsedMs": 10.54,
+                  "top1": {
+                    "file": "lib/parallel.js",
+                    "name": "parallel"
+                  }
+                },
+                {
+                  "id": "async-33",
+                  "ndcg": 0.43067655807339306,
+                  "mrr": 0.25,
+                  "precision": 0.1,
+                  "recall": 1,
+                  "elapsedMs": 12.54,
+                  "top1": {
+                    "file": "lib/retryable.js",
+                    "name": "retryable"
+                  }
+                },
+                {
+                  "id": "async-34",
+                  "ndcg": 1,
+                  "mrr": 1,
+                  "precision": 0.1,
+                  "recall": 1,
+                  "elapsedMs": 9.08,
+                  "top1": {
+                    "file": "lib/retryable.js",
+                    "name": "retryable"
+                  }
+                },
+                {
+                  "id": "async-35",
+                  "ndcg": 1,
+                  "mrr": 1,
+                  "precision": 0.1,
+                  "recall": 1,
+                  "elapsedMs": 14.91,
+                  "top1": {
+                    "file": "lib/series.js",
+                    "name": "series"
+                  }
+                },
+                {
+                  "id": "async-36",
+                  "ndcg": 1,
+                  "mrr": 1,
+                  "precision": 0.1,
+                  "recall": 1,
+                  "elapsedMs": 9.97,
+                  "top1": {
+                    "file": "lib/sortBy.js",
+                    "name": "sortBy"
+                  }
+                },
+                {
+                  "id": "async-37",
+                  "ndcg": 1,
+                  "mrr": 1,
+                  "precision": 0.1,
+                  "recall": 1,
+                  "elapsedMs": 13.2,
+                  "top1": {
+                    "file": "lib/timeout.js",
+                    "name": "timeout"
+                  }
+                },
+                {
+                  "id": "async-38",
+                  "ndcg": 1,
+                  "mrr": 1,
+                  "precision": 0.1,
+                  "recall": 1,
+                  "elapsedMs": 14.39,
+                  "top1": {
+                    "file": "lib/tryEach.js",
+                    "name": "tryEach"
+                  }
+                },
+                {
+                  "id": "async-39",
+                  "ndcg": 0.6309297535714575,
+                  "mrr": 0.5,
+                  "precision": 0.1,
+                  "recall": 1,
+                  "elapsedMs": 14.01,
+                  "top1": {
+                    "file": "lib/memoize.js",
+                    "name": "memoize"
+                  }
+                },
+                {
+                  "id": "async-40",
+                  "ndcg": 1,
+                  "mrr": 1,
+                  "precision": 0.1,
+                  "recall": 1,
+                  "elapsedMs": 15.67,
+                  "top1": {
+                    "file": "lib/waterfall.js",
+                    "name": "waterfall"
+                  }
+                }
+              ]
+            },
+            "codestrata": {
+              "ndcg_at_10": 0.6717006195714895,
+              "mrr_at_10": 0.5917261904761905,
+              "recall_at_10": 0.925,
+              "precision_at_10": 0.09250000000000005,
+              "meanLatencyMs": 19.644999999999996,
+              "p95LatencyMs": 52.72,
+              "runs": [
+                {
+                  "id": "async-01",
+                  "ndcg": 1,
+                  "mrr": 1,
+                  "precision": 0.1,
+                  "recall": 1,
+                  "elapsedMs": 15.59,
+                  "top1": {
+                    "file": "lib/asyncify.js",
+                    "name": "asyncify"
+                  }
+                },
+                {
+                  "id": "async-02",
+                  "ndcg": 1,
+                  "mrr": 1,
+                  "precision": 0.1,
+                  "recall": 1,
+                  "elapsedMs": 17.5,
+                  "top1": {
+                    "file": "lib/auto.js",
+                    "name": "auto"
+                  }
+                },
+                {
+                  "id": "async-03",
+                  "ndcg": 1,
+                  "mrr": 1,
+                  "precision": 0.1,
+                  "recall": 1,
+                  "elapsedMs": 15.16,
+                  "top1": {
+                    "file": "lib/autoInject.js",
+                    "name": "autoInject"
+                  }
+                },
+                {
+                  "id": "async-04",
+                  "ndcg": 0.6309297535714575,
+                  "mrr": 0.5,
+                  "precision": 0.1,
+                  "recall": 1,
+                  "elapsedMs": 15.25,
+                  "top1": {
+                    "file": "lib/cargoQueue.js",
+                    "name": "cargo"
+                  }
+                },
+                {
+                  "id": "async-05",
+                  "ndcg": 0.5,
+                  "mrr": 0.3333333333333333,
+                  "precision": 0.1,
+                  "recall": 1,
+                  "elapsedMs": 12.52,
+                  "top1": {
+                    "file": "lib/queue.js",
+                    "name": "anonymous@146"
+                  }
+                },
+                {
+                  "id": "async-06",
+                  "ndcg": 1,
+                  "mrr": 1,
+                  "precision": 0.1,
+                  "recall": 1,
+                  "elapsedMs": 13.4,
+                  "top1": {
+                    "file": "lib/compose.js",
+                    "name": "compose"
+                  }
+                },
+                {
+                  "id": "async-07",
+                  "ndcg": 0.3333333333333333,
+                  "mrr": 0.14285714285714285,
+                  "precision": 0.1,
+                  "recall": 1,
+                  "elapsedMs": 9.54,
+                  "top1": {
+                    "file": "lib/transform.js",
+                    "name": "transform"
+                  }
+                },
+                {
+                  "id": "async-08",
+                  "ndcg": 0.3562071871080222,
+                  "mrr": 0.16666666666666666,
+                  "precision": 0.1,
+                  "recall": 1,
+                  "elapsedMs": 26.41,
+                  "top1": {
+                    "file": "lib/internal/queue.js",
+                    "name": "queue"
+                  }
+                },
+                {
+                  "id": "async-09",
+                  "ndcg": 0.6309297535714575,
+                  "mrr": 0.5,
+                  "precision": 0.1,
+                  "recall": 1,
+                  "elapsedMs": 15.81,
+                  "top1": {
+                    "file": "lib/concatLimit.js",
+                    "name": "concatLimit"
+                  }
+                },
+                {
+                  "id": "async-10",
+                  "ndcg": 1,
+                  "mrr": 1,
+                  "precision": 0.1,
+                  "recall": 1,
+                  "elapsedMs": 33.9,
+                  "top1": {
+                    "file": "lib/detect.js",
+                    "name": "detect"
+                  }
+                },
+                {
+                  "id": "async-11",
+                  "ndcg": 1,
+                  "mrr": 1,
+                  "precision": 0.1,
+                  "recall": 1,
+                  "elapsedMs": 14.85,
+                  "top1": {
+                    "file": "lib/detectLimit.js",
+                    "name": "detectLimit"
+                  }
+                },
+                {
+                  "id": "async-12",
+                  "ndcg": 0.3562071871080222,
+                  "mrr": 0.16666666666666666,
+                  "precision": 0.1,
+                  "recall": 1,
+                  "elapsedMs": 18.43,
+                  "top1": {
+                    "file": "lib/everySeries.js",
+                    "name": "everySeries"
+                  }
+                },
+                {
+                  "id": "async-13",
+                  "ndcg": 0.5,
+                  "mrr": 0.3333333333333333,
+                  "precision": 0.1,
+                  "recall": 1,
+                  "elapsedMs": 16.05,
+                  "top1": {
+                    "file": "lib/race.js",
+                    "name": "race"
+                  }
+                },
+                {
+                  "id": "async-14",
+                  "ndcg": 0.38685280723454163,
+                  "mrr": 0.2,
+                  "precision": 0.1,
+                  "recall": 1,
+                  "elapsedMs": 20.94,
+                  "top1": {
+                    "file": "lib/whilst.js",
+                    "name": "whilst"
+                  }
+                },
+                {
+                  "id": "async-15",
+                  "ndcg": 0,
+                  "mrr": 0,
+                  "precision": 0,
+                  "recall": 0,
+                  "elapsedMs": 11.49,
+                  "top1": {
+                    "file": "lib/everySeries.js",
+                    "name": "everySeries"
+                  }
+                },
+                {
+                  "id": "async-16",
+                  "ndcg": 0,
+                  "mrr": 0,
+                  "precision": 0,
+                  "recall": 0,
+                  "elapsedMs": 10.9,
+                  "top1": {
+                    "file": "lib/map.js",
+                    "name": "map"
+                  }
+                },
+                {
+                  "id": "async-17",
+                  "ndcg": 1,
+                  "mrr": 1,
+                  "precision": 0.1,
+                  "recall": 1,
+                  "elapsedMs": 12.44,
+                  "top1": {
+                    "file": "lib/ensureAsync.js",
+                    "name": "ensureAsync"
+                  }
+                },
+                {
+                  "id": "async-18",
+                  "ndcg": 0.38685280723454163,
+                  "mrr": 0.2,
+                  "precision": 0.1,
+                  "recall": 1,
+                  "elapsedMs": 12.17,
+                  "top1": {
+                    "file": "lib/mapSeries.js",
+                    "name": "mapSeries"
+                  }
+                },
+                {
+                  "id": "async-19",
+                  "ndcg": 0,
+                  "mrr": 0,
+                  "precision": 0,
+                  "recall": 0,
+                  "elapsedMs": 10.26,
+                  "top1": {
+                    "file": "lib/someSeries.js",
+                    "name": "someSeries"
+                  }
+                },
+                {
+                  "id": "async-20",
+                  "ndcg": 0.38685280723454163,
+                  "mrr": 0.2,
+                  "precision": 0.1,
+                  "recall": 1,
+                  "elapsedMs": 8.82,
+                  "top1": {
+                    "file": "lib/internal/filter.js",
+                    "name": "filterArray"
+                  }
+                },
+                {
+                  "id": "async-21",
+                  "ndcg": 0.3562071871080222,
+                  "mrr": 0.16666666666666666,
+                  "precision": 0.1,
+                  "recall": 1,
+                  "elapsedMs": 9.77,
+                  "top1": {
+                    "file": "lib/doUntil.js",
+                    "name": "doUntil"
+                  }
+                },
+                {
+                  "id": "async-22",
+                  "ndcg": 0.5,
+                  "mrr": 0.3333333333333333,
+                  "precision": 0.1,
+                  "recall": 1,
+                  "elapsedMs": 15.5,
+                  "top1": {
+                    "file": "lib/groupBySeries.js",
+                    "name": "groupBySeries"
+                  }
+                },
+                {
+                  "id": "async-23",
+                  "ndcg": 0.38685280723454163,
+                  "mrr": 0.2,
+                  "precision": 0.1,
+                  "recall": 1,
+                  "elapsedMs": 17.34,
+                  "top1": {
+                    "file": "lib/everySeries.js",
+                    "name": "everySeries"
+                  }
+                },
+                {
+                  "id": "async-24",
+                  "ndcg": 0.5,
+                  "mrr": 0.3333333333333333,
+                  "precision": 0.1,
+                  "recall": 1,
+                  "elapsedMs": 13.12,
+                  "top1": {
+                    "file": "lib/transform.js",
+                    "name": "transform"
+                  }
+                },
+                {
+                  "id": "async-25",
+                  "ndcg": 1,
+                  "mrr": 1,
+                  "precision": 0.1,
+                  "recall": 1,
+                  "elapsedMs": 12.17,
+                  "top1": {
+                    "file": "lib/mapSeries.js",
+                    "name": "mapSeries"
+                  }
+                },
+                {
+                  "id": "async-26",
+                  "ndcg": 1,
+                  "mrr": 1,
+                  "precision": 0.1,
+                  "recall": 1,
+                  "elapsedMs": 14.03,
+                  "top1": {
+                    "file": "lib/memoize.js",
+                    "name": "memoize"
+                  }
+                },
+                {
+                  "id": "async-27",
+                  "ndcg": 0.6309297535714575,
+                  "mrr": 0.5,
+                  "precision": 0.1,
+                  "recall": 1,
+                  "elapsedMs": 13.78,
+                  "top1": {
+                    "file": "lib/auto.js",
+                    "name": "auto"
+                  }
+                },
+                {
+                  "id": "async-28",
+                  "ndcg": 1,
+                  "mrr": 1,
+                  "precision": 0.1,
+                  "recall": 1,
+                  "elapsedMs": 14.26,
+                  "top1": {
+                    "file": "lib/parallelLimit.js",
+                    "name": "parallelLimit"
+                  }
+                },
+                {
+                  "id": "async-29",
+                  "ndcg": 1,
+                  "mrr": 1,
+                  "precision": 0.1,
+                  "recall": 1,
+                  "elapsedMs": 17.65,
+                  "top1": {
+                    "file": "lib/race.js",
+                    "name": "race"
+                  }
+                },
+                {
+                  "id": "async-30",
+                  "ndcg": 0.6309297535714575,
+                  "mrr": 0.5,
+                  "precision": 0.1,
+                  "recall": 1,
+                  "elapsedMs": 14.38,
+                  "top1": {
+                    "file": "lib/reflectAll.js",
+                    "name": "reflectAll"
+                  }
+                },
+                {
+                  "id": "async-31",
+                  "ndcg": 1,
+                  "mrr": 1,
+                  "precision": 0.1,
+                  "recall": 1,
+                  "elapsedMs": 14.17,
+                  "top1": {
+                    "file": "lib/reduceRight.js",
+                    "name": "reduceRight"
+                  }
+                },
+                {
+                  "id": "async-32",
+                  "ndcg": 0.3333333333333333,
+                  "mrr": 0.14285714285714285,
+                  "precision": 0.1,
+                  "recall": 1,
+                  "elapsedMs": 15.47,
+                  "top1": {
+                    "file": "lib/parallel.js",
+                    "name": "parallel"
+                  }
+                },
+                {
+                  "id": "async-33",
+                  "ndcg": 0.43067655807339306,
+                  "mrr": 0.25,
+                  "precision": 0.1,
+                  "recall": 1,
+                  "elapsedMs": 17.84,
+                  "top1": {
+                    "file": "lib/retryable.js",
+                    "name": "retryable"
+                  }
+                },
+                {
+                  "id": "async-34",
+                  "ndcg": 1,
+                  "mrr": 1,
+                  "precision": 0.1,
+                  "recall": 1,
+                  "elapsedMs": 17.59,
+                  "top1": {
+                    "file": "lib/retryable.js",
+                    "name": "retryable"
+                  }
+                },
+                {
+                  "id": "async-35",
+                  "ndcg": 1,
+                  "mrr": 1,
+                  "precision": 0.1,
+                  "recall": 1,
+                  "elapsedMs": 32.9,
+                  "top1": {
+                    "file": "lib/series.js",
+                    "name": "series"
+                  }
+                },
+                {
+                  "id": "async-36",
+                  "ndcg": 1,
+                  "mrr": 1,
+                  "precision": 0.1,
+                  "recall": 1,
+                  "elapsedMs": 19.41,
+                  "top1": {
+                    "file": "lib/sortBy.js",
+                    "name": "sortBy"
+                  }
+                },
+                {
+                  "id": "async-37",
+                  "ndcg": 1,
+                  "mrr": 1,
+                  "precision": 0.1,
+                  "recall": 1,
+                  "elapsedMs": 19.51,
+                  "top1": {
+                    "file": "lib/timeout.js",
+                    "name": "timeout"
+                  }
+                },
+                {
+                  "id": "async-38",
+                  "ndcg": 1,
+                  "mrr": 1,
+                  "precision": 0.1,
+                  "recall": 1,
+                  "elapsedMs": 52.72,
+                  "top1": {
+                    "file": "lib/tryEach.js",
+                    "name": "tryEach"
+                  }
+                },
+                {
+                  "id": "async-39",
+                  "ndcg": 0.6309297535714575,
+                  "mrr": 0.5,
+                  "precision": 0.1,
+                  "recall": 1,
+                  "elapsedMs": 66.54,
+                  "top1": {
+                    "file": "lib/memoize.js",
+                    "name": "memoize"
+                  }
+                },
+                {
+                  "id": "async-40",
+                  "ndcg": 1,
+                  "mrr": 1,
+                  "precision": 0.1,
+                  "recall": 1,
+                  "elapsedMs": 76.22,
+                  "top1": {
+                    "file": "lib/waterfall.js",
+                    "name": "waterfall"
+                  }
+                }
+              ]
+            }
+          }
+        }
+      }
+    },
+    {
+      "name": "express",
+      "repo": "expressjs/express",
+      "revision": "cd7d4397c398a3f3ecadeaf9ef6ac1377bd414c4",
+      "prefixes": [
+        "lib/"
+      ],
+      "license": "MIT",
+      "measurements": {
+        "features": {
+          "snippets": 109,
+          "indexing": {
+            "parsedFiles": 6,
+            "reusedFiles": 0,
+            "embeddedSnippets": 109,
+            "reusedVectors": 0,
+            "deletedFiles": 0,
+            "snippets": 109,
+            "elapsedMs": 92.67
+          },
+          "modes": {
+            "lexical": {
+              "ndcg_at_10": 0.8347300276869258,
+              "mrr_at_10": 0.7829166666666667,
+              "recall_at_10": 1,
+              "precision_at_10": 0.10000000000000002,
+              "meanLatencyMs": 0.6605000000000001,
+              "p95LatencyMs": 0.47,
+              "runs": [
+                {
+                  "id": "express-01",
+                  "ndcg": 1,
+                  "mrr": 1,
+                  "precision": 0.1,
+                  "recall": 1,
+                  "elapsedMs": 8.12,
+                  "top1": {
+                    "file": "lib/response.js",
+                    "name": "status"
+                  }
+                },
+                {
+                  "id": "express-02",
+                  "ndcg": 0.43067655807339306,
+                  "mrr": 0.25,
+                  "precision": 0.1,
+                  "recall": 1,
+                  "elapsedMs": 0.34,
+                  "top1": {
+                    "file": "lib/response.js",
+                    "name": "jsonp"
+                  }
+                },
+                {
+                  "id": "express-03",
+                  "ndcg": 0.31546487678572877,
+                  "mrr": 0.125,
+                  "precision": 0.1,
+                  "recall": 1,
+                  "elapsedMs": 0.37,
+                  "top1": {
+                    "file": "lib/response.js",
+                    "name": "res.cookie"
+                  }
+                },
+                {
+                  "id": "express-04",
+                  "ndcg": 1,
+                  "mrr": 1,
+                  "precision": 0.1,
+                  "recall": 1,
+                  "elapsedMs": 0.2,
+                  "top1": {
+                    "file": "lib/response.js",
+                    "name": "jsonp"
+                  }
+                },
+                {
+                  "id": "express-05",
+                  "ndcg": 1,
+                  "mrr": 1,
+                  "precision": 0.1,
+                  "recall": 1,
+                  "elapsedMs": 0.16,
+                  "top1": {
+                    "file": "lib/response.js",
+                    "name": "sendStatus"
+                  }
+                },
+                {
+                  "id": "express-06",
+                  "ndcg": 1,
+                  "mrr": 1,
+                  "precision": 0.1,
+                  "recall": 1,
+                  "elapsedMs": 0.15,
+                  "top1": {
+                    "file": "lib/response.js",
+                    "name": "sendFile"
+                  }
+                },
+                {
+                  "id": "express-07",
+                  "ndcg": 1,
+                  "mrr": 1,
+                  "precision": 0.1,
+                  "recall": 1,
+                  "elapsedMs": 0.47,
+                  "top1": {
+                    "file": "lib/response.js",
+                    "name": "download"
+                  }
+                },
+                {
+                  "id": "express-08",
+                  "ndcg": 0.6309297535714575,
+                  "mrr": 0.5,
+                  "precision": 0.1,
+                  "recall": 1,
+                  "elapsedMs": 0.37,
+                  "top1": {
+                    "file": "lib/response.js",
+                    "name": "download"
+                  }
+                },
+                {
+                  "id": "express-09",
+                  "ndcg": 1,
+                  "mrr": 1,
+                  "precision": 0.1,
+                  "recall": 1,
+                  "elapsedMs": 0.3,
+                  "top1": {
+                    "file": "lib/response.js",
+                    "name": "append"
+                  }
+                },
+                {
+                  "id": "express-10",
+                  "ndcg": 1,
+                  "mrr": 1,
+                  "precision": 0.1,
+                  "recall": 1,
+                  "elapsedMs": 0.38,
+                  "top1": {
+                    "file": "lib/response.js",
+                    "name": "clearCookie"
+                  }
+                },
+                {
+                  "id": "express-11",
+                  "ndcg": 0.5,
+                  "mrr": 0.3333333333333333,
+                  "precision": 0.1,
+                  "recall": 1,
+                  "elapsedMs": 0.23,
+                  "top1": {
+                    "file": "lib/response.js",
+                    "name": "clearCookie"
+                  }
+                },
+                {
+                  "id": "express-12",
+                  "ndcg": 1,
+                  "mrr": 1,
+                  "precision": 0.1,
+                  "recall": 1,
+                  "elapsedMs": 0.17,
+                  "top1": {
+                    "file": "lib/response.js",
+                    "name": "redirect"
+                  }
+                },
+                {
+                  "id": "express-13",
+                  "ndcg": 1,
+                  "mrr": 1,
+                  "precision": 0.1,
+                  "recall": 1,
+                  "elapsedMs": 0.21,
+                  "top1": {
+                    "file": "lib/response.js",
+                    "name": "res.vary"
+                  }
+                },
+                {
+                  "id": "express-14",
+                  "ndcg": 1,
+                  "mrr": 1,
+                  "precision": 0.1,
+                  "recall": 1,
+                  "elapsedMs": 0.29,
+                  "top1": {
+                    "file": "lib/response.js",
+                    "name": "stringify"
+                  }
+                },
+                {
+                  "id": "express-15",
+                  "ndcg": 0.43067655807339306,
+                  "mrr": 0.25,
+                  "precision": 0.1,
+                  "recall": 1,
+                  "elapsedMs": 0.29,
+                  "top1": {
+                    "file": "lib/request.js",
+                    "name": "req.accepts"
+                  }
+                },
+                {
+                  "id": "express-16",
+                  "ndcg": 1,
+                  "mrr": 1,
+                  "precision": 0.1,
+                  "recall": 1,
+                  "elapsedMs": 0.22,
+                  "top1": {
+                    "file": "lib/request.js",
+                    "name": "range"
+                  }
+                },
+                {
+                  "id": "express-17",
+                  "ndcg": 1,
+                  "mrr": 1,
+                  "precision": 0.1,
+                  "recall": 1,
+                  "elapsedMs": 0.21,
+                  "top1": {
+                    "file": "lib/application.js",
+                    "name": "engine"
+                  }
+                },
+                {
+                  "id": "express-18",
+                  "ndcg": 1,
+                  "mrr": 1,
+                  "precision": 0.1,
+                  "recall": 1,
+                  "elapsedMs": 0.3,
+                  "top1": {
+                    "file": "lib/application.js",
+                    "name": "use"
+                  }
+                },
+                {
+                  "id": "express-19",
+                  "ndcg": 1,
+                  "mrr": 1,
+                  "precision": 0.1,
+                  "recall": 1,
+                  "elapsedMs": 0.25,
+                  "top1": {
+                    "file": "lib/application.js",
+                    "name": "listen"
+                  }
+                },
+                {
+                  "id": "express-20",
+                  "ndcg": 0.38685280723454163,
+                  "mrr": 0.2,
+                  "precision": 0.1,
+                  "recall": 1,
+                  "elapsedMs": 0.18,
+                  "top1": {
+                    "file": "lib/view.js",
+                    "name": "View"
+                  }
+                }
+              ]
+            },
+            "codestrata": {
+              "ndcg_at_10": 0.7088964696305675,
+              "mrr_at_10": 0.6181150793650794,
+              "recall_at_10": 1,
+              "precision_at_10": 0.10000000000000002,
+              "meanLatencyMs": 0.9089999999999998,
+              "p95LatencyMs": 1.65,
+              "runs": [
+                {
+                  "id": "express-01",
+                  "ndcg": 1,
+                  "mrr": 1,
+                  "precision": 0.1,
+                  "recall": 1,
+                  "elapsedMs": 1.65,
+                  "top1": {
+                    "file": "lib/response.js",
+                    "name": "status"
+                  }
+                },
+                {
+                  "id": "express-02",
+                  "ndcg": 0.3333333333333333,
+                  "mrr": 0.14285714285714285,
+                  "precision": 0.1,
+                  "recall": 1,
+                  "elapsedMs": 1.23,
+                  "top1": {
+                    "file": "lib/response.js",
+                    "name": "jsonp"
+                  }
+                },
+                {
+                  "id": "express-03",
+                  "ndcg": 0.43067655807339306,
+                  "mrr": 0.25,
+                  "precision": 0.1,
+                  "recall": 1,
+                  "elapsedMs": 1.33,
+                  "top1": {
+                    "file": "lib/request.js",
+                    "name": "req.accepts"
+                  }
+                },
+                {
+                  "id": "express-04",
+                  "ndcg": 0.6309297535714575,
+                  "mrr": 0.5,
+                  "precision": 0.1,
+                  "recall": 1,
+                  "elapsedMs": 1.24,
+                  "top1": {
+                    "file": "lib/response.js",
+                    "name": "sendFile"
+                  }
+                },
+                {
+                  "id": "express-05",
+                  "ndcg": 1,
+                  "mrr": 1,
+                  "precision": 0.1,
+                  "recall": 1,
+                  "elapsedMs": 1.21,
+                  "top1": {
+                    "file": "lib/response.js",
+                    "name": "sendStatus"
+                  }
+                },
+                {
+                  "id": "express-06",
+                  "ndcg": 1,
+                  "mrr": 1,
+                  "precision": 0.1,
+                  "recall": 1,
+                  "elapsedMs": 3.09,
+                  "top1": {
+                    "file": "lib/response.js",
+                    "name": "sendFile"
+                  }
+                },
+                {
+                  "id": "express-07",
+                  "ndcg": 0.5,
+                  "mrr": 0.3333333333333333,
+                  "precision": 0.1,
+                  "recall": 1,
+                  "elapsedMs": 1.13,
+                  "top1": {
+                    "file": "lib/response.js",
+                    "name": "render"
+                  }
+                },
+                {
+                  "id": "express-08",
+                  "ndcg": 1,
+                  "mrr": 1,
+                  "precision": 0.1,
+                  "recall": 1,
+                  "elapsedMs": 1.27,
+                  "top1": {
+                    "file": "lib/response.js",
+                    "name": "attachment"
+                  }
+                },
+                {
+                  "id": "express-09",
+                  "ndcg": 0.38685280723454163,
+                  "mrr": 0.2,
+                  "precision": 0.1,
+                  "recall": 1,
+                  "elapsedMs": 0.71,
+                  "top1": {
+                    "file": "lib/response.js",
+                    "name": "status"
+                  }
+                },
+                {
+                  "id": "express-10",
+                  "ndcg": 1,
+                  "mrr": 1,
+                  "precision": 0.1,
+                  "recall": 1,
+                  "elapsedMs": 0.45,
+                  "top1": {
+                    "file": "lib/response.js",
+                    "name": "clearCookie"
+                  }
+                },
+                {
+                  "id": "express-11",
+                  "ndcg": 0.3010299956639812,
+                  "mrr": 0.1111111111111111,
+                  "precision": 0.1,
+                  "recall": 1,
+                  "elapsedMs": 0.42,
+                  "top1": {
+                    "file": "lib/response.js",
+                    "name": "clearCookie"
+                  }
+                },
+                {
+                  "id": "express-12",
+                  "ndcg": 0.6309297535714575,
+                  "mrr": 0.5,
+                  "precision": 0.1,
+                  "recall": 1,
+                  "elapsedMs": 0.62,
+                  "top1": {
+                    "file": "lib/response.js",
+                    "name": "location"
+                  }
+                },
+                {
+                  "id": "express-13",
+                  "ndcg": 1,
+                  "mrr": 1,
+                  "precision": 0.1,
+                  "recall": 1,
+                  "elapsedMs": 0.62,
+                  "top1": {
+                    "file": "lib/response.js",
+                    "name": "res.vary"
+                  }
+                },
+                {
+                  "id": "express-14",
+                  "ndcg": 0.6309297535714575,
+                  "mrr": 0.5,
+                  "precision": 0.1,
+                  "recall": 1,
+                  "elapsedMs": 0.56,
+                  "top1": {
+                    "file": "lib/request.js",
+                    "name": "req.accepts"
+                  }
+                },
+                {
+                  "id": "express-15",
+                  "ndcg": 0.38685280723454163,
+                  "mrr": 0.2,
+                  "precision": 0.1,
+                  "recall": 1,
+                  "elapsedMs": 0.7,
+                  "top1": {
+                    "file": "lib/request.js",
+                    "name": "range"
+                  }
+                },
+                {
+                  "id": "express-16",
+                  "ndcg": 1,
+                  "mrr": 1,
+                  "precision": 0.1,
+                  "recall": 1,
+                  "elapsedMs": 0.43,
+                  "top1": {
+                    "file": "lib/request.js",
+                    "name": "range"
+                  }
+                },
+                {
+                  "id": "express-17",
+                  "ndcg": 1,
+                  "mrr": 1,
+                  "precision": 0.1,
+                  "recall": 1,
+                  "elapsedMs": 0.4,
+                  "top1": {
+                    "file": "lib/application.js",
+                    "name": "engine"
+                  }
+                },
+                {
+                  "id": "express-18",
+                  "ndcg": 0.6309297535714575,
+                  "mrr": 0.5,
+                  "precision": 0.1,
+                  "recall": 1,
+                  "elapsedMs": 0.42,
+                  "top1": {
+                    "file": "lib/response.js",
+                    "name": "sendFile"
+                  }
+                },
+                {
+                  "id": "express-19",
+                  "ndcg": 1,
+                  "mrr": 1,
+                  "precision": 0.1,
+                  "recall": 1,
+                  "elapsedMs": 0.36,
+                  "top1": {
+                    "file": "lib/application.js",
+                    "name": "listen"
+                  }
+                },
+                {
+                  "id": "express-20",
+                  "ndcg": 0.31546487678572877,
+                  "mrr": 0.125,
+                  "precision": 0.1,
+                  "recall": 1,
+                  "elapsedMs": 0.34,
+                  "top1": {
+                    "file": "lib/application.js",
+                    "name": "render"
+                  }
+                }
+              ]
+            }
+          }
+        },
+        "bge": {
+          "snippets": 109,
+          "indexing": {
+            "parsedFiles": 6,
+            "reusedFiles": 0,
+            "embeddedSnippets": 109,
+            "reusedVectors": 0,
+            "deletedFiles": 0,
+            "snippets": 109,
+            "elapsedMs": 25929.84
+          },
+          "modes": {
+            "hybrid": {
+              "ndcg_at_10": 0.8577324383928644,
+              "mrr_at_10": 0.8083333333333332,
+              "recall_at_10": 1,
+              "precision_at_10": 0.10000000000000002,
+              "meanLatencyMs": 12.4055,
+              "p95LatencyMs": 21.27,
+              "runs": [
+                {
+                  "id": "express-01",
+                  "ndcg": 0.6309297535714575,
+                  "mrr": 0.5,
+                  "precision": 0.1,
+                  "recall": 1,
+                  "elapsedMs": 26.58,
+                  "top1": {
+                    "file": "lib/response.js",
+                    "name": "sendStatus"
+                  }
+                },
+                {
+                  "id": "express-02",
+                  "ndcg": 0.5,
+                  "mrr": 0.3333333333333333,
+                  "precision": 0.1,
+                  "recall": 1,
+                  "elapsedMs": 21.27,
+                  "top1": {
+                    "file": "lib/response.js",
+                    "name": "sendStatus"
+                  }
+                },
+                {
+                  "id": "express-03",
+                  "ndcg": 0.6309297535714575,
+                  "mrr": 0.5,
+                  "precision": 0.1,
+                  "recall": 1,
+                  "elapsedMs": 15.72,
+                  "top1": {
+                    "file": "lib/request.js",
+                    "name": "req.accepts"
+                  }
+                },
+                {
+                  "id": "express-04",
+                  "ndcg": 1,
+                  "mrr": 1,
+                  "precision": 0.1,
+                  "recall": 1,
+                  "elapsedMs": 11.4,
+                  "top1": {
+                    "file": "lib/response.js",
+                    "name": "jsonp"
+                  }
+                },
+                {
+                  "id": "express-05",
+                  "ndcg": 1,
+                  "mrr": 1,
+                  "precision": 0.1,
+                  "recall": 1,
+                  "elapsedMs": 19.16,
+                  "top1": {
+                    "file": "lib/response.js",
+                    "name": "sendStatus"
+                  }
+                },
+                {
+                  "id": "express-06",
+                  "ndcg": 1,
+                  "mrr": 1,
+                  "precision": 0.1,
+                  "recall": 1,
+                  "elapsedMs": 9.65,
+                  "top1": {
+                    "file": "lib/response.js",
+                    "name": "sendFile"
+                  }
+                },
+                {
+                  "id": "express-07",
+                  "ndcg": 1,
+                  "mrr": 1,
+                  "precision": 0.1,
+                  "recall": 1,
+                  "elapsedMs": 16.93,
+                  "top1": {
+                    "file": "lib/response.js",
+                    "name": "download"
+                  }
+                },
+                {
+                  "id": "express-08",
+                  "ndcg": 0.6309297535714575,
+                  "mrr": 0.5,
+                  "precision": 0.1,
+                  "recall": 1,
+                  "elapsedMs": 10.16,
+                  "top1": {
+                    "file": "lib/response.js",
+                    "name": "download"
+                  }
+                },
+                {
+                  "id": "express-09",
+                  "ndcg": 1,
+                  "mrr": 1,
+                  "precision": 0.1,
+                  "recall": 1,
+                  "elapsedMs": 10.66,
+                  "top1": {
+                    "file": "lib/response.js",
+                    "name": "append"
+                  }
+                },
+                {
+                  "id": "express-10",
+                  "ndcg": 1,
+                  "mrr": 1,
+                  "precision": 0.1,
+                  "recall": 1,
+                  "elapsedMs": 9.1,
+                  "top1": {
+                    "file": "lib/response.js",
+                    "name": "clearCookie"
+                  }
+                },
+                {
+                  "id": "express-11",
+                  "ndcg": 0.6309297535714575,
+                  "mrr": 0.5,
+                  "precision": 0.1,
+                  "recall": 1,
+                  "elapsedMs": 8.58,
+                  "top1": {
+                    "file": "lib/response.js",
+                    "name": "clearCookie"
+                  }
+                },
+                {
+                  "id": "express-12",
+                  "ndcg": 1,
+                  "mrr": 1,
+                  "precision": 0.1,
+                  "recall": 1,
+                  "elapsedMs": 6.51,
+                  "top1": {
+                    "file": "lib/response.js",
+                    "name": "redirect"
+                  }
+                },
+                {
+                  "id": "express-13",
+                  "ndcg": 1,
+                  "mrr": 1,
+                  "precision": 0.1,
+                  "recall": 1,
+                  "elapsedMs": 7.11,
+                  "top1": {
+                    "file": "lib/response.js",
+                    "name": "res.vary"
+                  }
+                },
+                {
+                  "id": "express-14",
+                  "ndcg": 1,
+                  "mrr": 1,
+                  "precision": 0.1,
+                  "recall": 1,
+                  "elapsedMs": 12.14,
+                  "top1": {
+                    "file": "lib/response.js",
+                    "name": "stringify"
+                  }
+                },
+                {
+                  "id": "express-15",
+                  "ndcg": 0.6309297535714575,
+                  "mrr": 0.5,
+                  "precision": 0.1,
+                  "recall": 1,
+                  "elapsedMs": 10.83,
+                  "top1": {
+                    "file": "lib/request.js",
+                    "name": "req.accepts"
+                  }
+                },
+                {
+                  "id": "express-16",
+                  "ndcg": 1,
+                  "mrr": 1,
+                  "precision": 0.1,
+                  "recall": 1,
+                  "elapsedMs": 8.47,
+                  "top1": {
+                    "file": "lib/request.js",
+                    "name": "range"
+                  }
+                },
+                {
+                  "id": "express-17",
+                  "ndcg": 1,
+                  "mrr": 1,
+                  "precision": 0.1,
+                  "recall": 1,
+                  "elapsedMs": 13.44,
+                  "top1": {
+                    "file": "lib/application.js",
+                    "name": "engine"
+                  }
+                },
+                {
+                  "id": "express-18",
+                  "ndcg": 1,
+                  "mrr": 1,
+                  "precision": 0.1,
+                  "recall": 1,
+                  "elapsedMs": 9.23,
+                  "top1": {
+                    "file": "lib/application.js",
+                    "name": "use"
+                  }
+                },
+                {
+                  "id": "express-19",
+                  "ndcg": 1,
+                  "mrr": 1,
+                  "precision": 0.1,
+                  "recall": 1,
+                  "elapsedMs": 8.42,
+                  "top1": {
+                    "file": "lib/application.js",
+                    "name": "listen"
+                  }
+                },
+                {
+                  "id": "express-20",
+                  "ndcg": 0.5,
+                  "mrr": 0.3333333333333333,
+                  "precision": 0.1,
+                  "recall": 1,
+                  "elapsedMs": 12.75,
+                  "top1": {
+                    "file": "lib/view.js",
+                    "name": "View"
+                  }
+                }
+              ]
+            },
+            "codestrata": {
+              "ndcg_at_10": 0.8577324383928644,
+              "mrr_at_10": 0.8083333333333332,
+              "recall_at_10": 1,
+              "precision_at_10": 0.10000000000000002,
+              "meanLatencyMs": 13.324000000000002,
+              "p95LatencyMs": 16.42,
+              "runs": [
+                {
+                  "id": "express-01",
+                  "ndcg": 0.6309297535714575,
+                  "mrr": 0.5,
+                  "precision": 0.1,
+                  "recall": 1,
+                  "elapsedMs": 11.64,
+                  "top1": {
+                    "file": "lib/response.js",
+                    "name": "sendStatus"
+                  }
+                },
+                {
+                  "id": "express-02",
+                  "ndcg": 0.5,
+                  "mrr": 0.3333333333333333,
+                  "precision": 0.1,
+                  "recall": 1,
+                  "elapsedMs": 14.15,
+                  "top1": {
+                    "file": "lib/response.js",
+                    "name": "sendStatus"
+                  }
+                },
+                {
+                  "id": "express-03",
+                  "ndcg": 0.6309297535714575,
+                  "mrr": 0.5,
+                  "precision": 0.1,
+                  "recall": 1,
+                  "elapsedMs": 10.24,
+                  "top1": {
+                    "file": "lib/request.js",
+                    "name": "req.accepts"
+                  }
+                },
+                {
+                  "id": "express-04",
+                  "ndcg": 1,
+                  "mrr": 1,
+                  "precision": 0.1,
+                  "recall": 1,
+                  "elapsedMs": 12.42,
+                  "top1": {
+                    "file": "lib/response.js",
+                    "name": "jsonp"
+                  }
+                },
+                {
+                  "id": "express-05",
+                  "ndcg": 1,
+                  "mrr": 1,
+                  "precision": 0.1,
+                  "recall": 1,
+                  "elapsedMs": 10.74,
+                  "top1": {
+                    "file": "lib/response.js",
+                    "name": "sendStatus"
+                  }
+                },
+                {
+                  "id": "express-06",
+                  "ndcg": 1,
+                  "mrr": 1,
+                  "precision": 0.1,
+                  "recall": 1,
+                  "elapsedMs": 11.09,
+                  "top1": {
+                    "file": "lib/response.js",
+                    "name": "sendFile"
+                  }
+                },
+                {
+                  "id": "express-07",
+                  "ndcg": 1,
+                  "mrr": 1,
+                  "precision": 0.1,
+                  "recall": 1,
+                  "elapsedMs": 16.42,
+                  "top1": {
+                    "file": "lib/response.js",
+                    "name": "download"
+                  }
+                },
+                {
+                  "id": "express-08",
+                  "ndcg": 0.6309297535714575,
+                  "mrr": 0.5,
+                  "precision": 0.1,
+                  "recall": 1,
+                  "elapsedMs": 13.74,
+                  "top1": {
+                    "file": "lib/response.js",
+                    "name": "download"
+                  }
+                },
+                {
+                  "id": "express-09",
+                  "ndcg": 1,
+                  "mrr": 1,
+                  "precision": 0.1,
+                  "recall": 1,
+                  "elapsedMs": 13.26,
+                  "top1": {
+                    "file": "lib/response.js",
+                    "name": "append"
+                  }
+                },
+                {
+                  "id": "express-10",
+                  "ndcg": 1,
+                  "mrr": 1,
+                  "precision": 0.1,
+                  "recall": 1,
+                  "elapsedMs": 17.63,
+                  "top1": {
+                    "file": "lib/response.js",
+                    "name": "clearCookie"
+                  }
+                },
+                {
+                  "id": "express-11",
+                  "ndcg": 0.6309297535714575,
+                  "mrr": 0.5,
+                  "precision": 0.1,
+                  "recall": 1,
+                  "elapsedMs": 14.84,
+                  "top1": {
+                    "file": "lib/response.js",
+                    "name": "clearCookie"
+                  }
+                },
+                {
+                  "id": "express-12",
+                  "ndcg": 1,
+                  "mrr": 1,
+                  "precision": 0.1,
+                  "recall": 1,
+                  "elapsedMs": 15.72,
+                  "top1": {
+                    "file": "lib/response.js",
+                    "name": "redirect"
+                  }
+                },
+                {
+                  "id": "express-13",
+                  "ndcg": 1,
+                  "mrr": 1,
+                  "precision": 0.1,
+                  "recall": 1,
+                  "elapsedMs": 16.37,
+                  "top1": {
+                    "file": "lib/response.js",
+                    "name": "res.vary"
+                  }
+                },
+                {
+                  "id": "express-14",
+                  "ndcg": 1,
+                  "mrr": 1,
+                  "precision": 0.1,
+                  "recall": 1,
+                  "elapsedMs": 13.55,
+                  "top1": {
+                    "file": "lib/response.js",
+                    "name": "stringify"
+                  }
+                },
+                {
+                  "id": "express-15",
+                  "ndcg": 0.6309297535714575,
+                  "mrr": 0.5,
+                  "precision": 0.1,
+                  "recall": 1,
+                  "elapsedMs": 12.68,
+                  "top1": {
+                    "file": "lib/request.js",
+                    "name": "req.accepts"
+                  }
+                },
+                {
+                  "id": "express-16",
+                  "ndcg": 1,
+                  "mrr": 1,
+                  "precision": 0.1,
+                  "recall": 1,
+                  "elapsedMs": 13.82,
+                  "top1": {
+                    "file": "lib/request.js",
+                    "name": "range"
+                  }
+                },
+                {
+                  "id": "express-17",
+                  "ndcg": 1,
+                  "mrr": 1,
+                  "precision": 0.1,
+                  "recall": 1,
+                  "elapsedMs": 12.61,
+                  "top1": {
+                    "file": "lib/application.js",
+                    "name": "engine"
+                  }
+                },
+                {
+                  "id": "express-18",
+                  "ndcg": 1,
+                  "mrr": 1,
+                  "precision": 0.1,
+                  "recall": 1,
+                  "elapsedMs": 13.36,
+                  "top1": {
+                    "file": "lib/application.js",
+                    "name": "use"
+                  }
+                },
+                {
+                  "id": "express-19",
+                  "ndcg": 1,
+                  "mrr": 1,
+                  "precision": 0.1,
+                  "recall": 1,
+                  "elapsedMs": 9.74,
+                  "top1": {
+                    "file": "lib/application.js",
+                    "name": "listen"
+                  }
+                },
+                {
+                  "id": "express-20",
+                  "ndcg": 0.5,
+                  "mrr": 0.3333333333333333,
+                  "precision": 0.1,
+                  "recall": 1,
+                  "elapsedMs": 12.46,
+                  "top1": {
+                    "file": "lib/view.js",
+                    "name": "View"
+                  }
+                }
+              ]
+            }
+          }
+        }
+      }
+    }
+  ],
+  "limitations": [
+    "AI-assisted relevance judgments; not independently annotated.",
+    "One pinned snapshot per repository; evolutionary retrieval is tested separately.",
+    "Partial relevance labels identify the intended API entry point; helpers may also be useful."
+  ],
+  "rssMiB": 618
+}
