@@ -13,3 +13,14 @@ evaluation-results/
 test-results/
 playwright-report/
 rendered/
+docs/CodeStrata-Submission-Draft.pptx
+docs/CodeStrata-AI-Disclosure-Draft.docx
+docs/ai-usage.md
+docs/demo-script.md
+docs/judge-qa.md
+docs/submission-checklist.md
+docs/submission-guide.md
+requirements-submission.txt
+scripts/prepare_disclosure.py
+scripts/prepare_presentation.py
+scripts/verify_submission.py

@@ -31,7 +31,7 @@ npm run start:semantic
 
 The first run downloads quantized `Xenova/bge-small-en-v1.5` into `.cache/models`. CPU inference uses two threads by default; set `CODESTRATA_THREADS` (1?16) or `CODESTRATA_MODEL_CACHE` to customize. MiniLM remains available through `--embedding minilm`. BGE samples at most four overlapping source windows, including the tail; very long functions can still lose intermediate evidence in embeddings.
 
-A separate optional code-trained encoder is available with `npm run index -- --repo /path/to/repo --version working --embedding jina --out .codestrata/code.json` and `npm run search -- --out .codestrata/code.json --query "find the changed function"`. It downloads quantized `jinaai/jina-embeddings-v2-base-code` on first use and uses 768-dimensional vectors. The training-only AppsRetrieval selection subset improved to NDCG@10 0.7096; the full official result is reported separately in [validation](docs/validation.md). The index and search modes must match.
+A separate optional code-trained encoder is available with `npm run index -- --repo /path/to/repo --version working --embedding jina --out .codestrata/code.json` and `npm run search -- --out .codestrata/code.json --query "find the changed function"`. It downloads quantized `jinaai/jina-embeddings-v2-base-code` on first use and uses 768-dimensional vectors. The training-only AppsRetrieval selection subset reached NDCG@10 0.7096; no full official Jina result is available yet. See [validation](docs/validation.md) for the official BGE result. The index and search modes must match. Jina averages at most three source windows; unusually long files can still lose intermediate content in the embedding.
 
 ## Investigate your repository
 
@@ -135,4 +135,4 @@ The image runs the offline demo; learned-model downloads and Python evaluation a
 
 Static syntax evidence cannot prove runtime races, security guarantees, or cross-file control flow. Complex branches, duplicate callees, deferred awaits, and dynamic dispatch remain conservative. Exact CPU scans and heuristic lineage target small repositories; monorepo throughput is unvalidated. Caches retain obsolete entries and concurrent index writers are unsupported. Public deployment needs authentication and resource isolation.
 
-See [architecture](docs/architecture.md), [five-minute demo](docs/demo-script.md), [judge Q&A](docs/judge-qa.md), [editable submission deck](docs/CodeStrata-Submission-Draft.pptx), [filled disclosure draft awaiting signature](docs/CodeStrata-AI-Disclosure-Draft.docx), [submission handoff](docs/submission-guide.md), [submission checklist](docs/submission-checklist.md), and [AI usage record](docs/ai-usage.md).
+See [architecture](docs/architecture.md) and [validation](docs/validation.md) for implementation details and measured results.

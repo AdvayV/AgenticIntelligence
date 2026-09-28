@@ -1,2 +1,0 @@
-# Only needed to regenerate the editable Samsung presentation from the supplied template.
-python-pptx==1.0.2

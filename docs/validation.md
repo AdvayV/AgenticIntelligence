@@ -1,6 +1,6 @@
 # Validation ? CodeStrata 0.2.0
 
-Measured on 27 September 2026, Windows, Intel i5-1135G7 (8 logical processors), 8 GB RAM, Node 22.23.2. Neural inference runs on CPU with two threads. Timings are single local measurements, not load tests.
+Baseline runs were measured on 27 September 2026; the Jina selection and real-repository rerun were measured on 28 September. Hardware: Windows, Intel i5-1135G7 (8 logical processors), 8 GB RAM, Node 22.23.2. Neural inference runs on CPU with two threads. Timings are single local measurements, not load tests.
 
 ## Regression and integration
 
@@ -64,10 +64,10 @@ Learned embeddings improve these sets, while feature hashing harms broad semanti
 
 [Dataset-only audit](results/appsretrieval-dataset-audit.json): all 3,765 test questions describe Python programming tasks, with median length 1,601 characters; all 8,765 documents are Python solutions, with median length 332 characters. This differs from the application's JavaScript version-investigation demo. BGE is a general text encoder with a 512-token cap, and the JavaScript AST enrichment rarely applies to the Python code. These are plausible contributors to the low score, not a proved decomposition of its cause. The audit reads text and metadata only, never test relevance labels.
 
-The official independent encoder does not test query-dependent historical evidence reranking. A code-specific encoder is now integrated and under full official evaluation; broader development data remain future work.
+The official independent encoder does not test query-dependent historical evidence reranking. A code-specific encoder is integrated, but a completed full official evaluation is not yet available; broader development data remain future work.
 
 ## Reproduce
 
-Run README commands. Evaluation outputs go to evaluation-results; reviewed snapshots are checked into docs/results. MTEB raw artifacts can be attached to the final judged release after team submission assets are ready.
+Run README commands. Evaluation outputs go to evaluation-results; reviewed snapshots are checked into docs/results.
 
 Sources: [BGE model card](https://huggingface.co/Xenova/bge-small-en-v1.5), [Jina Code model card](https://huggingface.co/jinaai/jina-embeddings-v2-base-code), [MTEB evaluation interface](https://docs.mteb.org/get_started/usage/running_the_evaluation/), [CoIR](https://github.com/CoIR-team/coir).
