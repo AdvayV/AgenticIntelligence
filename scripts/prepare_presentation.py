@@ -39,7 +39,7 @@ CONTENT = {
     6: (1, [
         'Node.js + JavaScript; Babel parser; plain HTML/CSS/modules.',
         'BM25 + normalized cosine vectors + reciprocal rank fusion.',
-        'Optional Transformers.js q8 BGE / MiniLM on CPU, two threads.',
+        'Optional CPU q8 BGE, Jina Code, or MiniLM; two threads.',
         'Deterministic planner; no LLM API, GPU, or repository execution.',
         'Python/MTEB for official evaluation; persistent Node encoder.',
         'Node tests, jsdom, Playwright, Docker, GitHub Actions.',
@@ -54,12 +54,12 @@ CONTENT = {
     ]),
     8: (1, []),
     9: (1, [
-        'Prioritize a code-specific encoder using separate development data.',
+        'Validate the code encoder on the full official test; keep train/test separate.',
         'Collect independently labeled multi-commit repository questions.',
         'Explain the gap between development and official test accuracy.',
         'Broaden conservative lineage and supported import patterns.',
         'Measure larger repositories before adding approximate indexes.',
-        'Finish team identity, video, disclosure, and organizer review.',
+        'Record the demo, sign disclosure, and confirm organizer submission.',
     ]),
     10: (1, [
         'Behavior evidence survives a simultaneous rename and file move.',
@@ -73,7 +73,7 @@ CONTENT = {
         'Prototype code + setup README — YES, public GitHub.',
         'Tests + browser/Docker workflows — see latest Actions status.',
         'Official MTEB JSON + real-repository artifacts — YES, docs/results.',
-        'Presentation draft — YES; team details remain incomplete.',
+        'Presentation — YES; both team members and contacts entered.',
         'Video + signed AI disclosure — PENDING team action.',
         'Final judged release/tag — PENDING submission readiness.',
     ]),

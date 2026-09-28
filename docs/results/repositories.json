@@ -1,6 +1,6 @@
 {
   "dataset": "Frozen source-reviewed repository queries; NOT CoIR",
-  "querySetSha256": "d8d725368bf5c15a603458aae332da77a0f6e54eff140d11220fd366b7cf7d3e",
+  "querySetSha256": "f5a4781217e901850b381f4229274c16c67426291ba644bf3328a7059a8713b4",
   "queries": 60,
   "hardware": {
     "cpu": "11th Gen Intel(R) Core(TM) i5-1135G7 @ 2.40GHz",
@@ -19,13 +19,7 @@
         "features": {
           "snippets": 327,
           "indexing": {
-            "parsedFiles": 102,
-            "reusedFiles": 0,
-            "embeddedSnippets": 326,
-            "reusedVectors": 1,
-            "deletedFiles": 0,
-            "snippets": 327,
-            "elapsedMs": 217.01
+            "cached": true
           },
           "modes": {
             "lexical": {
@@ -33,8 +27,8 @@
               "mrr_at_10": 0.5316964285714285,
               "recall_at_10": 0.8,
               "precision_at_10": 0.08000000000000004,
-              "meanLatencyMs": 1.1500000000000004,
-              "p95LatencyMs": 1.67,
+              "meanLatencyMs": 6.858250000000003,
+              "p95LatencyMs": 3.86,
               "runs": [
                 {
                   "id": "async-01",
@@ -42,7 +36,7 @@
                   "mrr": 1,
                   "precision": 0.1,
                   "recall": 1,
-                  "elapsedMs": 25.95,
+                  "elapsedMs": 234.48,
                   "top1": {
                     "file": "lib/asyncify.js",
                     "name": "asyncify"
@@ -54,7 +48,7 @@
                   "mrr": 0.5,
                   "precision": 0.1,
                   "recall": 1,
-                  "elapsedMs": 1.7,
+                  "elapsedMs": 3.86,
                   "top1": {
                     "file": "lib/auto.js",
                     "name": "anonymous@198"
@@ -66,7 +60,7 @@
                   "mrr": 1,
                   "precision": 0.1,
                   "recall": 1,
-                  "elapsedMs": 1.08,
+                  "elapsedMs": 1.15,
                   "top1": {
                     "file": "lib/autoInject.js",
                     "name": "autoInject"
@@ -78,7 +72,7 @@
                   "mrr": 0.5,
                   "precision": 0.1,
                   "recall": 1,
-                  "elapsedMs": 0.76,
+                  "elapsedMs": 1.07,
                   "top1": {
                     "file": "lib/cargoQueue.js",
                     "name": "cargo"
@@ -90,7 +84,7 @@
                   "mrr": 1,
                   "precision": 0.1,
                   "recall": 1,
-                  "elapsedMs": 0.64,
+                  "elapsedMs": 1.27,
                   "top1": {
                     "file": "lib/cargoQueue.js",
                     "name": "cargo"
@@ -102,7 +96,7 @@
                   "mrr": 1,
                   "precision": 0.1,
                   "recall": 1,
-                  "elapsedMs": 0.46,
+                  "elapsedMs": 1.08,
                   "top1": {
                     "file": "lib/compose.js",
                     "name": "compose"
@@ -114,7 +108,7 @@
                   "mrr": 0.14285714285714285,
                   "precision": 0.1,
                   "recall": 1,
-                  "elapsedMs": 0.4,
+                  "elapsedMs": 1.08,
                   "top1": {
                     "file": "lib/transform.js",
                     "name": "transform"
@@ -126,7 +120,7 @@
                   "mrr": 0,
                   "precision": 0,
                   "recall": 0,
-                  "elapsedMs": 0.36,
+                  "elapsedMs": 1.19,
                   "top1": {
                     "file": "lib/cargoQueue.js",
                     "name": "cargo"
@@ -138,7 +132,7 @@
                   "mrr": 0.2,
                   "precision": 0.1,
                   "recall": 1,
-                  "elapsedMs": 1.67,
+                  "elapsedMs": 3.02,
                   "top1": {
                     "file": "lib/mapLimit.js",
                     "name": "mapLimit"
@@ -150,7 +144,7 @@
                   "mrr": 1,
                   "precision": 0.1,
                   "recall": 1,
-                  "elapsedMs": 0.76,
+                  "elapsedMs": 2.41,
                   "top1": {
                     "file": "lib/detect.js",
                     "name": "detect"
@@ -162,7 +156,7 @@
                   "mrr": 1,
                   "precision": 0.1,
                   "recall": 1,
-                  "elapsedMs": 0.81,
+                  "elapsedMs": 0.88,
                   "top1": {
                     "file": "lib/detectLimit.js",
                     "name": "detectLimit"
@@ -174,7 +168,7 @@
                   "mrr": 0,
                   "precision": 0,
                   "recall": 0,
-                  "elapsedMs": 0.35,
+                  "elapsedMs": 0.75,
                   "top1": {
                     "file": "lib/queue.js",
                     "name": "anonymous@146"
@@ -186,7 +180,7 @@
                   "mrr": 0.25,
                   "precision": 0.1,
                   "recall": 1,
-                  "elapsedMs": 0.37,
+                  "elapsedMs": 0.8,
                   "top1": {
                     "file": "lib/cargoQueue.js",
                     "name": "cargo"
@@ -198,7 +192,7 @@
                   "mrr": 1,
                   "precision": 0.1,
                   "recall": 1,
-                  "elapsedMs": 0.34,
+                  "elapsedMs": 0.67,
                   "top1": {
                     "file": "lib/doWhilst.js",
                     "name": "doWhilst"
@@ -210,7 +204,7 @@
                   "mrr": 0,
                   "precision": 0,
                   "recall": 0,
-                  "elapsedMs": 0.3,
+                  "elapsedMs": 0.61,
                   "top1": {
                     "file": "lib/everySeries.js",
                     "name": "everySeries"
@@ -222,7 +216,7 @@
                   "mrr": 0,
                   "precision": 0,
                   "recall": 0,
-                  "elapsedMs": 0.25,
+                  "elapsedMs": 0.46,
                   "top1": {
                     "file": "lib/mapValuesSeries.js",
                     "name": "mapValuesSeries"
@@ -234,7 +228,7 @@
                   "mrr": 0.3333333333333333,
                   "precision": 0.1,
                   "recall": 1,
-                  "elapsedMs": 0.32,
+                  "elapsedMs": 0.61,
                   "top1": {
                     "file": "lib/map.js",
                     "name": "map"
@@ -246,7 +240,7 @@
                   "mrr": 0,
                   "precision": 0,
                   "recall": 0,
-                  "elapsedMs": 0.24,
+                  "elapsedMs": 0.45,
                   "top1": {
                     "file": "lib/mapSeries.js",
                     "name": "mapSeries"
@@ -258,7 +252,7 @@
                   "mrr": 0,
                   "precision": 0,
                   "recall": 0,
-                  "elapsedMs": 0.25,
+                  "elapsedMs": 0.61,
                   "top1": {
                     "file": "lib/groupBySeries.js",
                     "name": "groupBySeries"
@@ -270,7 +264,7 @@
                   "mrr": 0.125,
                   "precision": 0.1,
                   "recall": 1,
-                  "elapsedMs": 0.23,
+                  "elapsedMs": 0.72,
                   "top1": {
                     "file": "lib/filter.js",
                     "name": "filter"
@@ -282,7 +276,7 @@
                   "mrr": 0.3333333333333333,
                   "precision": 0.1,
                   "recall": 1,
-                  "elapsedMs": 0.35,
+                  "elapsedMs": 0.71,
                   "top1": {
                     "file": "lib/until.js",
                     "name": "until"
@@ -294,7 +288,7 @@
                   "mrr": 0.3333333333333333,
                   "precision": 0.1,
                   "recall": 1,
-                  "elapsedMs": 0.25,
+                  "elapsedMs": 0.6,
                   "top1": {
                     "file": "lib/groupBySeries.js",
                     "name": "groupBySeries"
@@ -306,7 +300,7 @@
                   "mrr": 1,
                   "precision": 0.1,
                   "recall": 1,
-                  "elapsedMs": 0.31,
+                  "elapsedMs": 0.57,
                   "top1": {
                     "file": "lib/map.js",
                     "name": "map"
@@ -318,7 +312,7 @@
                   "mrr": 0.2,
                   "precision": 0.1,
                   "recall": 1,
-                  "elapsedMs": 0.31,
+                  "elapsedMs": 0.7,
                   "top1": {
                     "file": "lib/transform.js",
                     "name": "transform"
@@ -330,7 +324,7 @@
                   "mrr": 0.25,
                   "precision": 0.1,
                   "recall": 1,
-                  "elapsedMs": 0.28,
+                  "elapsedMs": 0.66,
                   "top1": {
                     "file": "lib/mapLimit.js",
                     "name": "mapLimit"
@@ -342,7 +336,7 @@
                   "mrr": 1,
                   "precision": 0.1,
                   "recall": 1,
-                  "elapsedMs": 0.36,
+                  "elapsedMs": 0.67,
                   "top1": {
                     "file": "lib/memoize.js",
                     "name": "memoize"
@@ -354,7 +348,7 @@
                   "mrr": 0.1,
                   "precision": 0.1,
                   "recall": 1,
-                  "elapsedMs": 0.75,
+                  "elapsedMs": 4.8,
                   "top1": {
                     "file": "lib/auto.js",
                     "name": "auto"
@@ -366,7 +360,7 @@
                   "mrr": 1,
                   "precision": 0.1,
                   "recall": 1,
-                  "elapsedMs": 0.31,
+                  "elapsedMs": 0.64,
                   "top1": {
                     "file": "lib/parallelLimit.js",
                     "name": "parallelLimit"
@@ -378,7 +372,7 @@
                   "mrr": 0.3333333333333333,
                   "precision": 0.1,
                   "recall": 1,
-                  "elapsedMs": 0.37,
+                  "elapsedMs": 0.79,
                   "top1": {
                     "file": "lib/tryEach.js",
                     "name": "tryEach"
@@ -390,7 +384,7 @@
                   "mrr": 1,
                   "precision": 0.1,
                   "recall": 1,
-                  "elapsedMs": 0.28,
+                  "elapsedMs": 1.05,
                   "top1": {
                     "file": "lib/reduce.js",
                     "name": "reduce"
@@ -402,7 +396,7 @@
                   "mrr": 1,
                   "precision": 0.1,
                   "recall": 1,
-                  "elapsedMs": 0.28,
+                  "elapsedMs": 0.56,
                   "top1": {
                     "file": "lib/reduceRight.js",
                     "name": "reduceRight"
@@ -414,7 +408,7 @@
                   "mrr": 0,
                   "precision": 0,
                   "recall": 0,
-                  "elapsedMs": 0.6,
+                  "elapsedMs": 0.64,
                   "top1": {
                     "file": "lib/series.js",
                     "name": "series"
@@ -426,7 +420,7 @@
                   "mrr": 0,
                   "precision": 0,
                   "recall": 0,
-                  "elapsedMs": 0.5,
+                  "elapsedMs": 0.54,
                   "top1": {
                     "file": "lib/retryable.js",
                     "name": "retryable"
@@ -438,7 +432,7 @@
                   "mrr": 1,
                   "precision": 0.1,
                   "recall": 1,
-                  "elapsedMs": 0.88,
+                  "elapsedMs": 0.58,
                   "top1": {
                     "file": "lib/retryable.js",
                     "name": "retryable"
@@ -450,7 +444,7 @@
                   "mrr": 1,
                   "precision": 0.1,
                   "recall": 1,
-                  "elapsedMs": 0.52,
+                  "elapsedMs": 0.53,
                   "top1": {
                     "file": "lib/series.js",
                     "name": "series"
@@ -462,7 +456,7 @@
                   "mrr": 1,
                   "precision": 0.1,
                   "recall": 1,
-                  "elapsedMs": 0.43,
+                  "elapsedMs": 0.63,
                   "top1": {
                     "file": "lib/sortBy.js",
                     "name": "sortBy"
@@ -474,7 +468,7 @@
                   "mrr": 0.3333333333333333,
                   "precision": 0.1,
                   "recall": 1,
-                  "elapsedMs": 0.57,
+                  "elapsedMs": 0.7,
                   "top1": {
                     "file": "lib/map.js",
                     "name": "map"
@@ -486,7 +480,7 @@
                   "mrr": 1,
                   "precision": 0.1,
                   "recall": 1,
-                  "elapsedMs": 0.42,
+                  "elapsedMs": 0.49,
                   "top1": {
                     "file": "lib/tryEach.js",
                     "name": "tryEach"
@@ -498,7 +492,7 @@
                   "mrr": 0.3333333333333333,
                   "precision": 0.1,
                   "recall": 1,
-                  "elapsedMs": 0.5,
+                  "elapsedMs": 0.62,
                   "top1": {
                     "file": "lib/memoize.js",
                     "name": "memoize"
@@ -510,7 +504,7 @@
                   "mrr": 1,
                   "precision": 0.1,
                   "recall": 1,
-                  "elapsedMs": 0.49,
+                  "elapsedMs": 0.68,
                   "top1": {
                     "file": "lib/waterfall.js",
                     "name": "waterfall"
@@ -523,8 +517,8 @@
               "mrr_at_10": 0.33739087301587295,
               "recall_at_10": 0.65,
               "precision_at_10": 0.06500000000000003,
-              "meanLatencyMs": 1.6482499999999998,
-              "p95LatencyMs": 3.51,
+              "meanLatencyMs": 2.711750000000001,
+              "p95LatencyMs": 5.93,
               "runs": [
                 {
                   "id": "async-01",
@@ -532,7 +526,7 @@
                   "mrr": 1,
                   "precision": 0.1,
                   "recall": 1,
-                  "elapsedMs": 4.85,
+                  "elapsedMs": 7.4,
                   "top1": {
                     "file": "lib/asyncify.js",
                     "name": "asyncify"
@@ -544,7 +538,7 @@
                   "mrr": 0.3333333333333333,
                   "precision": 0.1,
                   "recall": 1,
-                  "elapsedMs": 3.02,
+                  "elapsedMs": 4.24,
                   "top1": {
                     "file": "lib/auto.js",
                     "name": "checkForDeadlocks"
@@ -556,7 +550,7 @@
                   "mrr": 1,
                   "precision": 0.1,
                   "recall": 1,
-                  "elapsedMs": 2.24,
+                  "elapsedMs": 4.84,
                   "top1": {
                     "file": "lib/autoInject.js",
                     "name": "autoInject"
@@ -568,7 +562,7 @@
                   "mrr": 0,
                   "precision": 0,
                   "recall": 0,
-                  "elapsedMs": 2.96,
+                  "elapsedMs": 4.03,
                   "top1": {
                     "file": "lib/sortBy.js",
                     "name": "sortBy"
@@ -580,7 +574,7 @@
                   "mrr": 0.5,
                   "precision": 0.1,
                   "recall": 1,
-                  "elapsedMs": 2.34,
+                  "elapsedMs": 5.32,
                   "top1": {
                     "file": "lib/parallelLimit.js",
                     "name": "parallelLimit"
@@ -592,7 +586,7 @@
                   "mrr": 1,
                   "precision": 0.1,
                   "recall": 1,
-                  "elapsedMs": 2.11,
+                  "elapsedMs": 4.74,
                   "top1": {
                     "file": "lib/compose.js",
                     "name": "compose"
@@ -604,7 +598,7 @@
                   "mrr": 0.16666666666666666,
                   "precision": 0.1,
                   "recall": 1,
-                  "elapsedMs": 2.39,
+                  "elapsedMs": 4.41,
                   "top1": {
                     "file": "lib/transform.js",
                     "name": "transform"
@@ -616,7 +610,7 @@
                   "mrr": 0.2,
                   "precision": 0.1,
                   "recall": 1,
-                  "elapsedMs": 2.07,
+                  "elapsedMs": 5.77,
                   "top1": {
                     "file": "lib/concatLimit.js",
                     "name": "anonymous@32"
@@ -628,7 +622,7 @@
                   "mrr": 0.125,
                   "precision": 0.1,
                   "recall": 1,
-                  "elapsedMs": 2.42,
+                  "elapsedMs": 5.93,
                   "top1": {
                     "file": "lib/mapLimit.js",
                     "name": "mapLimit"
@@ -640,7 +634,7 @@
                   "mrr": 1,
                   "precision": 0.1,
                   "recall": 1,
-                  "elapsedMs": 3.51,
+                  "elapsedMs": 5.88,
                   "top1": {
                     "file": "lib/detect.js",
                     "name": "detect"
@@ -652,7 +646,7 @@
                   "mrr": 1,
                   "precision": 0.1,
                   "recall": 1,
-                  "elapsedMs": 2.03,
+                  "elapsedMs": 1.71,
                   "top1": {
                     "file": "lib/detectLimit.js",
                     "name": "detectLimit"
@@ -664,7 +658,7 @@
                   "mrr": 0,
                   "precision": 0,
                   "recall": 0,
-                  "elapsedMs": 1.35,
+                  "elapsedMs": 2.32,
                   "top1": {
                     "file": "lib/until.js",
                     "name": "until"
@@ -676,7 +670,7 @@
                   "mrr": 0,
                   "precision": 0,
                   "recall": 0,
-                  "elapsedMs": 1.33,
+                  "elapsedMs": 3.16,
                   "top1": {
                     "file": "lib/race.js",
                     "name": "race"
@@ -688,7 +682,7 @@
                   "mrr": 0.5,
                   "precision": 0.1,
                   "recall": 1,
-                  "elapsedMs": 5.78,
+                  "elapsedMs": 7.95,
                   "top1": {
                     "file": "lib/whilst.js",
                     "name": "whilst"
@@ -700,7 +694,7 @@
                   "mrr": 0,
                   "precision": 0,
                   "recall": 0,
-                  "elapsedMs": 1.11,
+                  "elapsedMs": 1.28,
                   "top1": {
                     "file": "lib/everySeries.js",
                     "name": "everySeries"
@@ -712,7 +706,7 @@
                   "mrr": 0,
                   "precision": 0,
                   "recall": 0,
-                  "elapsedMs": 1.05,
+                  "elapsedMs": 1.3,
                   "top1": {
                     "file": "lib/mapValuesSeries.js",
                     "name": "mapValuesSeries"
@@ -724,7 +718,7 @@
                   "mrr": 0,
                   "precision": 0,
                   "recall": 0,
-                  "elapsedMs": 1.74,
+                  "elapsedMs": 1.72,
                   "top1": {
                     "file": "lib/map.js",
                     "name": "map"
@@ -736,7 +730,7 @@
                   "mrr": 0,
                   "precision": 0,
                   "recall": 0,
-                  "elapsedMs": 1.3,
+                  "elapsedMs": 1.62,
                   "top1": {
                     "file": "lib/mapSeries.js",
                     "name": "mapSeries"
@@ -748,7 +742,7 @@
                   "mrr": 0,
                   "precision": 0,
                   "recall": 0,
-                  "elapsedMs": 1.21,
+                  "elapsedMs": 1.44,
                   "top1": {
                     "file": "lib/mapValuesSeries.js",
                     "name": "mapValuesSeries"
@@ -760,7 +754,7 @@
                   "mrr": 0.25,
                   "precision": 0.1,
                   "recall": 1,
-                  "elapsedMs": 0.98,
+                  "elapsedMs": 1.62,
                   "top1": {
                     "file": "lib/filterSeries.js",
                     "name": "filterSeries"
@@ -772,7 +766,7 @@
                   "mrr": 0.5,
                   "precision": 0.1,
                   "recall": 1,
-                  "elapsedMs": 1.23,
+                  "elapsedMs": 1.36,
                   "top1": {
                     "file": "lib/until.js",
                     "name": "until"
@@ -784,7 +778,7 @@
                   "mrr": 0.3333333333333333,
                   "precision": 0.1,
                   "recall": 1,
-                  "elapsedMs": 0.88,
+                  "elapsedMs": 1.61,
                   "top1": {
                     "file": "lib/groupBySeries.js",
                     "name": "groupBySeries"
@@ -796,7 +790,7 @@
                   "mrr": 1,
                   "precision": 0.1,
                   "recall": 1,
-                  "elapsedMs": 0.92,
+                  "elapsedMs": 1.68,
                   "top1": {
                     "file": "lib/map.js",
                     "name": "map"
@@ -808,7 +802,7 @@
                   "mrr": 0.3333333333333333,
                   "precision": 0.1,
                   "recall": 1,
-                  "elapsedMs": 0.89,
+                  "elapsedMs": 1.99,
                   "top1": {
                     "file": "lib/mapSeries.js",
                     "name": "mapSeries"
@@ -820,7 +814,7 @@
                   "mrr": 0.5,
                   "precision": 0.1,
                   "recall": 1,
-                  "elapsedMs": 0.85,
+                  "elapsedMs": 1.79,
                   "top1": {
                     "file": "lib/mapLimit.js",
                     "name": "mapLimit"
@@ -832,7 +826,7 @@
                   "mrr": 1,
                   "precision": 0.1,
                   "recall": 1,
-                  "elapsedMs": 0.96,
+                  "elapsedMs": 1.49,
                   "top1": {
                     "file": "lib/memoize.js",
                     "name": "memoize"
@@ -844,7 +838,7 @@
                   "mrr": 0,
                   "precision": 0,
                   "recall": 0,
-                  "elapsedMs": 0.83,
+                  "elapsedMs": 2.15,
                   "top1": {
                     "file": "lib/reflectAll.js",
                     "name": "reflectAll"
@@ -856,7 +850,7 @@
                   "mrr": 0.5,
                   "precision": 0.1,
                   "recall": 1,
-                  "elapsedMs": 1.39,
+                  "elapsedMs": 1.65,
                   "top1": {
                     "file": "lib/filterLimit.js",
                     "name": "filterLimit"
@@ -868,7 +862,7 @@
                   "mrr": 0,
                   "precision": 0,
                   "recall": 0,
-                  "elapsedMs": 0.96,
+                  "elapsedMs": 3.22,
                   "top1": {
                     "file": "lib/tryEach.js",
                     "name": "tryEach"
@@ -880,7 +874,7 @@
                   "mrr": 0.25,
                   "precision": 0.1,
                   "recall": 1,
-                  "elapsedMs": 0.9,
+                  "elapsedMs": 2.4,
                   "top1": {
                     "file": "lib/mapValues.js",
                     "name": "mapValues"
@@ -892,7 +886,7 @@
                   "mrr": 1,
                   "precision": 0.1,
                   "recall": 1,
-                  "elapsedMs": 0.85,
+                  "elapsedMs": 1.93,
                   "top1": {
                     "file": "lib/reduceRight.js",
                     "name": "reduceRight"
@@ -904,7 +898,7 @@
                   "mrr": 0,
                   "precision": 0,
                   "recall": 0,
-                  "elapsedMs": 1.15,
+                  "elapsedMs": 1.2,
                   "top1": {
                     "file": "lib/parallel.js",
                     "name": "parallel"
@@ -916,7 +910,7 @@
                   "mrr": 0,
                   "precision": 0,
                   "recall": 0,
-                  "elapsedMs": 0.93,
+                  "elapsedMs": 1.06,
                   "top1": {
                     "file": "lib/mapValuesSeries.js",
                     "name": "mapValuesSeries"
@@ -928,7 +922,7 @@
                   "mrr": 0,
                   "precision": 0,
                   "recall": 0,
-                  "elapsedMs": 0.89,
+                  "elapsedMs": 1.05,
                   "top1": {
                     "file": "lib/detect.js",
                     "name": "detect"
@@ -940,7 +934,7 @@
                   "mrr": 0.3333333333333333,
                   "precision": 0.1,
                   "recall": 1,
-                  "elapsedMs": 0.89,
+                  "elapsedMs": 1.15,
                   "top1": {
                     "file": "lib/reflectAll.js",
                     "name": "reflectAll"
@@ -952,7 +946,7 @@
                   "mrr": 0.14285714285714285,
                   "precision": 0.1,
                   "recall": 1,
-                  "elapsedMs": 1.11,
+                  "elapsedMs": 0.89,
                   "top1": {
                     "file": "lib/sortBy.js",
                     "name": "anonymous@158"
@@ -964,7 +958,7 @@
                   "mrr": 0,
                   "precision": 0,
                   "recall": 0,
-                  "elapsedMs": 1.22,
+                  "elapsedMs": 1.02,
                   "top1": {
                     "file": "lib/ensureAsync.js",
                     "name": "ensureAsync"
@@ -976,7 +970,7 @@
                   "mrr": 0.1111111111111111,
                   "precision": 0.1,
                   "recall": 1,
-                  "elapsedMs": 1.22,
+                  "elapsedMs": 1.29,
                   "top1": {
                     "file": "lib/reflectAll.js",
                     "name": "reflectAll"
@@ -988,7 +982,7 @@
                   "mrr": 0.16666666666666666,
                   "precision": 0.1,
                   "recall": 1,
-                  "elapsedMs": 0.89,
+                  "elapsedMs": 1.5,
                   "top1": {
                     "file": "lib/compose.js",
                     "name": "compose"
@@ -1000,7 +994,7 @@
                   "mrr": 0.25,
                   "precision": 0.1,
                   "recall": 1,
-                  "elapsedMs": 1.18,
+                  "elapsedMs": 1.36,
                   "top1": {
                     "file": "lib/auto.js",
                     "name": "auto"
@@ -1013,13 +1007,7 @@
         "bge": {
           "snippets": 327,
           "indexing": {
-            "parsedFiles": 102,
-            "reusedFiles": 0,
-            "embeddedSnippets": 326,
-            "reusedVectors": 1,
-            "deletedFiles": 0,
-            "snippets": 327,
-            "elapsedMs": 56731.97
+            "cached": true
           },
           "modes": {
             "hybrid": {
@@ -1027,8 +1015,8 @@
               "mrr_at_10": 0.5917261904761905,
               "recall_at_10": 0.925,
               "precision_at_10": 0.09250000000000005,
-              "meanLatencyMs": 13.060750000000002,
-              "p95LatencyMs": 17.1,
+              "meanLatencyMs": 115.22875000000003,
+              "p95LatencyMs": 64.23,
               "runs": [
                 {
                   "id": "async-01",
@@ -1036,7 +1024,7 @@
                   "mrr": 1,
                   "precision": 0.1,
                   "recall": 1,
-                  "elapsedMs": 65.98,
+                  "elapsedMs": 3570.2,
                   "top1": {
                     "file": "lib/asyncify.js",
                     "name": "asyncify"
@@ -1048,7 +1036,7 @@
                   "mrr": 1,
                   "precision": 0.1,
                   "recall": 1,
-                  "elapsedMs": 13.47,
+                  "elapsedMs": 46.01,
                   "top1": {
                     "file": "lib/auto.js",
                     "name": "auto"
@@ -1060,7 +1048,7 @@
                   "mrr": 1,
                   "precision": 0.1,
                   "recall": 1,
-                  "elapsedMs": 8.24,
+                  "elapsedMs": 14.93,
                   "top1": {
                     "file": "lib/autoInject.js",
                     "name": "autoInject"
@@ -1072,7 +1060,7 @@
                   "mrr": 0.5,
                   "precision": 0.1,
                   "recall": 1,
-                  "elapsedMs": 9.48,
+                  "elapsedMs": 23.7,
                   "top1": {
                     "file": "lib/cargoQueue.js",
                     "name": "cargo"
@@ -1084,7 +1072,7 @@
                   "mrr": 0.3333333333333333,
                   "precision": 0.1,
                   "recall": 1,
-                  "elapsedMs": 9,
+                  "elapsedMs": 15.11,
                   "top1": {
                     "file": "lib/queue.js",
                     "name": "anonymous@146"
@@ -1096,7 +1084,7 @@
                   "mrr": 1,
                   "precision": 0.1,
                   "recall": 1,
-                  "elapsedMs": 8.63,
+                  "elapsedMs": 19.81,
                   "top1": {
                     "file": "lib/compose.js",
                     "name": "compose"
@@ -1108,7 +1096,7 @@
                   "mrr": 0.14285714285714285,
                   "precision": 0.1,
                   "recall": 1,
-                  "elapsedMs": 8.94,
+                  "elapsedMs": 20.2,
                   "top1": {
                     "file": "lib/transform.js",
                     "name": "transform"
@@ -1120,7 +1108,7 @@
                   "mrr": 0.16666666666666666,
                   "precision": 0.1,
                   "recall": 1,
-                  "elapsedMs": 8.33,
+                  "elapsedMs": 19.91,
                   "top1": {
                     "file": "lib/internal/queue.js",
                     "name": "queue"
@@ -1132,7 +1120,7 @@
                   "mrr": 0.5,
                   "precision": 0.1,
                   "recall": 1,
-                  "elapsedMs": 9.63,
+                  "elapsedMs": 20.23,
                   "top1": {
                     "file": "lib/concatLimit.js",
                     "name": "concatLimit"
@@ -1144,7 +1132,7 @@
                   "mrr": 1,
                   "precision": 0.1,
                   "recall": 1,
-                  "elapsedMs": 17.1,
+                  "elapsedMs": 29.56,
                   "top1": {
                     "file": "lib/detect.js",
                     "name": "detect"
@@ -1156,7 +1144,7 @@
                   "mrr": 1,
                   "precision": 0.1,
                   "recall": 1,
-                  "elapsedMs": 17.81,
+                  "elapsedMs": 24.51,
                   "top1": {
                     "file": "lib/detectLimit.js",
                     "name": "detectLimit"
@@ -1168,7 +1156,7 @@
                   "mrr": 0.16666666666666666,
                   "precision": 0.1,
                   "recall": 1,
-                  "elapsedMs": 15.79,
+                  "elapsedMs": 14,
                   "top1": {
                     "file": "lib/everySeries.js",
                     "name": "everySeries"
@@ -1180,7 +1168,7 @@
                   "mrr": 0.3333333333333333,
                   "precision": 0.1,
                   "recall": 1,
-                  "elapsedMs": 12.19,
+                  "elapsedMs": 18.51,
                   "top1": {
                     "file": "lib/race.js",
                     "name": "race"
@@ -1192,7 +1180,7 @@
                   "mrr": 0.2,
                   "precision": 0.1,
                   "recall": 1,
-                  "elapsedMs": 9.58,
+                  "elapsedMs": 16.87,
                   "top1": {
                     "file": "lib/whilst.js",
                     "name": "whilst"
@@ -1204,7 +1192,7 @@
                   "mrr": 0,
                   "precision": 0,
                   "recall": 0,
-                  "elapsedMs": 9.17,
+                  "elapsedMs": 15.07,
                   "top1": {
                     "file": "lib/everySeries.js",
                     "name": "everySeries"
@@ -1216,7 +1204,7 @@
                   "mrr": 0,
                   "precision": 0,
                   "recall": 0,
-                  "elapsedMs": 9.49,
+                  "elapsedMs": 14.73,
                   "top1": {
                     "file": "lib/map.js",
                     "name": "map"
@@ -1228,7 +1216,7 @@
                   "mrr": 1,
                   "precision": 0.1,
                   "recall": 1,
-                  "elapsedMs": 11.66,
+                  "elapsedMs": 35.25,
                   "top1": {
                     "file": "lib/ensureAsync.js",
                     "name": "ensureAsync"
@@ -1240,7 +1228,7 @@
                   "mrr": 0.2,
                   "precision": 0.1,
                   "recall": 1,
-                  "elapsedMs": 9.29,
+                  "elapsedMs": 40.19,
                   "top1": {
                     "file": "lib/mapSeries.js",
                     "name": "mapSeries"
@@ -1252,7 +1240,7 @@
                   "mrr": 0,
                   "precision": 0,
                   "recall": 0,
-                  "elapsedMs": 9.84,
+                  "elapsedMs": 16.1,
                   "top1": {
                     "file": "lib/someSeries.js",
                     "name": "someSeries"
@@ -1264,7 +1252,7 @@
                   "mrr": 0.2,
                   "precision": 0.1,
                   "recall": 1,
-                  "elapsedMs": 10.09,
+                  "elapsedMs": 11.27,
                   "top1": {
                     "file": "lib/internal/filter.js",
                     "name": "filterArray"
@@ -1276,7 +1264,7 @@
                   "mrr": 0.16666666666666666,
                   "precision": 0.1,
                   "recall": 1,
-                  "elapsedMs": 11.36,
+                  "elapsedMs": 11.76,
                   "top1": {
                     "file": "lib/doUntil.js",
                     "name": "doUntil"
@@ -1288,7 +1276,7 @@
                   "mrr": 0.3333333333333333,
                   "precision": 0.1,
                   "recall": 1,
-                  "elapsedMs": 13.24,
+                  "elapsedMs": 13.03,
                   "top1": {
                     "file": "lib/groupBySeries.js",
                     "name": "groupBySeries"
@@ -1300,7 +1288,7 @@
                   "mrr": 0.2,
                   "precision": 0.1,
                   "recall": 1,
-                  "elapsedMs": 10.35,
+                  "elapsedMs": 16.43,
                   "top1": {
                     "file": "lib/everySeries.js",
                     "name": "everySeries"
@@ -1312,7 +1300,7 @@
                   "mrr": 0.3333333333333333,
                   "precision": 0.1,
                   "recall": 1,
-                  "elapsedMs": 15.42,
+                  "elapsedMs": 19.27,
                   "top1": {
                     "file": "lib/transform.js",
                     "name": "transform"
@@ -1324,7 +1312,7 @@
                   "mrr": 1,
                   "precision": 0.1,
                   "recall": 1,
-                  "elapsedMs": 9.31,
+                  "elapsedMs": 14.24,
                   "top1": {
                     "file": "lib/mapSeries.js",
                     "name": "mapSeries"
@@ -1336,7 +1324,7 @@
                   "mrr": 1,
                   "precision": 0.1,
                   "recall": 1,
-                  "elapsedMs": 9.7,
+                  "elapsedMs": 32.32,
                   "top1": {
                     "file": "lib/memoize.js",
                     "name": "memoize"
@@ -1348,7 +1336,7 @@
                   "mrr": 0.5,
                   "precision": 0.1,
                   "recall": 1,
-                  "elapsedMs": 13.91,
+                  "elapsedMs": 28.93,
                   "top1": {
                     "file": "lib/auto.js",
                     "name": "auto"
@@ -1360,7 +1348,7 @@
                   "mrr": 1,
                   "precision": 0.1,
                   "recall": 1,
-                  "elapsedMs": 12.15,
+                  "elapsedMs": 25.71,
                   "top1": {
                     "file": "lib/parallelLimit.js",
                     "name": "parallelLimit"
@@ -1372,7 +1360,7 @@
                   "mrr": 1,
                   "precision": 0.1,
                   "recall": 1,
-                  "elapsedMs": 14.64,
+                  "elapsedMs": 37.85,
                   "top1": {
                     "file": "lib/race.js",
                     "name": "race"
@@ -1384,7 +1372,7 @@
                   "mrr": 0.5,
                   "precision": 0.1,
                   "recall": 1,
-                  "elapsedMs": 15.6,
+                  "elapsedMs": 64.23,
                   "top1": {
                     "file": "lib/reflectAll.js",
                     "name": "reflectAll"
@@ -1396,7 +1384,7 @@
                   "mrr": 1,
                   "precision": 0.1,
                   "recall": 1,
-                  "elapsedMs": 8.73,
+                  "elapsedMs": 106.77,
                   "top1": {
                     "file": "lib/reduceRight.js",
                     "name": "reduceRight"
@@ -1408,7 +1396,7 @@
                   "mrr": 0.14285714285714285,
                   "precision": 0.1,
                   "recall": 1,
-                  "elapsedMs": 10.54,
+                  "elapsedMs": 17.9,
                   "top1": {
                     "file": "lib/parallel.js",
                     "name": "parallel"
@@ -1420,7 +1408,7 @@
                   "mrr": 0.25,
                   "precision": 0.1,
                   "recall": 1,
-                  "elapsedMs": 12.54,
+                  "elapsedMs": 32.96,
                   "top1": {
                     "file": "lib/retryable.js",
                     "name": "retryable"
@@ -1432,7 +1420,7 @@
                   "mrr": 1,
                   "precision": 0.1,
                   "recall": 1,
-                  "elapsedMs": 9.08,
+                  "elapsedMs": 22.08,
                   "top1": {
                     "file": "lib/retryable.js",
                     "name": "retryable"
@@ -1444,7 +1432,7 @@
                   "mrr": 1,
                   "precision": 0.1,
                   "recall": 1,
-                  "elapsedMs": 14.91,
+                  "elapsedMs": 16.34,
                   "top1": {
                     "file": "lib/series.js",
                     "name": "series"
@@ -1456,7 +1444,7 @@
                   "mrr": 1,
                   "precision": 0.1,
                   "recall": 1,
-                  "elapsedMs": 9.97,
+                  "elapsedMs": 24.22,
                   "top1": {
                     "file": "lib/sortBy.js",
                     "name": "sortBy"
@@ -1468,7 +1456,7 @@
                   "mrr": 1,
                   "precision": 0.1,
                   "recall": 1,
-                  "elapsedMs": 13.2,
+                  "elapsedMs": 60.35,
                   "top1": {
                     "file": "lib/timeout.js",
                     "name": "timeout"
@@ -1480,7 +1468,7 @@
                   "mrr": 1,
                   "precision": 0.1,
                   "recall": 1,
-                  "elapsedMs": 14.39,
+                  "elapsedMs": 32.93,
                   "top1": {
                     "file": "lib/tryEach.js",
                     "name": "tryEach"
@@ -1492,7 +1480,7 @@
                   "mrr": 0.5,
                   "precision": 0.1,
                   "recall": 1,
-                  "elapsedMs": 14.01,
+                  "elapsedMs": 15.72,
                   "top1": {
                     "file": "lib/memoize.js",
                     "name": "memoize"
@@ -1504,7 +1492,7 @@
                   "mrr": 1,
                   "precision": 0.1,
                   "recall": 1,
-                  "elapsedMs": 15.67,
+                  "elapsedMs": 29.95,
                   "top1": {
                     "file": "lib/waterfall.js",
                     "name": "waterfall"
@@ -1517,8 +1505,8 @@
               "mrr_at_10": 0.5917261904761905,
               "recall_at_10": 0.925,
               "precision_at_10": 0.09250000000000005,
-              "meanLatencyMs": 19.644999999999996,
-              "p95LatencyMs": 52.72,
+              "meanLatencyMs": 17.9315,
+              "p95LatencyMs": 26.18,
               "runs": [
                 {
                   "id": "async-01",
@@ -1526,7 +1514,7 @@
                   "mrr": 1,
                   "precision": 0.1,
                   "recall": 1,
-                  "elapsedMs": 15.59,
+                  "elapsedMs": 26.18,
                   "top1": {
                     "file": "lib/asyncify.js",
                     "name": "asyncify"
@@ -1538,7 +1526,7 @@
                   "mrr": 1,
                   "precision": 0.1,
                   "recall": 1,
-                  "elapsedMs": 17.5,
+                  "elapsedMs": 14.94,
                   "top1": {
                     "file": "lib/auto.js",
                     "name": "auto"
@@ -1550,7 +1538,7 @@
                   "mrr": 1,
                   "precision": 0.1,
                   "recall": 1,
-                  "elapsedMs": 15.16,
+                  "elapsedMs": 26.12,
                   "top1": {
                     "file": "lib/autoInject.js",
                     "name": "autoInject"
@@ -1562,7 +1550,7 @@
                   "mrr": 0.5,
                   "precision": 0.1,
                   "recall": 1,
-                  "elapsedMs": 15.25,
+                  "elapsedMs": 35.14,
                   "top1": {
                     "file": "lib/cargoQueue.js",
                     "name": "cargo"
@@ -1574,7 +1562,7 @@
                   "mrr": 0.3333333333333333,
                   "precision": 0.1,
                   "recall": 1,
-                  "elapsedMs": 12.52,
+                  "elapsedMs": 18.88,
                   "top1": {
                     "file": "lib/queue.js",
                     "name": "anonymous@146"
@@ -1586,7 +1574,7 @@
                   "mrr": 1,
                   "precision": 0.1,
                   "recall": 1,
-                  "elapsedMs": 13.4,
+                  "elapsedMs": 17.52,
                   "top1": {
                     "file": "lib/compose.js",
                     "name": "compose"
@@ -1598,7 +1586,7 @@
                   "mrr": 0.14285714285714285,
                   "precision": 0.1,
                   "recall": 1,
-                  "elapsedMs": 9.54,
+                  "elapsedMs": 14.03,
                   "top1": {
                     "file": "lib/transform.js",
                     "name": "transform"
@@ -1610,7 +1598,7 @@
                   "mrr": 0.16666666666666666,
                   "precision": 0.1,
                   "recall": 1,
-                  "elapsedMs": 26.41,
+                  "elapsedMs": 14.66,
                   "top1": {
                     "file": "lib/internal/queue.js",
                     "name": "queue"
@@ -1622,7 +1610,7 @@
                   "mrr": 0.5,
                   "precision": 0.1,
                   "recall": 1,
-                  "elapsedMs": 15.81,
+                  "elapsedMs": 17.15,
                   "top1": {
                     "file": "lib/concatLimit.js",
                     "name": "concatLimit"
@@ -1634,7 +1622,7 @@
                   "mrr": 1,
                   "precision": 0.1,
                   "recall": 1,
-                  "elapsedMs": 33.9,
+                  "elapsedMs": 11.09,
                   "top1": {
                     "file": "lib/detect.js",
                     "name": "detect"
@@ -1646,7 +1634,7 @@
                   "mrr": 1,
                   "precision": 0.1,
                   "recall": 1,
-                  "elapsedMs": 14.85,
+                  "elapsedMs": 10.27,
                   "top1": {
                     "file": "lib/detectLimit.js",
                     "name": "detectLimit"
@@ -1658,7 +1646,7 @@
                   "mrr": 0.16666666666666666,
                   "precision": 0.1,
                   "recall": 1,
-                  "elapsedMs": 18.43,
+                  "elapsedMs": 10.3,
                   "top1": {
                     "file": "lib/everySeries.js",
                     "name": "everySeries"
@@ -1670,7 +1658,7 @@
                   "mrr": 0.3333333333333333,
                   "precision": 0.1,
                   "recall": 1,
-                  "elapsedMs": 16.05,
+                  "elapsedMs": 15.68,
                   "top1": {
                     "file": "lib/race.js",
                     "name": "race"
@@ -1682,7 +1670,7 @@
                   "mrr": 0.2,
                   "precision": 0.1,
                   "recall": 1,
-                  "elapsedMs": 20.94,
+                  "elapsedMs": 17.62,
                   "top1": {
                     "file": "lib/whilst.js",
                     "name": "whilst"
@@ -1694,7 +1682,7 @@
                   "mrr": 0,
                   "precision": 0,
                   "recall": 0,
-                  "elapsedMs": 11.49,
+                  "elapsedMs": 16.68,
                   "top1": {
                     "file": "lib/everySeries.js",
                     "name": "everySeries"
@@ -1706,7 +1694,7 @@
                   "mrr": 0,
                   "precision": 0,
                   "recall": 0,
-                  "elapsedMs": 10.9,
+                  "elapsedMs": 16.75,
                   "top1": {
                     "file": "lib/map.js",
                     "name": "map"
@@ -1718,7 +1706,7 @@
                   "mrr": 1,
                   "precision": 0.1,
                   "recall": 1,
-                  "elapsedMs": 12.44,
+                  "elapsedMs": 19.5,
                   "top1": {
                     "file": "lib/ensureAsync.js",
                     "name": "ensureAsync"
@@ -1730,7 +1718,7 @@
                   "mrr": 0.2,
                   "precision": 0.1,
                   "recall": 1,
-                  "elapsedMs": 12.17,
+                  "elapsedMs": 24.84,
                   "top1": {
                     "file": "lib/mapSeries.js",
                     "name": "mapSeries"
@@ -1742,7 +1730,7 @@
                   "mrr": 0,
                   "precision": 0,
                   "recall": 0,
-                  "elapsedMs": 10.26,
+                  "elapsedMs": 20.18,
                   "top1": {
                     "file": "lib/someSeries.js",
                     "name": "someSeries"
@@ -1754,7 +1742,7 @@
                   "mrr": 0.2,
                   "precision": 0.1,
                   "recall": 1,
-                  "elapsedMs": 8.82,
+                  "elapsedMs": 15.63,
                   "top1": {
                     "file": "lib/internal/filter.js",
                     "name": "filterArray"
@@ -1766,7 +1754,7 @@
                   "mrr": 0.16666666666666666,
                   "precision": 0.1,
                   "recall": 1,
-                  "elapsedMs": 9.77,
+                  "elapsedMs": 24.77,
                   "top1": {
                     "file": "lib/doUntil.js",
                     "name": "doUntil"
@@ -1778,7 +1766,7 @@
                   "mrr": 0.3333333333333333,
                   "precision": 0.1,
                   "recall": 1,
-                  "elapsedMs": 15.5,
+                  "elapsedMs": 22.77,
                   "top1": {
                     "file": "lib/groupBySeries.js",
                     "name": "groupBySeries"
@@ -1790,7 +1778,7 @@
                   "mrr": 0.2,
                   "precision": 0.1,
                   "recall": 1,
-                  "elapsedMs": 17.34,
+                  "elapsedMs": 27.11,
                   "top1": {
                     "file": "lib/everySeries.js",
                     "name": "everySeries"
@@ -1802,7 +1790,7 @@
                   "mrr": 0.3333333333333333,
                   "precision": 0.1,
                   "recall": 1,
-                  "elapsedMs": 13.12,
+                  "elapsedMs": 21.52,
                   "top1": {
                     "file": "lib/transform.js",
                     "name": "transform"
@@ -1814,7 +1802,7 @@
                   "mrr": 1,
                   "precision": 0.1,
                   "recall": 1,
-                  "elapsedMs": 12.17,
+                  "elapsedMs": 14.73,
                   "top1": {
                     "file": "lib/mapSeries.js",
                     "name": "mapSeries"
@@ -1826,7 +1814,7 @@
                   "mrr": 1,
                   "precision": 0.1,
                   "recall": 1,
-                  "elapsedMs": 14.03,
+                  "elapsedMs": 19.65,
                   "top1": {
                     "file": "lib/memoize.js",
                     "name": "memoize"
@@ -1838,7 +1826,7 @@
                   "mrr": 0.5,
                   "precision": 0.1,
                   "recall": 1,
-                  "elapsedMs": 13.78,
+                  "elapsedMs": 18.67,
                   "top1": {
                     "file": "lib/auto.js",
                     "name": "auto"
@@ -1850,7 +1838,7 @@
                   "mrr": 1,
                   "precision": 0.1,
                   "recall": 1,
-                  "elapsedMs": 14.26,
+                  "elapsedMs": 13.98,
                   "top1": {
                     "file": "lib/parallelLimit.js",
                     "name": "parallelLimit"
@@ -1862,7 +1850,7 @@
                   "mrr": 1,
                   "precision": 0.1,
                   "recall": 1,
-                  "elapsedMs": 17.65,
+                  "elapsedMs": 19.28,
                   "top1": {
                     "file": "lib/race.js",
                     "name": "race"
@@ -1874,7 +1862,7 @@
                   "mrr": 0.5,
                   "precision": 0.1,
                   "recall": 1,
-                  "elapsedMs": 14.38,
+                  "elapsedMs": 18,
                   "top1": {
                     "file": "lib/reflectAll.js",
                     "name": "reflectAll"
@@ -1886,7 +1874,7 @@
                   "mrr": 1,
                   "precision": 0.1,
                   "recall": 1,
-                  "elapsedMs": 14.17,
+                  "elapsedMs": 9.97,
                   "top1": {
                     "file": "lib/reduceRight.js",
                     "name": "reduceRight"
@@ -1898,7 +1886,7 @@
                   "mrr": 0.14285714285714285,
                   "precision": 0.1,
                   "recall": 1,
-                  "elapsedMs": 15.47,
+                  "elapsedMs": 17.71,
                   "top1": {
                     "file": "lib/parallel.js",
                     "name": "parallel"
@@ -1910,7 +1898,7 @@
                   "mrr": 0.25,
                   "precision": 0.1,
                   "recall": 1,
-                  "elapsedMs": 17.84,
+                  "elapsedMs": 23.37,
                   "top1": {
                     "file": "lib/retryable.js",
                     "name": "retryable"
@@ -1922,7 +1910,7 @@
                   "mrr": 1,
                   "precision": 0.1,
                   "recall": 1,
-                  "elapsedMs": 17.59,
+                  "elapsedMs": 20.67,
                   "top1": {
                     "file": "lib/retryable.js",
                     "name": "retryable"
@@ -1934,7 +1922,7 @@
                   "mrr": 1,
                   "precision": 0.1,
                   "recall": 1,
-                  "elapsedMs": 32.9,
+                  "elapsedMs": 13.7,
                   "top1": {
                     "file": "lib/series.js",
                     "name": "series"
@@ -1946,7 +1934,7 @@
                   "mrr": 1,
                   "precision": 0.1,
                   "recall": 1,
-                  "elapsedMs": 19.41,
+                  "elapsedMs": 14.16,
                   "top1": {
                     "file": "lib/sortBy.js",
                     "name": "sortBy"
@@ -1958,7 +1946,7 @@
                   "mrr": 1,
                   "precision": 0.1,
                   "recall": 1,
-                  "elapsedMs": 19.51,
+                  "elapsedMs": 14.68,
                   "top1": {
                     "file": "lib/timeout.js",
                     "name": "timeout"
@@ -1970,7 +1958,7 @@
                   "mrr": 1,
                   "precision": 0.1,
                   "recall": 1,
-                  "elapsedMs": 52.72,
+                  "elapsedMs": 15.39,
                   "top1": {
                     "file": "lib/tryEach.js",
                     "name": "tryEach"
@@ -1982,7 +1970,7 @@
                   "mrr": 0.5,
                   "precision": 0.1,
                   "recall": 1,
-                  "elapsedMs": 66.54,
+                  "elapsedMs": 9.94,
                   "top1": {
                     "file": "lib/memoize.js",
                     "name": "memoize"
@@ -1994,10 +1982,1004 @@
                   "mrr": 1,
                   "precision": 0.1,
                   "recall": 1,
-                  "elapsedMs": 76.22,
+                  "elapsedMs": 14.03,
                   "top1": {
                     "file": "lib/waterfall.js",
                     "name": "waterfall"
+                  }
+                }
+              ]
+            }
+          }
+        },
+        "jina": {
+          "snippets": 327,
+          "indexing": {
+            "parsedFiles": 102,
+            "reusedFiles": 0,
+            "embeddedSnippets": 314,
+            "reusedVectors": 13,
+            "deletedFiles": 0,
+            "snippets": 327,
+            "elapsedMs": 207978.95
+          },
+          "modes": {
+            "hybrid": {
+              "ndcg_at_10": 0.6499811206783827,
+              "mrr_at_10": 0.5846527777777777,
+              "recall_at_10": 0.85,
+              "precision_at_10": 0.08500000000000005,
+              "meanLatencyMs": 52.559249999999984,
+              "p95LatencyMs": 93.36,
+              "runs": [
+                {
+                  "id": "async-01",
+                  "ndcg": 1,
+                  "mrr": 1,
+                  "precision": 0.1,
+                  "recall": 1,
+                  "elapsedMs": 184.34,
+                  "top1": {
+                    "file": "lib/asyncify.js",
+                    "name": "asyncify"
+                  }
+                },
+                {
+                  "id": "async-02",
+                  "ndcg": 1,
+                  "mrr": 1,
+                  "precision": 0.1,
+                  "recall": 1,
+                  "elapsedMs": 42.59,
+                  "top1": {
+                    "file": "lib/auto.js",
+                    "name": "auto"
+                  }
+                },
+                {
+                  "id": "async-03",
+                  "ndcg": 0.6309297535714575,
+                  "mrr": 0.5,
+                  "precision": 0.1,
+                  "recall": 1,
+                  "elapsedMs": 31.51,
+                  "top1": {
+                    "file": "lib/auto.js",
+                    "name": "anonymous@180"
+                  }
+                },
+                {
+                  "id": "async-04",
+                  "ndcg": 1,
+                  "mrr": 1,
+                  "precision": 0.1,
+                  "recall": 1,
+                  "elapsedMs": 46.62,
+                  "top1": {
+                    "file": "lib/cargo.js",
+                    "name": "cargo"
+                  }
+                },
+                {
+                  "id": "async-05",
+                  "ndcg": 0.43067655807339306,
+                  "mrr": 0.25,
+                  "precision": 0.1,
+                  "recall": 1,
+                  "elapsedMs": 52.67,
+                  "top1": {
+                    "file": "lib/auto.js",
+                    "name": "processQueue"
+                  }
+                },
+                {
+                  "id": "async-06",
+                  "ndcg": 1,
+                  "mrr": 1,
+                  "precision": 0.1,
+                  "recall": 1,
+                  "elapsedMs": 50.27,
+                  "top1": {
+                    "file": "lib/compose.js",
+                    "name": "compose"
+                  }
+                },
+                {
+                  "id": "async-07",
+                  "ndcg": 0.6309297535714575,
+                  "mrr": 0.5,
+                  "precision": 0.1,
+                  "recall": 1,
+                  "elapsedMs": 72.41,
+                  "top1": {
+                    "file": "lib/transform.js",
+                    "name": "transform"
+                  }
+                },
+                {
+                  "id": "async-08",
+                  "ndcg": 0,
+                  "mrr": 0,
+                  "precision": 0,
+                  "recall": 0,
+                  "elapsedMs": 63.32,
+                  "top1": {
+                    "file": "lib/internal/queue.js",
+                    "name": "process"
+                  }
+                },
+                {
+                  "id": "async-09",
+                  "ndcg": 1,
+                  "mrr": 1,
+                  "precision": 0.1,
+                  "recall": 1,
+                  "elapsedMs": 93.36,
+                  "top1": {
+                    "file": "lib/concatSeries.js",
+                    "name": "concatSeries"
+                  }
+                },
+                {
+                  "id": "async-10",
+                  "ndcg": 1,
+                  "mrr": 1,
+                  "precision": 0.1,
+                  "recall": 1,
+                  "elapsedMs": 32.16,
+                  "top1": {
+                    "file": "lib/detect.js",
+                    "name": "detect"
+                  }
+                },
+                {
+                  "id": "async-11",
+                  "ndcg": 1,
+                  "mrr": 1,
+                  "precision": 0.1,
+                  "recall": 1,
+                  "elapsedMs": 43.73,
+                  "top1": {
+                    "file": "lib/detectLimit.js",
+                    "name": "detectLimit"
+                  }
+                },
+                {
+                  "id": "async-12",
+                  "ndcg": 0,
+                  "mrr": 0,
+                  "precision": 0,
+                  "recall": 0,
+                  "elapsedMs": 46.35,
+                  "top1": {
+                    "file": "lib/some.js",
+                    "name": "some"
+                  }
+                },
+                {
+                  "id": "async-13",
+                  "ndcg": 0.6309297535714575,
+                  "mrr": 0.5,
+                  "precision": 0.1,
+                  "recall": 1,
+                  "elapsedMs": 44.31,
+                  "top1": {
+                    "file": "lib/until.js",
+                    "name": "until"
+                  }
+                },
+                {
+                  "id": "async-14",
+                  "ndcg": 0.6309297535714575,
+                  "mrr": 0.5,
+                  "precision": 0.1,
+                  "recall": 1,
+                  "elapsedMs": 41.24,
+                  "top1": {
+                    "file": "lib/until.js",
+                    "name": "until"
+                  }
+                },
+                {
+                  "id": "async-15",
+                  "ndcg": 0,
+                  "mrr": 0,
+                  "precision": 0,
+                  "recall": 0,
+                  "elapsedMs": 59.24,
+                  "top1": {
+                    "file": "lib/each.js",
+                    "name": "eachLimit"
+                  }
+                },
+                {
+                  "id": "async-16",
+                  "ndcg": 0,
+                  "mrr": 0,
+                  "precision": 0,
+                  "recall": 0,
+                  "elapsedMs": 65.42,
+                  "top1": {
+                    "file": "lib/queue.js",
+                    "name": "anonymous@148"
+                  }
+                },
+                {
+                  "id": "async-17",
+                  "ndcg": 1,
+                  "mrr": 1,
+                  "precision": 0.1,
+                  "recall": 1,
+                  "elapsedMs": 64.89,
+                  "top1": {
+                    "file": "lib/ensureAsync.js",
+                    "name": "ensureAsync"
+                  }
+                },
+                {
+                  "id": "async-18",
+                  "ndcg": 0.6309297535714575,
+                  "mrr": 0.5,
+                  "precision": 0.1,
+                  "recall": 1,
+                  "elapsedMs": 26.46,
+                  "top1": {
+                    "file": "lib/filter.js",
+                    "name": "filter"
+                  }
+                },
+                {
+                  "id": "async-19",
+                  "ndcg": 1,
+                  "mrr": 1,
+                  "precision": 0.1,
+                  "recall": 1,
+                  "elapsedMs": 38.71,
+                  "top1": {
+                    "file": "lib/filter.js",
+                    "name": "filter"
+                  }
+                },
+                {
+                  "id": "async-20",
+                  "ndcg": 0.31546487678572877,
+                  "mrr": 0.125,
+                  "precision": 0.1,
+                  "recall": 1,
+                  "elapsedMs": 40.57,
+                  "top1": {
+                    "file": "lib/filter.js",
+                    "name": "filter"
+                  }
+                },
+                {
+                  "id": "async-21",
+                  "ndcg": 0.6309297535714575,
+                  "mrr": 0.5,
+                  "precision": 0.1,
+                  "recall": 1,
+                  "elapsedMs": 47.76,
+                  "top1": {
+                    "file": "lib/auto.js",
+                    "name": "auto"
+                  }
+                },
+                {
+                  "id": "async-22",
+                  "ndcg": 1,
+                  "mrr": 1,
+                  "precision": 0.1,
+                  "recall": 1,
+                  "elapsedMs": 30.8,
+                  "top1": {
+                    "file": "lib/groupBy.js",
+                    "name": "groupBy"
+                  }
+                },
+                {
+                  "id": "async-23",
+                  "ndcg": 0.6309297535714575,
+                  "mrr": 0.5,
+                  "precision": 0.1,
+                  "recall": 1,
+                  "elapsedMs": 33.77,
+                  "top1": {
+                    "file": "lib/sortBy.js",
+                    "name": "sortBy"
+                  }
+                },
+                {
+                  "id": "async-24",
+                  "ndcg": 0.5,
+                  "mrr": 0.3333333333333333,
+                  "precision": 0.1,
+                  "recall": 1,
+                  "elapsedMs": 43.68,
+                  "top1": {
+                    "file": "lib/transform.js",
+                    "name": "transform"
+                  }
+                },
+                {
+                  "id": "async-25",
+                  "ndcg": 0.6309297535714575,
+                  "mrr": 0.5,
+                  "precision": 0.1,
+                  "recall": 1,
+                  "elapsedMs": 27.68,
+                  "top1": {
+                    "file": "lib/transform.js",
+                    "name": "transform"
+                  }
+                },
+                {
+                  "id": "async-26",
+                  "ndcg": 1,
+                  "mrr": 1,
+                  "precision": 0.1,
+                  "recall": 1,
+                  "elapsedMs": 47.55,
+                  "top1": {
+                    "file": "lib/memoize.js",
+                    "name": "memoize"
+                  }
+                },
+                {
+                  "id": "async-27",
+                  "ndcg": 0.38685280723454163,
+                  "mrr": 0.2,
+                  "precision": 0.1,
+                  "recall": 1,
+                  "elapsedMs": 36.71,
+                  "top1": {
+                    "file": "lib/auto.js",
+                    "name": "auto"
+                  }
+                },
+                {
+                  "id": "async-28",
+                  "ndcg": 1,
+                  "mrr": 1,
+                  "precision": 0.1,
+                  "recall": 1,
+                  "elapsedMs": 32.02,
+                  "top1": {
+                    "file": "lib/parallelLimit.js",
+                    "name": "parallelLimit"
+                  }
+                },
+                {
+                  "id": "async-29",
+                  "ndcg": 0,
+                  "mrr": 0,
+                  "precision": 0,
+                  "recall": 0,
+                  "elapsedMs": 46.53,
+                  "top1": {
+                    "file": "lib/auto.js",
+                    "name": "auto"
+                  }
+                },
+                {
+                  "id": "async-30",
+                  "ndcg": 1,
+                  "mrr": 1,
+                  "precision": 0.1,
+                  "recall": 1,
+                  "elapsedMs": 65.31,
+                  "top1": {
+                    "file": "lib/reduce.js",
+                    "name": "reduce"
+                  }
+                },
+                {
+                  "id": "async-31",
+                  "ndcg": 0.3010299956639812,
+                  "mrr": 0.1111111111111111,
+                  "precision": 0.1,
+                  "recall": 1,
+                  "elapsedMs": 69.34,
+                  "top1": {
+                    "file": "lib/reduce.js",
+                    "name": "reduce"
+                  }
+                },
+                {
+                  "id": "async-32",
+                  "ndcg": 0,
+                  "mrr": 0,
+                  "precision": 0,
+                  "recall": 0,
+                  "elapsedMs": 80.6,
+                  "top1": {
+                    "file": "lib/internal/parallel.js",
+                    "name": "anonymous@8"
+                  }
+                },
+                {
+                  "id": "async-33",
+                  "ndcg": 0.5,
+                  "mrr": 0.3333333333333333,
+                  "precision": 0.1,
+                  "recall": 1,
+                  "elapsedMs": 41.59,
+                  "top1": {
+                    "file": "lib/retryable.js",
+                    "name": "retryable"
+                  }
+                },
+                {
+                  "id": "async-34",
+                  "ndcg": 1,
+                  "mrr": 1,
+                  "precision": 0.1,
+                  "recall": 1,
+                  "elapsedMs": 29.2,
+                  "top1": {
+                    "file": "lib/retryable.js",
+                    "name": "retryable"
+                  }
+                },
+                {
+                  "id": "async-35",
+                  "ndcg": 0.5,
+                  "mrr": 0.3333333333333333,
+                  "precision": 0.1,
+                  "recall": 1,
+                  "elapsedMs": 34.78,
+                  "top1": {
+                    "file": "lib/auto.js",
+                    "name": "auto"
+                  }
+                },
+                {
+                  "id": "async-36",
+                  "ndcg": 1,
+                  "mrr": 1,
+                  "precision": 0.1,
+                  "recall": 1,
+                  "elapsedMs": 40.67,
+                  "top1": {
+                    "file": "lib/sortBy.js",
+                    "name": "sortBy"
+                  }
+                },
+                {
+                  "id": "async-37",
+                  "ndcg": 1,
+                  "mrr": 1,
+                  "precision": 0.1,
+                  "recall": 1,
+                  "elapsedMs": 134.32,
+                  "top1": {
+                    "file": "lib/timeout.js",
+                    "name": "timeout"
+                  }
+                },
+                {
+                  "id": "async-38",
+                  "ndcg": 1,
+                  "mrr": 1,
+                  "precision": 0.1,
+                  "recall": 1,
+                  "elapsedMs": 57.54,
+                  "top1": {
+                    "file": "lib/tryEach.js",
+                    "name": "tryEach"
+                  }
+                },
+                {
+                  "id": "async-39",
+                  "ndcg": 0.6309297535714575,
+                  "mrr": 0.5,
+                  "precision": 0.1,
+                  "recall": 1,
+                  "elapsedMs": 31.17,
+                  "top1": {
+                    "file": "lib/memoize.js",
+                    "name": "memoize"
+                  }
+                },
+                {
+                  "id": "async-40",
+                  "ndcg": 0.38685280723454163,
+                  "mrr": 0.2,
+                  "precision": 0.1,
+                  "recall": 1,
+                  "elapsedMs": 31.18,
+                  "top1": {
+                    "file": "lib/auto.js",
+                    "name": "auto"
+                  }
+                }
+              ]
+            },
+            "codestrata": {
+              "ndcg_at_10": 0.6499811206783827,
+              "mrr_at_10": 0.5846527777777777,
+              "recall_at_10": 0.85,
+              "precision_at_10": 0.08500000000000005,
+              "meanLatencyMs": 68.34049999999999,
+              "p95LatencyMs": 163.87,
+              "runs": [
+                {
+                  "id": "async-01",
+                  "ndcg": 1,
+                  "mrr": 1,
+                  "precision": 0.1,
+                  "recall": 1,
+                  "elapsedMs": 44.57,
+                  "top1": {
+                    "file": "lib/asyncify.js",
+                    "name": "asyncify"
+                  }
+                },
+                {
+                  "id": "async-02",
+                  "ndcg": 1,
+                  "mrr": 1,
+                  "precision": 0.1,
+                  "recall": 1,
+                  "elapsedMs": 46.73,
+                  "top1": {
+                    "file": "lib/auto.js",
+                    "name": "auto"
+                  }
+                },
+                {
+                  "id": "async-03",
+                  "ndcg": 0.6309297535714575,
+                  "mrr": 0.5,
+                  "precision": 0.1,
+                  "recall": 1,
+                  "elapsedMs": 59.86,
+                  "top1": {
+                    "file": "lib/auto.js",
+                    "name": "anonymous@180"
+                  }
+                },
+                {
+                  "id": "async-04",
+                  "ndcg": 1,
+                  "mrr": 1,
+                  "precision": 0.1,
+                  "recall": 1,
+                  "elapsedMs": 114.31,
+                  "top1": {
+                    "file": "lib/cargo.js",
+                    "name": "cargo"
+                  }
+                },
+                {
+                  "id": "async-05",
+                  "ndcg": 0.43067655807339306,
+                  "mrr": 0.25,
+                  "precision": 0.1,
+                  "recall": 1,
+                  "elapsedMs": 41.69,
+                  "top1": {
+                    "file": "lib/auto.js",
+                    "name": "processQueue"
+                  }
+                },
+                {
+                  "id": "async-06",
+                  "ndcg": 1,
+                  "mrr": 1,
+                  "precision": 0.1,
+                  "recall": 1,
+                  "elapsedMs": 27.05,
+                  "top1": {
+                    "file": "lib/compose.js",
+                    "name": "compose"
+                  }
+                },
+                {
+                  "id": "async-07",
+                  "ndcg": 0.6309297535714575,
+                  "mrr": 0.5,
+                  "precision": 0.1,
+                  "recall": 1,
+                  "elapsedMs": 28.27,
+                  "top1": {
+                    "file": "lib/transform.js",
+                    "name": "transform"
+                  }
+                },
+                {
+                  "id": "async-08",
+                  "ndcg": 0,
+                  "mrr": 0,
+                  "precision": 0,
+                  "recall": 0,
+                  "elapsedMs": 22.42,
+                  "top1": {
+                    "file": "lib/internal/queue.js",
+                    "name": "process"
+                  }
+                },
+                {
+                  "id": "async-09",
+                  "ndcg": 1,
+                  "mrr": 1,
+                  "precision": 0.1,
+                  "recall": 1,
+                  "elapsedMs": 40.3,
+                  "top1": {
+                    "file": "lib/concatSeries.js",
+                    "name": "concatSeries"
+                  }
+                },
+                {
+                  "id": "async-10",
+                  "ndcg": 1,
+                  "mrr": 1,
+                  "precision": 0.1,
+                  "recall": 1,
+                  "elapsedMs": 75.76,
+                  "top1": {
+                    "file": "lib/detect.js",
+                    "name": "detect"
+                  }
+                },
+                {
+                  "id": "async-11",
+                  "ndcg": 1,
+                  "mrr": 1,
+                  "precision": 0.1,
+                  "recall": 1,
+                  "elapsedMs": 47.71,
+                  "top1": {
+                    "file": "lib/detectLimit.js",
+                    "name": "detectLimit"
+                  }
+                },
+                {
+                  "id": "async-12",
+                  "ndcg": 0,
+                  "mrr": 0,
+                  "precision": 0,
+                  "recall": 0,
+                  "elapsedMs": 71.85,
+                  "top1": {
+                    "file": "lib/some.js",
+                    "name": "some"
+                  }
+                },
+                {
+                  "id": "async-13",
+                  "ndcg": 0.6309297535714575,
+                  "mrr": 0.5,
+                  "precision": 0.1,
+                  "recall": 1,
+                  "elapsedMs": 38.55,
+                  "top1": {
+                    "file": "lib/until.js",
+                    "name": "until"
+                  }
+                },
+                {
+                  "id": "async-14",
+                  "ndcg": 0.6309297535714575,
+                  "mrr": 0.5,
+                  "precision": 0.1,
+                  "recall": 1,
+                  "elapsedMs": 46.49,
+                  "top1": {
+                    "file": "lib/until.js",
+                    "name": "until"
+                  }
+                },
+                {
+                  "id": "async-15",
+                  "ndcg": 0,
+                  "mrr": 0,
+                  "precision": 0,
+                  "recall": 0,
+                  "elapsedMs": 27.58,
+                  "top1": {
+                    "file": "lib/each.js",
+                    "name": "eachLimit"
+                  }
+                },
+                {
+                  "id": "async-16",
+                  "ndcg": 0,
+                  "mrr": 0,
+                  "precision": 0,
+                  "recall": 0,
+                  "elapsedMs": 88.63,
+                  "top1": {
+                    "file": "lib/queue.js",
+                    "name": "anonymous@148"
+                  }
+                },
+                {
+                  "id": "async-17",
+                  "ndcg": 1,
+                  "mrr": 1,
+                  "precision": 0.1,
+                  "recall": 1,
+                  "elapsedMs": 67.49,
+                  "top1": {
+                    "file": "lib/ensureAsync.js",
+                    "name": "ensureAsync"
+                  }
+                },
+                {
+                  "id": "async-18",
+                  "ndcg": 0.6309297535714575,
+                  "mrr": 0.5,
+                  "precision": 0.1,
+                  "recall": 1,
+                  "elapsedMs": 64.09,
+                  "top1": {
+                    "file": "lib/filter.js",
+                    "name": "filter"
+                  }
+                },
+                {
+                  "id": "async-19",
+                  "ndcg": 1,
+                  "mrr": 1,
+                  "precision": 0.1,
+                  "recall": 1,
+                  "elapsedMs": 52.68,
+                  "top1": {
+                    "file": "lib/filter.js",
+                    "name": "filter"
+                  }
+                },
+                {
+                  "id": "async-20",
+                  "ndcg": 0.31546487678572877,
+                  "mrr": 0.125,
+                  "precision": 0.1,
+                  "recall": 1,
+                  "elapsedMs": 34.96,
+                  "top1": {
+                    "file": "lib/filter.js",
+                    "name": "filter"
+                  }
+                },
+                {
+                  "id": "async-21",
+                  "ndcg": 0.6309297535714575,
+                  "mrr": 0.5,
+                  "precision": 0.1,
+                  "recall": 1,
+                  "elapsedMs": 31.78,
+                  "top1": {
+                    "file": "lib/auto.js",
+                    "name": "auto"
+                  }
+                },
+                {
+                  "id": "async-22",
+                  "ndcg": 1,
+                  "mrr": 1,
+                  "precision": 0.1,
+                  "recall": 1,
+                  "elapsedMs": 28.27,
+                  "top1": {
+                    "file": "lib/groupBy.js",
+                    "name": "groupBy"
+                  }
+                },
+                {
+                  "id": "async-23",
+                  "ndcg": 0.6309297535714575,
+                  "mrr": 0.5,
+                  "precision": 0.1,
+                  "recall": 1,
+                  "elapsedMs": 38.62,
+                  "top1": {
+                    "file": "lib/sortBy.js",
+                    "name": "sortBy"
+                  }
+                },
+                {
+                  "id": "async-24",
+                  "ndcg": 0.5,
+                  "mrr": 0.3333333333333333,
+                  "precision": 0.1,
+                  "recall": 1,
+                  "elapsedMs": 34.92,
+                  "top1": {
+                    "file": "lib/transform.js",
+                    "name": "transform"
+                  }
+                },
+                {
+                  "id": "async-25",
+                  "ndcg": 0.6309297535714575,
+                  "mrr": 0.5,
+                  "precision": 0.1,
+                  "recall": 1,
+                  "elapsedMs": 81.89,
+                  "top1": {
+                    "file": "lib/transform.js",
+                    "name": "transform"
+                  }
+                },
+                {
+                  "id": "async-26",
+                  "ndcg": 1,
+                  "mrr": 1,
+                  "precision": 0.1,
+                  "recall": 1,
+                  "elapsedMs": 88.09,
+                  "top1": {
+                    "file": "lib/memoize.js",
+                    "name": "memoize"
+                  }
+                },
+                {
+                  "id": "async-27",
+                  "ndcg": 0.38685280723454163,
+                  "mrr": 0.2,
+                  "precision": 0.1,
+                  "recall": 1,
+                  "elapsedMs": 67.45,
+                  "top1": {
+                    "file": "lib/auto.js",
+                    "name": "auto"
+                  }
+                },
+                {
+                  "id": "async-28",
+                  "ndcg": 1,
+                  "mrr": 1,
+                  "precision": 0.1,
+                  "recall": 1,
+                  "elapsedMs": 57.91,
+                  "top1": {
+                    "file": "lib/parallelLimit.js",
+                    "name": "parallelLimit"
+                  }
+                },
+                {
+                  "id": "async-29",
+                  "ndcg": 0,
+                  "mrr": 0,
+                  "precision": 0,
+                  "recall": 0,
+                  "elapsedMs": 60.69,
+                  "top1": {
+                    "file": "lib/auto.js",
+                    "name": "auto"
+                  }
+                },
+                {
+                  "id": "async-30",
+                  "ndcg": 1,
+                  "mrr": 1,
+                  "precision": 0.1,
+                  "recall": 1,
+                  "elapsedMs": 54.87,
+                  "top1": {
+                    "file": "lib/reduce.js",
+                    "name": "reduce"
+                  }
+                },
+                {
+                  "id": "async-31",
+                  "ndcg": 0.3010299956639812,
+                  "mrr": 0.1111111111111111,
+                  "precision": 0.1,
+                  "recall": 1,
+                  "elapsedMs": 82.36,
+                  "top1": {
+                    "file": "lib/reduce.js",
+                    "name": "reduce"
+                  }
+                },
+                {
+                  "id": "async-32",
+                  "ndcg": 0,
+                  "mrr": 0,
+                  "precision": 0,
+                  "recall": 0,
+                  "elapsedMs": 56.77,
+                  "top1": {
+                    "file": "lib/internal/parallel.js",
+                    "name": "anonymous@8"
+                  }
+                },
+                {
+                  "id": "async-33",
+                  "ndcg": 0.5,
+                  "mrr": 0.3333333333333333,
+                  "precision": 0.1,
+                  "recall": 1,
+                  "elapsedMs": 34.7,
+                  "top1": {
+                    "file": "lib/retryable.js",
+                    "name": "retryable"
+                  }
+                },
+                {
+                  "id": "async-34",
+                  "ndcg": 1,
+                  "mrr": 1,
+                  "precision": 0.1,
+                  "recall": 1,
+                  "elapsedMs": 66.54,
+                  "top1": {
+                    "file": "lib/retryable.js",
+                    "name": "retryable"
+                  }
+                },
+                {
+                  "id": "async-35",
+                  "ndcg": 0.5,
+                  "mrr": 0.3333333333333333,
+                  "precision": 0.1,
+                  "recall": 1,
+                  "elapsedMs": 197.72,
+                  "top1": {
+                    "file": "lib/auto.js",
+                    "name": "auto"
+                  }
+                },
+                {
+                  "id": "async-36",
+                  "ndcg": 1,
+                  "mrr": 1,
+                  "precision": 0.1,
+                  "recall": 1,
+                  "elapsedMs": 82.98,
+                  "top1": {
+                    "file": "lib/sortBy.js",
+                    "name": "sortBy"
+                  }
+                },
+                {
+                  "id": "async-37",
+                  "ndcg": 1,
+                  "mrr": 1,
+                  "precision": 0.1,
+                  "recall": 1,
+                  "elapsedMs": 221.83,
+                  "top1": {
+                    "file": "lib/timeout.js",
+                    "name": "timeout"
+                  }
+                },
+                {
+                  "id": "async-38",
+                  "ndcg": 1,
+                  "mrr": 1,
+                  "precision": 0.1,
+                  "recall": 1,
+                  "elapsedMs": 163.87,
+                  "top1": {
+                    "file": "lib/tryEach.js",
+                    "name": "tryEach"
+                  }
+                },
+                {
+                  "id": "async-39",
+                  "ndcg": 0.6309297535714575,
+                  "mrr": 0.5,
+                  "precision": 0.1,
+                  "recall": 1,
+                  "elapsedMs": 88.3,
+                  "top1": {
+                    "file": "lib/memoize.js",
+                    "name": "memoize"
+                  }
+                },
+                {
+                  "id": "async-40",
+                  "ndcg": 0.38685280723454163,
+                  "mrr": 0.2,
+                  "precision": 0.1,
+                  "recall": 1,
+                  "elapsedMs": 153.07,
+                  "top1": {
+                    "file": "lib/auto.js",
+                    "name": "auto"
                   }
                 }
               ]
@@ -2018,13 +3000,7 @@
         "features": {
           "snippets": 109,
           "indexing": {
-            "parsedFiles": 6,
-            "reusedFiles": 0,
-            "embeddedSnippets": 109,
-            "reusedVectors": 0,
-            "deletedFiles": 0,
-            "snippets": 109,
-            "elapsedMs": 92.67
+            "cached": true
           },
           "modes": {
             "lexical": {
@@ -2032,8 +3008,8 @@
               "mrr_at_10": 0.7829166666666667,
               "recall_at_10": 1,
               "precision_at_10": 0.10000000000000002,
-              "meanLatencyMs": 0.6605000000000001,
-              "p95LatencyMs": 0.47,
+              "meanLatencyMs": 2.13,
+              "p95LatencyMs": 5.48,
               "runs": [
                 {
                   "id": "express-01",
@@ -2041,7 +3017,7 @@
                   "mrr": 1,
                   "precision": 0.1,
                   "recall": 1,
-                  "elapsedMs": 8.12,
+                  "elapsedMs": 26.6,
                   "top1": {
                     "file": "lib/response.js",
                     "name": "status"
@@ -2053,7 +3029,7 @@
                   "mrr": 0.25,
                   "precision": 0.1,
                   "recall": 1,
-                  "elapsedMs": 0.34,
+                  "elapsedMs": 0.4,
                   "top1": {
                     "file": "lib/response.js",
                     "name": "jsonp"
@@ -2065,7 +3041,7 @@
                   "mrr": 0.125,
                   "precision": 0.1,
                   "recall": 1,
-                  "elapsedMs": 0.37,
+                  "elapsedMs": 1.74,
                   "top1": {
                     "file": "lib/response.js",
                     "name": "res.cookie"
@@ -2077,7 +3053,7 @@
                   "mrr": 1,
                   "precision": 0.1,
                   "recall": 1,
-                  "elapsedMs": 0.2,
+                  "elapsedMs": 0.41,
                   "top1": {
                     "file": "lib/response.js",
                     "name": "jsonp"
@@ -2089,7 +3065,7 @@
                   "mrr": 1,
                   "precision": 0.1,
                   "recall": 1,
-                  "elapsedMs": 0.16,
+                  "elapsedMs": 0.32,
                   "top1": {
                     "file": "lib/response.js",
                     "name": "sendStatus"
@@ -2101,7 +3077,7 @@
                   "mrr": 1,
                   "precision": 0.1,
                   "recall": 1,
-                  "elapsedMs": 0.15,
+                  "elapsedMs": 0.4,
                   "top1": {
                     "file": "lib/response.js",
                     "name": "sendFile"
@@ -2113,7 +3089,7 @@
                   "mrr": 1,
                   "precision": 0.1,
                   "recall": 1,
-                  "elapsedMs": 0.47,
+                  "elapsedMs": 5.48,
                   "top1": {
                     "file": "lib/response.js",
                     "name": "download"
@@ -2125,7 +3101,7 @@
                   "mrr": 0.5,
                   "precision": 0.1,
                   "recall": 1,
-                  "elapsedMs": 0.37,
+                  "elapsedMs": 1.41,
                   "top1": {
                     "file": "lib/response.js",
                     "name": "download"
@@ -2137,7 +3113,7 @@
                   "mrr": 1,
                   "precision": 0.1,
                   "recall": 1,
-                  "elapsedMs": 0.3,
+                  "elapsedMs": 0.5,
                   "top1": {
                     "file": "lib/response.js",
                     "name": "append"
@@ -2149,7 +3125,7 @@
                   "mrr": 1,
                   "precision": 0.1,
                   "recall": 1,
-                  "elapsedMs": 0.38,
+                  "elapsedMs": 0.4,
                   "top1": {
                     "file": "lib/response.js",
                     "name": "clearCookie"
@@ -2161,7 +3137,7 @@
                   "mrr": 0.3333333333333333,
                   "precision": 0.1,
                   "recall": 1,
-                  "elapsedMs": 0.23,
+                  "elapsedMs": 0.45,
                   "top1": {
                     "file": "lib/response.js",
                     "name": "clearCookie"
@@ -2173,7 +3149,7 @@
                   "mrr": 1,
                   "precision": 0.1,
                   "recall": 1,
-                  "elapsedMs": 0.17,
+                  "elapsedMs": 0.38,
                   "top1": {
                     "file": "lib/response.js",
                     "name": "redirect"
@@ -2185,7 +3161,7 @@
                   "mrr": 1,
                   "precision": 0.1,
                   "recall": 1,
-                  "elapsedMs": 0.21,
+                  "elapsedMs": 0.42,
                   "top1": {
                     "file": "lib/response.js",
                     "name": "res.vary"
@@ -2197,7 +3173,7 @@
                   "mrr": 1,
                   "precision": 0.1,
                   "recall": 1,
-                  "elapsedMs": 0.29,
+                  "elapsedMs": 1.62,
                   "top1": {
                     "file": "lib/response.js",
                     "name": "stringify"
@@ -2209,7 +3185,7 @@
                   "mrr": 0.25,
                   "precision": 0.1,
                   "recall": 1,
-                  "elapsedMs": 0.29,
+                  "elapsedMs": 0.59,
                   "top1": {
                     "file": "lib/request.js",
                     "name": "req.accepts"
@@ -2221,7 +3197,7 @@
                   "mrr": 1,
                   "precision": 0.1,
                   "recall": 1,
-                  "elapsedMs": 0.22,
+                  "elapsedMs": 0.3,
                   "top1": {
                     "file": "lib/request.js",
                     "name": "range"
@@ -2233,7 +3209,7 @@
                   "mrr": 1,
                   "precision": 0.1,
                   "recall": 1,
-                  "elapsedMs": 0.21,
+                  "elapsedMs": 0.3,
                   "top1": {
                     "file": "lib/application.js",
                     "name": "engine"
@@ -2245,7 +3221,7 @@
                   "mrr": 1,
                   "precision": 0.1,
                   "recall": 1,
-                  "elapsedMs": 0.3,
+                  "elapsedMs": 0.31,
                   "top1": {
                     "file": "lib/application.js",
                     "name": "use"
@@ -2257,7 +3233,7 @@
                   "mrr": 1,
                   "precision": 0.1,
                   "recall": 1,
-                  "elapsedMs": 0.25,
+                  "elapsedMs": 0.3,
                   "top1": {
                     "file": "lib/application.js",
                     "name": "listen"
@@ -2269,7 +3245,7 @@
                   "mrr": 0.2,
                   "precision": 0.1,
                   "recall": 1,
-                  "elapsedMs": 0.18,
+                  "elapsedMs": 0.27,
                   "top1": {
                     "file": "lib/view.js",
                     "name": "View"
@@ -2282,8 +3258,8 @@
               "mrr_at_10": 0.6181150793650794,
               "recall_at_10": 1,
               "precision_at_10": 0.10000000000000002,
-              "meanLatencyMs": 0.9089999999999998,
-              "p95LatencyMs": 1.65,
+              "meanLatencyMs": 1.6629999999999998,
+              "p95LatencyMs": 4.88,
               "runs": [
                 {
                   "id": "express-01",
@@ -2291,7 +3267,7 @@
                   "mrr": 1,
                   "precision": 0.1,
                   "recall": 1,
-                  "elapsedMs": 1.65,
+                  "elapsedMs": 0.99,
                   "top1": {
                     "file": "lib/response.js",
                     "name": "status"
@@ -2303,7 +3279,7 @@
                   "mrr": 0.14285714285714285,
                   "precision": 0.1,
                   "recall": 1,
-                  "elapsedMs": 1.23,
+                  "elapsedMs": 2.12,
                   "top1": {
                     "file": "lib/response.js",
                     "name": "jsonp"
@@ -2315,7 +3291,7 @@
                   "mrr": 0.25,
                   "precision": 0.1,
                   "recall": 1,
-                  "elapsedMs": 1.33,
+                  "elapsedMs": 4.88,
                   "top1": {
                     "file": "lib/request.js",
                     "name": "req.accepts"
@@ -2327,7 +3303,7 @@
                   "mrr": 0.5,
                   "precision": 0.1,
                   "recall": 1,
-                  "elapsedMs": 1.24,
+                  "elapsedMs": 0.9,
                   "top1": {
                     "file": "lib/response.js",
                     "name": "sendFile"
@@ -2339,7 +3315,7 @@
                   "mrr": 1,
                   "precision": 0.1,
                   "recall": 1,
-                  "elapsedMs": 1.21,
+                  "elapsedMs": 0.98,
                   "top1": {
                     "file": "lib/response.js",
                     "name": "sendStatus"
@@ -2351,7 +3327,7 @@
                   "mrr": 1,
                   "precision": 0.1,
                   "recall": 1,
-                  "elapsedMs": 3.09,
+                  "elapsedMs": 0.54,
                   "top1": {
                     "file": "lib/response.js",
                     "name": "sendFile"
@@ -2363,7 +3339,7 @@
                   "mrr": 0.3333333333333333,
                   "precision": 0.1,
                   "recall": 1,
-                  "elapsedMs": 1.13,
+                  "elapsedMs": 1.28,
                   "top1": {
                     "file": "lib/response.js",
                     "name": "render"
@@ -2375,7 +3351,7 @@
                   "mrr": 1,
                   "precision": 0.1,
                   "recall": 1,
-                  "elapsedMs": 1.27,
+                  "elapsedMs": 2.42,
                   "top1": {
                     "file": "lib/response.js",
                     "name": "attachment"
@@ -2387,7 +3363,7 @@
                   "mrr": 0.2,
                   "precision": 0.1,
                   "recall": 1,
-                  "elapsedMs": 0.71,
+                  "elapsedMs": 0.57,
                   "top1": {
                     "file": "lib/response.js",
                     "name": "status"
@@ -2399,7 +3375,7 @@
                   "mrr": 1,
                   "precision": 0.1,
                   "recall": 1,
-                  "elapsedMs": 0.45,
+                  "elapsedMs": 0.5,
                   "top1": {
                     "file": "lib/response.js",
                     "name": "clearCookie"
@@ -2411,7 +3387,7 @@
                   "mrr": 0.1111111111111111,
                   "precision": 0.1,
                   "recall": 1,
-                  "elapsedMs": 0.42,
+                  "elapsedMs": 3.59,
                   "top1": {
                     "file": "lib/response.js",
                     "name": "clearCookie"
@@ -2423,7 +3399,7 @@
                   "mrr": 0.5,
                   "precision": 0.1,
                   "recall": 1,
-                  "elapsedMs": 0.62,
+                  "elapsedMs": 1.09,
                   "top1": {
                     "file": "lib/response.js",
                     "name": "location"
@@ -2435,7 +3411,7 @@
                   "mrr": 1,
                   "precision": 0.1,
                   "recall": 1,
-                  "elapsedMs": 0.62,
+                  "elapsedMs": 2.98,
                   "top1": {
                     "file": "lib/response.js",
                     "name": "res.vary"
@@ -2447,7 +3423,7 @@
                   "mrr": 0.5,
                   "precision": 0.1,
                   "recall": 1,
-                  "elapsedMs": 0.56,
+                  "elapsedMs": 0.65,
                   "top1": {
                     "file": "lib/request.js",
                     "name": "req.accepts"
@@ -2459,7 +3435,7 @@
                   "mrr": 0.2,
                   "precision": 0.1,
                   "recall": 1,
-                  "elapsedMs": 0.7,
+                  "elapsedMs": 0.87,
                   "top1": {
                     "file": "lib/request.js",
                     "name": "range"
@@ -2471,7 +3447,7 @@
                   "mrr": 1,
                   "precision": 0.1,
                   "recall": 1,
-                  "elapsedMs": 0.43,
+                  "elapsedMs": 0.98,
                   "top1": {
                     "file": "lib/request.js",
                     "name": "range"
@@ -2483,7 +3459,7 @@
                   "mrr": 1,
                   "precision": 0.1,
                   "recall": 1,
-                  "elapsedMs": 0.4,
+                  "elapsedMs": 0.79,
                   "top1": {
                     "file": "lib/application.js",
                     "name": "engine"
@@ -2495,7 +3471,7 @@
                   "mrr": 0.5,
                   "precision": 0.1,
                   "recall": 1,
-                  "elapsedMs": 0.42,
+                  "elapsedMs": 5.12,
                   "top1": {
                     "file": "lib/response.js",
                     "name": "sendFile"
@@ -2507,7 +3483,7 @@
                   "mrr": 1,
                   "precision": 0.1,
                   "recall": 1,
-                  "elapsedMs": 0.36,
+                  "elapsedMs": 1.16,
                   "top1": {
                     "file": "lib/application.js",
                     "name": "listen"
@@ -2519,7 +3495,7 @@
                   "mrr": 0.125,
                   "precision": 0.1,
                   "recall": 1,
-                  "elapsedMs": 0.34,
+                  "elapsedMs": 0.85,
                   "top1": {
                     "file": "lib/application.js",
                     "name": "render"
@@ -2532,13 +3508,7 @@
         "bge": {
           "snippets": 109,
           "indexing": {
-            "parsedFiles": 6,
-            "reusedFiles": 0,
-            "embeddedSnippets": 109,
-            "reusedVectors": 0,
-            "deletedFiles": 0,
-            "snippets": 109,
-            "elapsedMs": 25929.84
+            "cached": true
           },
           "modes": {
             "hybrid": {
@@ -2546,8 +3516,8 @@
               "mrr_at_10": 0.8083333333333332,
               "recall_at_10": 1,
               "precision_at_10": 0.10000000000000002,
-              "meanLatencyMs": 12.4055,
-              "p95LatencyMs": 21.27,
+              "meanLatencyMs": 54.93850000000001,
+              "p95LatencyMs": 46.84,
               "runs": [
                 {
                   "id": "express-01",
@@ -2555,7 +3525,7 @@
                   "mrr": 0.5,
                   "precision": 0.1,
                   "recall": 1,
-                  "elapsedMs": 26.58,
+                  "elapsedMs": 598.49,
                   "top1": {
                     "file": "lib/response.js",
                     "name": "sendStatus"
@@ -2567,7 +3537,7 @@
                   "mrr": 0.3333333333333333,
                   "precision": 0.1,
                   "recall": 1,
-                  "elapsedMs": 21.27,
+                  "elapsedMs": 32.9,
                   "top1": {
                     "file": "lib/response.js",
                     "name": "sendStatus"
@@ -2579,7 +3549,7 @@
                   "mrr": 0.5,
                   "precision": 0.1,
                   "recall": 1,
-                  "elapsedMs": 15.72,
+                  "elapsedMs": 33.19,
                   "top1": {
                     "file": "lib/request.js",
                     "name": "req.accepts"
@@ -2591,7 +3561,7 @@
                   "mrr": 1,
                   "precision": 0.1,
                   "recall": 1,
-                  "elapsedMs": 11.4,
+                  "elapsedMs": 24.02,
                   "top1": {
                     "file": "lib/response.js",
                     "name": "jsonp"
@@ -2603,7 +3573,7 @@
                   "mrr": 1,
                   "precision": 0.1,
                   "recall": 1,
-                  "elapsedMs": 19.16,
+                  "elapsedMs": 27.56,
                   "top1": {
                     "file": "lib/response.js",
                     "name": "sendStatus"
@@ -2615,7 +3585,7 @@
                   "mrr": 1,
                   "precision": 0.1,
                   "recall": 1,
-                  "elapsedMs": 9.65,
+                  "elapsedMs": 46.84,
                   "top1": {
                     "file": "lib/response.js",
                     "name": "sendFile"
@@ -2627,7 +3597,7 @@
                   "mrr": 1,
                   "precision": 0.1,
                   "recall": 1,
-                  "elapsedMs": 16.93,
+                  "elapsedMs": 34.98,
                   "top1": {
                     "file": "lib/response.js",
                     "name": "download"
@@ -2639,7 +3609,7 @@
                   "mrr": 0.5,
                   "precision": 0.1,
                   "recall": 1,
-                  "elapsedMs": 10.16,
+                  "elapsedMs": 21.84,
                   "top1": {
                     "file": "lib/response.js",
                     "name": "download"
@@ -2651,7 +3621,7 @@
                   "mrr": 1,
                   "precision": 0.1,
                   "recall": 1,
-                  "elapsedMs": 10.66,
+                  "elapsedMs": 24.5,
                   "top1": {
                     "file": "lib/response.js",
                     "name": "append"
@@ -2663,7 +3633,7 @@
                   "mrr": 1,
                   "precision": 0.1,
                   "recall": 1,
-                  "elapsedMs": 9.1,
+                  "elapsedMs": 26.95,
                   "top1": {
                     "file": "lib/response.js",
                     "name": "clearCookie"
@@ -2675,7 +3645,7 @@
                   "mrr": 0.5,
                   "precision": 0.1,
                   "recall": 1,
-                  "elapsedMs": 8.58,
+                  "elapsedMs": 46.21,
                   "top1": {
                     "file": "lib/response.js",
                     "name": "clearCookie"
@@ -2687,7 +3657,7 @@
                   "mrr": 1,
                   "precision": 0.1,
                   "recall": 1,
-                  "elapsedMs": 6.51,
+                  "elapsedMs": 32.51,
                   "top1": {
                     "file": "lib/response.js",
                     "name": "redirect"
@@ -2699,7 +3669,7 @@
                   "mrr": 1,
                   "precision": 0.1,
                   "recall": 1,
-                  "elapsedMs": 7.11,
+                  "elapsedMs": 21.69,
                   "top1": {
                     "file": "lib/response.js",
                     "name": "res.vary"
@@ -2711,7 +3681,7 @@
                   "mrr": 1,
                   "precision": 0.1,
                   "recall": 1,
-                  "elapsedMs": 12.14,
+                  "elapsedMs": 24.89,
                   "top1": {
                     "file": "lib/response.js",
                     "name": "stringify"
@@ -2723,7 +3693,7 @@
                   "mrr": 0.5,
                   "precision": 0.1,
                   "recall": 1,
-                  "elapsedMs": 10.83,
+                  "elapsedMs": 16.85,
                   "top1": {
                     "file": "lib/request.js",
                     "name": "req.accepts"
@@ -2735,7 +3705,7 @@
                   "mrr": 1,
                   "precision": 0.1,
                   "recall": 1,
-                  "elapsedMs": 8.47,
+                  "elapsedMs": 22.68,
                   "top1": {
                     "file": "lib/request.js",
                     "name": "range"
@@ -2747,7 +3717,7 @@
                   "mrr": 1,
                   "precision": 0.1,
                   "recall": 1,
-                  "elapsedMs": 13.44,
+                  "elapsedMs": 15,
                   "top1": {
                     "file": "lib/application.js",
                     "name": "engine"
@@ -2759,7 +3729,7 @@
                   "mrr": 1,
                   "precision": 0.1,
                   "recall": 1,
-                  "elapsedMs": 9.23,
+                  "elapsedMs": 16.42,
                   "top1": {
                     "file": "lib/application.js",
                     "name": "use"
@@ -2771,7 +3741,7 @@
                   "mrr": 1,
                   "precision": 0.1,
                   "recall": 1,
-                  "elapsedMs": 8.42,
+                  "elapsedMs": 18.5,
                   "top1": {
                     "file": "lib/application.js",
                     "name": "listen"
@@ -2796,8 +3766,8 @@
               "mrr_at_10": 0.8083333333333332,
               "recall_at_10": 1,
               "precision_at_10": 0.10000000000000002,
-              "meanLatencyMs": 13.324000000000002,
-              "p95LatencyMs": 16.42,
+              "meanLatencyMs": 70.70500000000001,
+              "p95LatencyMs": 103.98,
               "runs": [
                 {
                   "id": "express-01",
@@ -2805,7 +3775,7 @@
                   "mrr": 0.5,
                   "precision": 0.1,
                   "recall": 1,
-                  "elapsedMs": 11.64,
+                  "elapsedMs": 28.17,
                   "top1": {
                     "file": "lib/response.js",
                     "name": "sendStatus"
@@ -2817,7 +3787,7 @@
                   "mrr": 0.3333333333333333,
                   "precision": 0.1,
                   "recall": 1,
-                  "elapsedMs": 14.15,
+                  "elapsedMs": 35.66,
                   "top1": {
                     "file": "lib/response.js",
                     "name": "sendStatus"
@@ -2829,7 +3799,7 @@
                   "mrr": 0.5,
                   "precision": 0.1,
                   "recall": 1,
-                  "elapsedMs": 10.24,
+                  "elapsedMs": 40.23,
                   "top1": {
                     "file": "lib/request.js",
                     "name": "req.accepts"
@@ -2841,7 +3811,7 @@
                   "mrr": 1,
                   "precision": 0.1,
                   "recall": 1,
-                  "elapsedMs": 12.42,
+                  "elapsedMs": 81.2,
                   "top1": {
                     "file": "lib/response.js",
                     "name": "jsonp"
@@ -2853,7 +3823,7 @@
                   "mrr": 1,
                   "precision": 0.1,
                   "recall": 1,
-                  "elapsedMs": 10.74,
+                  "elapsedMs": 45.3,
                   "top1": {
                     "file": "lib/response.js",
                     "name": "sendStatus"
@@ -2865,7 +3835,7 @@
                   "mrr": 1,
                   "precision": 0.1,
                   "recall": 1,
-                  "elapsedMs": 11.09,
+                  "elapsedMs": 71.83,
                   "top1": {
                     "file": "lib/response.js",
                     "name": "sendFile"
@@ -2877,7 +3847,7 @@
                   "mrr": 1,
                   "precision": 0.1,
                   "recall": 1,
-                  "elapsedMs": 16.42,
+                  "elapsedMs": 43.33,
                   "top1": {
                     "file": "lib/response.js",
                     "name": "download"
@@ -2889,7 +3859,7 @@
                   "mrr": 0.5,
                   "precision": 0.1,
                   "recall": 1,
-                  "elapsedMs": 13.74,
+                  "elapsedMs": 39.98,
                   "top1": {
                     "file": "lib/response.js",
                     "name": "download"
@@ -2901,7 +3871,7 @@
                   "mrr": 1,
                   "precision": 0.1,
                   "recall": 1,
-                  "elapsedMs": 13.26,
+                  "elapsedMs": 100.87,
                   "top1": {
                     "file": "lib/response.js",
                     "name": "append"
@@ -2913,7 +3883,7 @@
                   "mrr": 1,
                   "precision": 0.1,
                   "recall": 1,
-                  "elapsedMs": 17.63,
+                  "elapsedMs": 95.96,
                   "top1": {
                     "file": "lib/response.js",
                     "name": "clearCookie"
@@ -2925,7 +3895,7 @@
                   "mrr": 0.5,
                   "precision": 0.1,
                   "recall": 1,
-                  "elapsedMs": 14.84,
+                  "elapsedMs": 14.87,
                   "top1": {
                     "file": "lib/response.js",
                     "name": "clearCookie"
@@ -2937,7 +3907,7 @@
                   "mrr": 1,
                   "precision": 0.1,
                   "recall": 1,
-                  "elapsedMs": 15.72,
+                  "elapsedMs": 30.33,
                   "top1": {
                     "file": "lib/response.js",
                     "name": "redirect"
@@ -2949,7 +3919,7 @@
                   "mrr": 1,
                   "precision": 0.1,
                   "recall": 1,
-                  "elapsedMs": 16.37,
+                  "elapsedMs": 42.13,
                   "top1": {
                     "file": "lib/response.js",
                     "name": "res.vary"
@@ -2961,7 +3931,7 @@
                   "mrr": 1,
                   "precision": 0.1,
                   "recall": 1,
-                  "elapsedMs": 13.55,
+                  "elapsedMs": 16.12,
                   "top1": {
                     "file": "lib/response.js",
                     "name": "stringify"
@@ -2973,7 +3943,7 @@
                   "mrr": 0.5,
                   "precision": 0.1,
                   "recall": 1,
-                  "elapsedMs": 12.68,
+                  "elapsedMs": 31.43,
                   "top1": {
                     "file": "lib/request.js",
                     "name": "req.accepts"
@@ -2985,7 +3955,7 @@
                   "mrr": 1,
                   "precision": 0.1,
                   "recall": 1,
-                  "elapsedMs": 13.82,
+                  "elapsedMs": 33.8,
                   "top1": {
                     "file": "lib/request.js",
                     "name": "range"
@@ -2997,7 +3967,7 @@
                   "mrr": 1,
                   "precision": 0.1,
                   "recall": 1,
-                  "elapsedMs": 12.61,
+                  "elapsedMs": 63.72,
                   "top1": {
                     "file": "lib/application.js",
                     "name": "engine"
@@ -3009,7 +3979,7 @@
                   "mrr": 1,
                   "precision": 0.1,
                   "recall": 1,
-                  "elapsedMs": 13.36,
+                  "elapsedMs": 433.47,
                   "top1": {
                     "file": "lib/application.js",
                     "name": "use"
@@ -3021,7 +3991,7 @@
                   "mrr": 1,
                   "precision": 0.1,
                   "recall": 1,
-                  "elapsedMs": 9.74,
+                  "elapsedMs": 103.98,
                   "top1": {
                     "file": "lib/application.js",
                     "name": "listen"
@@ -3033,7 +4003,521 @@
                   "mrr": 0.3333333333333333,
                   "precision": 0.1,
                   "recall": 1,
-                  "elapsedMs": 12.46,
+                  "elapsedMs": 61.72,
+                  "top1": {
+                    "file": "lib/view.js",
+                    "name": "View"
+                  }
+                }
+              ]
+            }
+          }
+        },
+        "jina": {
+          "snippets": 109,
+          "indexing": {
+            "parsedFiles": 6,
+            "reusedFiles": 0,
+            "embeddedSnippets": 109,
+            "reusedVectors": 0,
+            "deletedFiles": 0,
+            "snippets": 109,
+            "elapsedMs": 63253.96
+          },
+          "modes": {
+            "hybrid": {
+              "ndcg_at_10": 0.9261859507142916,
+              "mrr_at_10": 0.9,
+              "recall_at_10": 1,
+              "precision_at_10": 0.10000000000000002,
+              "meanLatencyMs": 47.612500000000004,
+              "p95LatencyMs": 109.52,
+              "runs": [
+                {
+                  "id": "express-01",
+                  "ndcg": 1,
+                  "mrr": 1,
+                  "precision": 0.1,
+                  "recall": 1,
+                  "elapsedMs": 42.92,
+                  "top1": {
+                    "file": "lib/response.js",
+                    "name": "status"
+                  }
+                },
+                {
+                  "id": "express-02",
+                  "ndcg": 1,
+                  "mrr": 1,
+                  "precision": 0.1,
+                  "recall": 1,
+                  "elapsedMs": 33.97,
+                  "top1": {
+                    "file": "lib/response.js",
+                    "name": "send"
+                  }
+                },
+                {
+                  "id": "express-03",
+                  "ndcg": 1,
+                  "mrr": 1,
+                  "precision": 0.1,
+                  "recall": 1,
+                  "elapsedMs": 22.37,
+                  "top1": {
+                    "file": "lib/response.js",
+                    "name": "json"
+                  }
+                },
+                {
+                  "id": "express-04",
+                  "ndcg": 1,
+                  "mrr": 1,
+                  "precision": 0.1,
+                  "recall": 1,
+                  "elapsedMs": 33.71,
+                  "top1": {
+                    "file": "lib/response.js",
+                    "name": "jsonp"
+                  }
+                },
+                {
+                  "id": "express-05",
+                  "ndcg": 1,
+                  "mrr": 1,
+                  "precision": 0.1,
+                  "recall": 1,
+                  "elapsedMs": 41.97,
+                  "top1": {
+                    "file": "lib/response.js",
+                    "name": "sendStatus"
+                  }
+                },
+                {
+                  "id": "express-06",
+                  "ndcg": 1,
+                  "mrr": 1,
+                  "precision": 0.1,
+                  "recall": 1,
+                  "elapsedMs": 43.55,
+                  "top1": {
+                    "file": "lib/response.js",
+                    "name": "sendFile"
+                  }
+                },
+                {
+                  "id": "express-07",
+                  "ndcg": 1,
+                  "mrr": 1,
+                  "precision": 0.1,
+                  "recall": 1,
+                  "elapsedMs": 50.36,
+                  "top1": {
+                    "file": "lib/response.js",
+                    "name": "download"
+                  }
+                },
+                {
+                  "id": "express-08",
+                  "ndcg": 0.6309297535714575,
+                  "mrr": 0.5,
+                  "precision": 0.1,
+                  "recall": 1,
+                  "elapsedMs": 38.36,
+                  "top1": {
+                    "file": "lib/response.js",
+                    "name": "download"
+                  }
+                },
+                {
+                  "id": "express-09",
+                  "ndcg": 1,
+                  "mrr": 1,
+                  "precision": 0.1,
+                  "recall": 1,
+                  "elapsedMs": 76.79,
+                  "top1": {
+                    "file": "lib/response.js",
+                    "name": "append"
+                  }
+                },
+                {
+                  "id": "express-10",
+                  "ndcg": 1,
+                  "mrr": 1,
+                  "precision": 0.1,
+                  "recall": 1,
+                  "elapsedMs": 42.95,
+                  "top1": {
+                    "file": "lib/response.js",
+                    "name": "clearCookie"
+                  }
+                },
+                {
+                  "id": "express-11",
+                  "ndcg": 0.6309297535714575,
+                  "mrr": 0.5,
+                  "precision": 0.1,
+                  "recall": 1,
+                  "elapsedMs": 54.44,
+                  "top1": {
+                    "file": "lib/response.js",
+                    "name": "clearCookie"
+                  }
+                },
+                {
+                  "id": "express-12",
+                  "ndcg": 1,
+                  "mrr": 1,
+                  "precision": 0.1,
+                  "recall": 1,
+                  "elapsedMs": 109.52,
+                  "top1": {
+                    "file": "lib/response.js",
+                    "name": "redirect"
+                  }
+                },
+                {
+                  "id": "express-13",
+                  "ndcg": 1,
+                  "mrr": 1,
+                  "precision": 0.1,
+                  "recall": 1,
+                  "elapsedMs": 126.22,
+                  "top1": {
+                    "file": "lib/response.js",
+                    "name": "res.vary"
+                  }
+                },
+                {
+                  "id": "express-14",
+                  "ndcg": 1,
+                  "mrr": 1,
+                  "precision": 0.1,
+                  "recall": 1,
+                  "elapsedMs": 45.15,
+                  "top1": {
+                    "file": "lib/response.js",
+                    "name": "stringify"
+                  }
+                },
+                {
+                  "id": "express-15",
+                  "ndcg": 1,
+                  "mrr": 1,
+                  "precision": 0.1,
+                  "recall": 1,
+                  "elapsedMs": 30.36,
+                  "top1": {
+                    "file": "lib/request.js",
+                    "name": "req.acceptsLanguages"
+                  }
+                },
+                {
+                  "id": "express-16",
+                  "ndcg": 1,
+                  "mrr": 1,
+                  "precision": 0.1,
+                  "recall": 1,
+                  "elapsedMs": 25.72,
+                  "top1": {
+                    "file": "lib/request.js",
+                    "name": "range"
+                  }
+                },
+                {
+                  "id": "express-17",
+                  "ndcg": 1,
+                  "mrr": 1,
+                  "precision": 0.1,
+                  "recall": 1,
+                  "elapsedMs": 28.12,
+                  "top1": {
+                    "file": "lib/application.js",
+                    "name": "engine"
+                  }
+                },
+                {
+                  "id": "express-18",
+                  "ndcg": 0.6309297535714575,
+                  "mrr": 0.5,
+                  "precision": 0.1,
+                  "recall": 1,
+                  "elapsedMs": 38.03,
+                  "top1": {
+                    "file": "lib/application.js",
+                    "name": "anonymous@219"
+                  }
+                },
+                {
+                  "id": "express-19",
+                  "ndcg": 1,
+                  "mrr": 1,
+                  "precision": 0.1,
+                  "recall": 1,
+                  "elapsedMs": 23.51,
+                  "top1": {
+                    "file": "lib/application.js",
+                    "name": "listen"
+                  }
+                },
+                {
+                  "id": "express-20",
+                  "ndcg": 0.6309297535714575,
+                  "mrr": 0.5,
+                  "precision": 0.1,
+                  "recall": 1,
+                  "elapsedMs": 44.23,
+                  "top1": {
+                    "file": "lib/view.js",
+                    "name": "View"
+                  }
+                }
+              ]
+            },
+            "codestrata": {
+              "ndcg_at_10": 0.9261859507142916,
+              "mrr_at_10": 0.9,
+              "recall_at_10": 1,
+              "precision_at_10": 0.10000000000000002,
+              "meanLatencyMs": 37.195499999999996,
+              "p95LatencyMs": 53.63,
+              "runs": [
+                {
+                  "id": "express-01",
+                  "ndcg": 1,
+                  "mrr": 1,
+                  "precision": 0.1,
+                  "recall": 1,
+                  "elapsedMs": 34.86,
+                  "top1": {
+                    "file": "lib/response.js",
+                    "name": "status"
+                  }
+                },
+                {
+                  "id": "express-02",
+                  "ndcg": 1,
+                  "mrr": 1,
+                  "precision": 0.1,
+                  "recall": 1,
+                  "elapsedMs": 39.1,
+                  "top1": {
+                    "file": "lib/response.js",
+                    "name": "send"
+                  }
+                },
+                {
+                  "id": "express-03",
+                  "ndcg": 1,
+                  "mrr": 1,
+                  "precision": 0.1,
+                  "recall": 1,
+                  "elapsedMs": 29.77,
+                  "top1": {
+                    "file": "lib/response.js",
+                    "name": "json"
+                  }
+                },
+                {
+                  "id": "express-04",
+                  "ndcg": 1,
+                  "mrr": 1,
+                  "precision": 0.1,
+                  "recall": 1,
+                  "elapsedMs": 38.7,
+                  "top1": {
+                    "file": "lib/response.js",
+                    "name": "jsonp"
+                  }
+                },
+                {
+                  "id": "express-05",
+                  "ndcg": 1,
+                  "mrr": 1,
+                  "precision": 0.1,
+                  "recall": 1,
+                  "elapsedMs": 36.24,
+                  "top1": {
+                    "file": "lib/response.js",
+                    "name": "sendStatus"
+                  }
+                },
+                {
+                  "id": "express-06",
+                  "ndcg": 1,
+                  "mrr": 1,
+                  "precision": 0.1,
+                  "recall": 1,
+                  "elapsedMs": 32.56,
+                  "top1": {
+                    "file": "lib/response.js",
+                    "name": "sendFile"
+                  }
+                },
+                {
+                  "id": "express-07",
+                  "ndcg": 1,
+                  "mrr": 1,
+                  "precision": 0.1,
+                  "recall": 1,
+                  "elapsedMs": 51.12,
+                  "top1": {
+                    "file": "lib/response.js",
+                    "name": "download"
+                  }
+                },
+                {
+                  "id": "express-08",
+                  "ndcg": 0.6309297535714575,
+                  "mrr": 0.5,
+                  "precision": 0.1,
+                  "recall": 1,
+                  "elapsedMs": 35.07,
+                  "top1": {
+                    "file": "lib/response.js",
+                    "name": "download"
+                  }
+                },
+                {
+                  "id": "express-09",
+                  "ndcg": 1,
+                  "mrr": 1,
+                  "precision": 0.1,
+                  "recall": 1,
+                  "elapsedMs": 24.02,
+                  "top1": {
+                    "file": "lib/response.js",
+                    "name": "append"
+                  }
+                },
+                {
+                  "id": "express-10",
+                  "ndcg": 1,
+                  "mrr": 1,
+                  "precision": 0.1,
+                  "recall": 1,
+                  "elapsedMs": 28.52,
+                  "top1": {
+                    "file": "lib/response.js",
+                    "name": "clearCookie"
+                  }
+                },
+                {
+                  "id": "express-11",
+                  "ndcg": 0.6309297535714575,
+                  "mrr": 0.5,
+                  "precision": 0.1,
+                  "recall": 1,
+                  "elapsedMs": 42.64,
+                  "top1": {
+                    "file": "lib/response.js",
+                    "name": "clearCookie"
+                  }
+                },
+                {
+                  "id": "express-12",
+                  "ndcg": 1,
+                  "mrr": 1,
+                  "precision": 0.1,
+                  "recall": 1,
+                  "elapsedMs": 34.23,
+                  "top1": {
+                    "file": "lib/response.js",
+                    "name": "redirect"
+                  }
+                },
+                {
+                  "id": "express-13",
+                  "ndcg": 1,
+                  "mrr": 1,
+                  "precision": 0.1,
+                  "recall": 1,
+                  "elapsedMs": 30.43,
+                  "top1": {
+                    "file": "lib/response.js",
+                    "name": "res.vary"
+                  }
+                },
+                {
+                  "id": "express-14",
+                  "ndcg": 1,
+                  "mrr": 1,
+                  "precision": 0.1,
+                  "recall": 1,
+                  "elapsedMs": 27.34,
+                  "top1": {
+                    "file": "lib/response.js",
+                    "name": "stringify"
+                  }
+                },
+                {
+                  "id": "express-15",
+                  "ndcg": 1,
+                  "mrr": 1,
+                  "precision": 0.1,
+                  "recall": 1,
+                  "elapsedMs": 31.47,
+                  "top1": {
+                    "file": "lib/request.js",
+                    "name": "req.acceptsLanguages"
+                  }
+                },
+                {
+                  "id": "express-16",
+                  "ndcg": 1,
+                  "mrr": 1,
+                  "precision": 0.1,
+                  "recall": 1,
+                  "elapsedMs": 42.64,
+                  "top1": {
+                    "file": "lib/request.js",
+                    "name": "range"
+                  }
+                },
+                {
+                  "id": "express-17",
+                  "ndcg": 1,
+                  "mrr": 1,
+                  "precision": 0.1,
+                  "recall": 1,
+                  "elapsedMs": 34.33,
+                  "top1": {
+                    "file": "lib/application.js",
+                    "name": "engine"
+                  }
+                },
+                {
+                  "id": "express-18",
+                  "ndcg": 0.6309297535714575,
+                  "mrr": 0.5,
+                  "precision": 0.1,
+                  "recall": 1,
+                  "elapsedMs": 39.72,
+                  "top1": {
+                    "file": "lib/application.js",
+                    "name": "anonymous@219"
+                  }
+                },
+                {
+                  "id": "express-19",
+                  "ndcg": 1,
+                  "mrr": 1,
+                  "precision": 0.1,
+                  "recall": 1,
+                  "elapsedMs": 53.63,
+                  "top1": {
+                    "file": "lib/application.js",
+                    "name": "listen"
+                  }
+                },
+                {
+                  "id": "express-20",
+                  "ndcg": 0.6309297535714575,
+                  "mrr": 0.5,
+                  "precision": 0.1,
+                  "recall": 1,
+                  "elapsedMs": 57.52,
                   "top1": {
                     "file": "lib/view.js",
                     "name": "View"
@@ -3051,5 +4535,5 @@
     "One pinned snapshot per repository; evolutionary retrieval is tested separately.",
     "Partial relevance labels identify the intended API entry point; helpers may also be useful."
   ],
-  "rssMiB": 618
+  "rssMiB": 300
 }

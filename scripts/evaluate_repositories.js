@@ -16,7 +16,7 @@ for (const spec of specs) {
   const files = await directoryFiles(path.join('.cache/repositories', spec.name));
   if (!Object.keys(files).length) throw new Error('Prepare benchmark sources first');
   const versions = {};
-  for (const embedding of ['features', 'bge']) {
+  for (const embedding of ['features', 'bge', 'jina']) {
     const cache = path.join('.cache/repositories', spec.name, `index-${embedding}-v5.json`);
     let index, indexing;
     try { index = await loadIndex(cache); indexing = { cached: true }; }

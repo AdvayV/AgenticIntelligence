@@ -99,11 +99,12 @@ test('invalid embedding batches do not publish a partial version or change its e
 
 test('index accepts validated code-encoder vectors with 768 dimensions', async () => {
   const index = emptyIndex();
-  await indexVersion(index, { version: 'v', files: { 'a.js': source }, embedder: {
-    name: 'test-code-768', dimension: 768, encode: async texts => texts.map(() => Array(768).fill(0.01)),
-  } });
+  const embedder = { name: 'test-code-768', dimension: 768, encode: async texts => texts.map(() => Array(768).fill(1 / Math.sqrt(768))) };
+  await indexVersion(index, { version: 'v', files: { 'a.js': source }, embedder });
   const key = index.snapshots.v.snippets[0].vectorKey;
   assert.equal(index.vectors[key].length, 768);
+  const result = await search(index, 'find connect', { embedder, topK: 1 });
+  assert.equal(result.results[0].name, 'connect');
 });
 
 test('documentation contributes to retrieval without leaking across unrelated declarations', async () => {

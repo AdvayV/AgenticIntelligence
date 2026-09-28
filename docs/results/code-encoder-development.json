@@ -1,0 +1,12 @@
+{
+  "dataset": "Frozen AppsRetrieval train subset; not official test",
+  "dataset_revision": "f22508f96b7a36c2415181ed8bb76f76e04ae2d5",
+  "queries": 128,
+  "documents": 1000,
+  "mode": "jina",
+  "enrich": false,
+  "ndcg_at_10": 0.7095796636782205,
+  "mrr_at_10": 0.6770678323412699,
+  "recall_at_10": 0.8125,
+  "seconds_including_cache": 608.87
+}

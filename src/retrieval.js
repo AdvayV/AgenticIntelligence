@@ -28,7 +28,7 @@ export async function search(index, query, options = {}) {
   if (options.mode !== 'lexical') {
     const embedder = options.embedder ?? await createEmbedder(embeddingMode(index.embedding));
     if (embedder.name !== index.embedding) throw new Error('Query embedder must match index embedding');
-    const vector = validateVectors(await embedder.encode([query], { kind: 'query' }), 1)[0];
+    const vector = validateVectors(await embedder.encode([query], { kind: 'query' }), 1, embedder.dimension ?? 384)[0];
     dense = rows.map(row => cosine(vector, index.vectors[row.vectorKey]));
   }
   const lexRank = new Map([...rows.keys()].sort((a, b) => lexical[b] - lexical[a]).map((id, rank) => [id, rank + 1]));

@@ -4,7 +4,7 @@ Measured on 27 September 2026, Windows, Intel i5-1135G7 (8 logical processors), 
 
 ## Regression and integration
 
-76 Node tests pass locally and on GitHub Linux/Windows. They cover source locations, conservative control-flow evidence, rename/move ambiguity, copy/deletion behavior, import aliases and shadowing, documentation extraction, cache invalidation, vector validation, bounded inspection, cancellation, HTTP streaming, UTF-8 splitting, UI interactions, and failure handling. The persistent Python/Node bridge and Docker image passed GitHub CI. All six browser checks pass across Chromium, Firefox, and a mobile viewport, including no horizontal page overflow. [Verified workflow](https://github.com/AdvayV/AgenticIntelligence/actions/runs/36330703620).
+77 Node tests pass locally; the previous 76-test revision passed GitHub Linux/Windows. They cover source locations, conservative control-flow evidence, rename/move ambiguity, copy/deletion behavior, import aliases and shadowing, documentation extraction, cache invalidation, vector validation, bounded inspection, cancellation, HTTP streaming, UTF-8 splitting, UI interactions, and failure handling. The persistent Python/Node bridge and Docker image passed GitHub CI. All six browser checks pass across Chromium, Firefox, and a mobile viewport, including no horizontal page overflow. [Verified workflow](https://github.com/AdvayV/AgenticIntelligence/actions/runs/36407794742).
 
 ## Controlled development challenge
 
@@ -29,11 +29,13 @@ Mean CodeStrata query time: 5.76 ms; process RSS: 88.46 MiB. Queries overlap dem
 | Async | BM25 | 0.5959 | 0.5317 | 0.800 |
 | Async | CodeStrata features | 0.4124 | 0.3374 | 0.650 |
 | Async | BGE hybrid / CodeStrata BGE | 0.6717 | 0.5917 | 0.925 |
+| Async | Jina code hybrid / CodeStrata Jina | 0.6500 | 0.5847 | 0.850 |
 | Express | BM25 | 0.8347 | 0.7829 | 1.000 |
 | Express | CodeStrata features | 0.7089 | 0.6181 | 1.000 |
 | Express | BGE hybrid / CodeStrata BGE | 0.8577 | 0.8083 | 1.000 |
+| Express | Jina code hybrid / CodeStrata Jina | 0.9262 | 0.9000 | 1.000 |
 
-General text embeddings improve these sets, while feature hashing harms broad semantic retrieval relative to BM25. These single-snapshot queries do not exercise evolutionary reranking; identical BGE/hybrid scores are expected. Labels are AI-assisted and source-reviewed, not independently human annotated. Warm BGE hybrid mean latency was 13.06 ms on Async and 12.41 ms on Express, excluding model load/indexing.
+Learned embeddings improve these sets, while feature hashing harms broad semantic retrieval relative to BM25. Jina helps Express but trails BGE on Async, so the local code-encoder effect is mixed. These single-snapshot queries do not exercise evolutionary reranking; identical hybrid/CodeStrata scores are expected. Labels are AI-assisted and source-reviewed, not independently human annotated. The earlier isolated warm BGE hybrid mean latency was 13.06 ms on Async and 12.41 ms on Express, excluding model load/indexing. The updated artifact's timings were measured while the official CPU evaluation ran, so they are not a fair latency comparison.
 
 ## Encoder selection ? development only
 
@@ -44,8 +46,9 @@ General text embeddings improve these sets, while feature hashing harms broad se
 | Feature hashing | 0.0792 | 0.0674 |
 | MiniLM q8 | 0.5083 | 0.4844 |
 | BGE small q8 | 0.5737 | 0.5476 |
+| Jina code q8, raw code | 0.7096 | 0.6771 |
 
-The small development corpus differs substantially from the full test. These scores must not be presented as official results.
+[Code-encoder selection artifact](results/code-encoder-development.json). Jina uses the same deterministic training question and document IDs as the earlier comparison, but raw code rather than JavaScript-specific enrichment. The small development corpus differs substantially from the full test. These scores must not be presented as official results.
 
 ## Official AppsRetrieval ? full test
 
@@ -59,7 +62,9 @@ The small development corpus differs substantially from the full test. These sco
 
 **This is a weak screening baseline.** The train-sample/test gap has not been explained conclusively. Adapter ordering and query/document routing were inspected; export used MTEB's supported serializer after a datetime serialization error. Cached scoring results were preserved. No test-label tuning or successful-accuracy claim is made.
 
-The official independent encoder does not test query-dependent historical evidence reranking. A code-specific encoder and broader development data are future work, not implemented claims.
+[Dataset-only audit](results/appsretrieval-dataset-audit.json): all 3,765 test questions describe Python programming tasks, with median length 1,601 characters; all 8,765 documents are Python solutions, with median length 332 characters. This differs from the application's JavaScript version-investigation demo. BGE is a general text encoder with a 512-token cap, and the JavaScript AST enrichment rarely applies to the Python code. These are plausible contributors to the low score, not a proved decomposition of its cause. The audit reads text and metadata only, never test relevance labels.
+
+The official independent encoder does not test query-dependent historical evidence reranking. A code-specific encoder is now integrated and under full official evaluation; broader development data remain future work.
 
 ## Reproduce
 

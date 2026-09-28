@@ -22,7 +22,7 @@ The light workspace has animated version layers, a clickable timeline, synchroni
 
 ### Learned CPU retrieval
 
-The default offline mode uses deterministic feature hashing, which is **not a learned semantic model**. BGE is the recommended learned option for broader natural-language queries:
+The default offline mode uses deterministic feature hashing, which is **not a learned semantic model**. BGE is a learned option for broader natural-language queries:
 
 ```sh
 npm ci --include=optional
@@ -30,6 +30,8 @@ npm run start:semantic
 ```
 
 The first run downloads quantized `Xenova/bge-small-en-v1.5` into `.cache/models`. CPU inference uses two threads by default; set `CODESTRATA_THREADS` (1?16) or `CODESTRATA_MODEL_CACHE` to customize. MiniLM remains available through `--embedding minilm`. BGE samples at most four overlapping source windows, including the tail; very long functions can still lose intermediate evidence in embeddings.
+
+A separate optional code-trained encoder is available with `npm run index -- --repo /path/to/repo --version working --embedding jina --out .codestrata/code.json` and `npm run search -- --out .codestrata/code.json --query "find the changed function"`. It downloads quantized `jinaai/jina-embeddings-v2-base-code` on first use and uses 768-dimensional vectors. The training-only AppsRetrieval selection subset improved to NDCG@10 0.7096; the full official result is reported separately in [validation](docs/validation.md). The index and search modes must match.
 
 ## Investigate your repository
 
@@ -86,8 +88,9 @@ Lineage uses unique same-file symbols, then conservative mutual structural match
 See [validation and raw artifacts](docs/validation.md) for setup and limitations.
 
 - **Controlled version challenge:** 8 demo-related queries, 1,025 snippets. CodeStrata achieves 8/8 correct top results and NDCG@10 1.0. This is synthetic development evidence.
-- **Real code:** 60 frozen, source-reviewed queries on pinned Async and Express snapshots. BGE hybrid NDCG@10 is 0.6717 and 0.8577 respectively. Labels are AI-assisted, not independent human judgments.
-- **Official AppsRetrieval:** full MTEB test run completed on CPU. **NDCG@10 0.0505; MRR@10 0.043363.** This is a weak screening baseline. The encoder evaluation does not test historical reranking.
+- **Real code:** 60 frozen, source-reviewed queries on pinned Async and Express snapshots. BGE hybrid NDCG@10 is 0.6717 and 0.8577; code-trained Jina yields 0.6500 and 0.9262 respectively. Labels are AI-assisted, not independent human judgments.
+- **Official AppsRetrieval:** full MTEB BGE test run completed on CPU. **NDCG@10 0.0505; MRR@10 0.043363.** This is a weak screening baseline. The encoder evaluation does not test historical reranking.
+- **Code-encoder development check:** Jina q8 scored NDCG@10 0.7096 on a 128-query, 1,000-document training-only subset. This is model-selection evidence, not an official test score.
 
 The demonstrated strength is behavior/version discrimination. Broad code-retrieval accuracy still needs improvement for a strong P0 submission.
 
@@ -127,4 +130,4 @@ The image runs the offline demo; learned-model downloads and Python evaluation a
 
 Static syntax evidence cannot prove runtime races, security guarantees, or cross-file control flow. Complex branches, duplicate callees, deferred awaits, and dynamic dispatch remain conservative. Exact CPU scans and heuristic lineage target small repositories; monorepo throughput is unvalidated. Caches retain obsolete entries and concurrent index writers are unsupported. Public deployment needs authentication and resource isolation.
 
-See [architecture](docs/architecture.md), [five-minute demo](docs/demo-script.md), [editable submission deck](docs/CodeStrata-Submission-Draft.pptx), [filled disclosure draft awaiting signature](docs/CodeStrata-AI-Disclosure-Draft.docx), [submission checklist](docs/submission-checklist.md), and [AI usage record](docs/ai-usage.md).
+See [architecture](docs/architecture.md), [five-minute demo](docs/demo-script.md), [editable submission deck](docs/CodeStrata-Submission-Draft.pptx), [filled disclosure draft awaiting signature](docs/CodeStrata-AI-Disclosure-Draft.docx), [submission handoff](docs/submission-guide.md), [submission checklist](docs/submission-checklist.md), and [AI usage record](docs/ai-usage.md).

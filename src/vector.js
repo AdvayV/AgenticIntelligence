@@ -46,7 +46,7 @@ export async function createEmbedder(mode = 'features') {
     if (!Number.isInteger(threads) || threads < 1 || threads > 16) throw new Error('CODESTRATA_THREADS must be between 1 and 16');
     const extract = await pipeline('feature-extraction', model, { device: 'cpu', dtype: 'q8', session_options: { intraOpNumThreads: threads, interOpNumThreads: 1 } });
     const dimension = mode === 'jina' ? 768 : 384;
-    return { name: model + (mode === 'bge' ? ':q8:windows-v1' : mode === 'jina' ? ':q8:windows-v1' : ':q8'), dimension, encode: async (texts, { kind = 'document' } = {}) => {
+    return { name: model + (mode === 'bge' ? ':q8:windows-v1' : mode === 'jina' ? ':q8:code-v1' : ':q8'), dimension, encode: async (texts, { kind = 'document' } = {}) => {
       if (!texts.length) return [];
       const groups = texts.map(text => mode === 'bge' && kind !== 'query' ? textWindows(text) : mode === 'jina' && kind !== 'query' ? textWindows(text, 5000, 400, 3) : [text]);
       const flat = groups.flat().map(text => mode === 'bge' && kind === 'query' ? 'Represent this sentence for searching relevant passages: ' + text : text);

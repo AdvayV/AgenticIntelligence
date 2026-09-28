@@ -1,0 +1,23 @@
+{
+  "dataset": "CoIR AppsRetrieval",
+  "revision": "f22508f96b7a36c2415181ed8bb76f76e04ae2d5",
+  "method": "Descriptive dataset audit only; relevance labels not read",
+  "test_queries": {
+    "count": 3765,
+    "median_characters": 1601,
+    "p90_characters": 2590,
+    "maximum_characters": 5742,
+    "languages": {
+      "PYTHON": 3765
+    }
+  },
+  "all_documents": {
+    "count": 8765,
+    "median_characters": 332,
+    "p90_characters": 1128,
+    "maximum_characters": 289048,
+    "languages": {
+      "PYTHON": 8765
+    }
+  }
+}
