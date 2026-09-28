@@ -1,5 +1,6 @@
 """Fill and enhance the supplied Samsung presentation template."""
 import argparse
+import json
 from pathlib import Path
 import zipfile
 import xml.etree.ElementTree as ET
@@ -160,7 +161,21 @@ def add_architecture(root):
     box('Conservative static evidence · live agent events · CPU only', 820000, 5160000, 10090000, 480000, 'F9F7FD', 1400)
 
 
-def enhance_deck(target):
+def selected_official_result():
+    baseline = json.loads(Path('docs/results/appsretrieval_results.json').read_text(encoding='utf-8'))
+    base_scores = baseline['scores']['test'][0]
+    selected = ('BGE q8', base_scores)
+    candidate = Path('docs/results/appsretrieval_jina.json')
+    if candidate.exists():
+        code = json.loads(candidate.read_text(encoding='utf-8'))
+        assert code['task_name'] == 'AppsRetrieval'
+        code_scores = code['scores']['test'][0]
+        if code_scores['ndcg_at_10'] > base_scores['ndcg_at_10']:
+            selected = ('Jina Code q8', code_scores)
+    return selected, base_scores
+
+
+def enhance_deck(target, official):
     """Use vector cards so the demo and benchmark slides are readable in a room."""
     from pptx import Presentation
     from pptx.dml.color import RGBColor
@@ -221,10 +236,11 @@ def enhance_deck(target):
     label(slide, 'Video URL: [TEAM TO ADD AFTER RECORDING · 5 MIN MAX]', .91, 6.24, 11.5, .36, 13, purple, True)
 
     slide = deck.slides[7]
+    (encoder, scores), baseline = official
     metrics = [
         ('CONTROLLED VERSIONS', '8 / 8', 'correct top result', '25 demo snippets + 1,000 distractors', 'F0EBFF'),
         ('REAL CODE', '0.67 / 0.86', 'NDCG@10, Async / Express', '60 AI-assisted, source-reviewed labels', 'EAF8F2'),
-        ('OFFICIAL SCREENING', '0.0505', 'AppsRetrieval NDCG@10', 'weak baseline · improvement required', 'FFF2E5'),
+        ('OFFICIAL SCREENING', f"{scores['ndcg_at_10']:.4f}", 'AppsRetrieval NDCG@10', f'{encoder} · full MTEB test', 'FFF2E5'),
     ]
     for idx, (title, value, detail, footnote, fill) in enumerate(metrics):
         x = .9 + idx * 4.18
@@ -233,7 +249,7 @@ def enhance_deck(target):
         label(slide, value, x + .18, 2.55, 3.42, .76, 36, ink, True)
         label(slide, detail, x + .18, 3.43, 3.42, .43, 16)
         label(slide, footnote, x + .18, 4.08, 3.42, .48, 11, ink)
-    label(slide, 'These are separate evaluations. Official MRR@10 is 0.043363. The MTEB encoder does not test version reranking.', .91, 5.12, 11.5, .66, 17, ink)
+    label(slide, f"BGE baseline NDCG@10 {baseline['ndcg_at_10']:.4f}; selected MRR@10 {scores['mrr_at_10']:.4f}. MTEB excludes version reranking.", .91, 5.12, 11.5, .66, 17, ink)
     label(slide, 'Limits: heuristic lineage · bounded static syntax · no independently annotated real-code labels.', .91, 5.97, 11.5, .5, 14, purple, True)
     deck.save(target)
 
@@ -243,6 +259,9 @@ def main():
     parser.add_argument('--template', required=True)
     parser.add_argument('--output', default='docs/CodeStrata-Submission-Draft.pptx')
     args = parser.parse_args()
+    official = selected_official_result()
+    if Path('docs/results/appsretrieval_jina.json').exists():
+        CONTENT[9][1][0] = 'Extend independent multi-commit evaluation after the full code-encoder test.'
     target = Path(args.output)
     target.parent.mkdir(parents=True, exist_ok=True)
     with zipfile.ZipFile(args.template) as source, zipfile.ZipFile(target, 'w', zipfile.ZIP_DEFLATED) as out:
@@ -257,7 +276,7 @@ def main():
         for name in check.namelist():
             if name.endswith('.xml'):
                 ET.fromstring(check.read(name))
-    enhance_deck(target)
+    enhance_deck(target, official)
     with zipfile.ZipFile(target) as check:
         assert check.testzip() is None
         for name in check.namelist():

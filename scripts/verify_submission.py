@@ -40,6 +40,11 @@ def verify_deck():
                          'Vellore Institute of Technology', '0.0505', 'pairDevice',
                          'BM25 + CPU vectors', 'Jina Code']:
             assert required in joined, required
+        code_result = DOCS / 'results' / 'appsretrieval_jina.json'
+        if code_result.exists():
+            code_score = json.loads(code_result.read_text(encoding='utf-8'))['scores']['test'][0]['ndcg_at_10']
+            if code_score > 0.0505:
+                assert f'{code_score:.4f}' in joined, 'Deck does not show the selected official result'
         assert 'TEAM TO COMPLETE' not in joined
         assert 'Finish team identity' not in joined
         assert 'Prioritize a code-specific encoder' not in joined
@@ -63,6 +68,13 @@ def verify_results():
     assert official['task_name'] == 'AppsRetrieval'
     assert official['mteb_version'] == '2.21.8'
     assert official['scores']['test'][0]['ndcg_at_10'] == 0.0505
+    code_result = folder / 'appsretrieval_jina.json'
+    if code_result.exists():
+        code = json.loads(code_result.read_text(encoding='utf-8'))
+        assert code['task_name'] == official['task_name']
+        assert code['mteb_version'] == official['mteb_version']
+        assert code['dataset_revision'] == official['dataset_revision']
+        assert 0 <= code['scores']['test'][0]['ndcg_at_10'] <= 1
     for name in ['challenge.json', 'encoder-development.json']:
         json.loads((folder / name).read_text(encoding='utf-8'))
     code = json.loads((folder / 'code-encoder-development.json').read_text(encoding='utf-8'))
