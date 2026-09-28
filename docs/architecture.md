@@ -19,6 +19,14 @@ The planner is deterministic, not an LLM. Cross-file links locate source without
 
 ## Conservative lineage
 
+### Behavior Watch
+
+`src/watch.js` checks a pinned `{version, id, contentHash}` against the loaded index, parses a structural rule, and follows the anchor's conservative lineage through at most 200 snapshots. It never retrieves replacement functions. Each point contains evidence, source, content hash, location, and predecessor-link confidence. Repeated matching await/order calls remain unknown. Regression/restoration transitions require adjacent indexed points with explicit supported/contradicted states; unknown and unlinked gaps are never bridged.
+
+`POST /api/watch` shares the bounded request handling with search. Browser storage holds at most ten watch definitions, not exported source reports. Reload and manual recheck evaluate the current index. Failed checks discard the previous report, so stale evidence cannot be exported as current. Removing a pending watch cannot resurrect it when its request completes. Reports are downloaded locally with schema `codestrata.behavior-watch.v1`.
+
+### Symbol matching
+
 Unique same-file/name pairs link directly. Unmatched removed/added symbols use normalized AST bigrams and call-target overlap. Only sufficiently similar, unambiguous mutual matches link. Matching omits direct await wrappers to preserve identity across await changes; evidence inspection still uses original source.
 
 Retained originals with new copies, competing matches, duplicate symbols, and deleted-version gaps do not receive invented predecessors. Structural links expose inferred confidence and similarity. Significant refactors may remain unresolved; this is not a formal identity proof.

@@ -6,6 +6,20 @@ A CPU-only code investigation workspace for Samsung PRISM Theme 01. In the prepa
 
 The distinctive idea is **evidence-backed evolutionary retrieval with neighboring counterexamples**: display a matching implementation beside a nearby version that contradicts the requested behavior. A bounded local agent searches, inspects static facts, follows import/version links, and streams its actual decisions. Counterexamples are checked after results are ranked; they explain a result but do not select or rerank it.
 
+## Behavior Watch: turn a discovery into a repeatable check
+
+Pin a retrieved function and check a static rule across its linked history. **Behavior Watch** shows where the rule holds, breaks, and is restored, with source evidence and an exportable JSON report. The watch follows one function through supported lineage links rather than searching for a different matching function in each version.
+
+Try the 30-second walkthrough:
+
+1. Click **Investigate the refactor**, then **Watch behavior** on `pairDevice`.
+2. Keep the suggested rule, `awaits policyCheck`, and click **Save and check**.
+3. Inspect **v1 Holds → v2 Broken → v3 Holds**, including the inferred rename/move. Click a version to open its exact source, or **Export evidence** to download the report.
+
+Up to ten watches persist in browser storage and are rechecked on reload or on demand. Supported rules use the existing await, call-order, guard-syntax, and exact-URL-literal parser; the UI displays the parsed checks. Repeated calls, missing evidence, and ambiguous lineage remain unverified. Reports identify transitions between adjacent **indexed snapshots**, not necessarily the exact intervening Git commit. These are static checks, not runtime tests or background monitoring. Reindex and restart the server to check new source; a changed anchor hash requires repinning.
+
+This feature strengthens the version-investigation workflow; it does not change the official AppsRetrieval encoder score.
+
 ## Run locally
 
 Requires Node 22.22.2+ on the 22 release line, Node 24.15+, or Node 26+. No GPU, API key, or Python is required for the application.
@@ -60,8 +74,11 @@ To browse your own indexed repository, set `CODESTRATA_INDEX` to the generated f
 | POST /api/search | Ranked snippets and evidence |
 | POST /api/search/stream | Actual agent steps and final result as NDJSON |
 | GET /api/snippet?version=...&id=... | Indexed source, history, and call links |
+| POST /api/watch | Check a pinned static rule across linked snapshots (maximum 200) |
 
 Search accepts `{ "query": "...", "version": "optional", "topK": 5, "mode": "codestrata" }`. Requests are bounded to 8 KB, concurrent CPU searches to two.
+
+Watch accepts `{ "query": "awaits policyCheck", "version": "v2", "id": "<result id>", "contentHash": "<result contentHash>" }`. Obtain the anchor fields from a search result. Invalid rules and stale or unavailable anchors return HTTP 400; evidence reports include the source, parsed constraints, lineage confidence, snapshot identities, and limitations. Saved definitions remain in the browser; the server does not store a watchlist.
 
 ## Architecture
 
@@ -78,6 +95,9 @@ flowchart LR
   E --> D{Enough evidence?}
   D -->|Within budget: inspect more| R
   D -->|Stop| O[Source + timeline + counterexample]
+  O --> W[Pin a behavior rule]
+  V --> W
+  W --> H[Check linked snapshots + export evidence]
 ```
 
 The deterministic planner supports constrained await, order, guard, and exact-literal questions. **It does not use an LLM or understand arbitrary English.** The agent is the bounded search/inspect/refine policy; trace events describe actual work. Phrase matching is limited: in the prepared demo, "Where did Bluetooth settings stop waiting for permission checking?" returns the correct `v2` with supported evidence, while replacing "permission checking" with "authorization" currently returns `v1` with uncertain evidence. Use callable names when possible and treat `uncertain` or `semantic-match` results as leads to inspect, not verified behavior changes.

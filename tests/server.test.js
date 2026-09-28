@@ -2,6 +2,20 @@ import test from 'node:test';
 import assert from 'node:assert/strict';
 import { createServer } from '../src/server.js';
 import { buildDemo } from '../src/demo.js';
+test('watch endpoint validates pins, rules and bounded bodies', async t => {
+  const { index } = await buildDemo(), server = createServer(index);
+  await new Promise(resolve => server.listen(0, '127.0.0.1', resolve));
+  t.after(() => new Promise(resolve => server.close(resolve)));
+  const base = `http://127.0.0.1:${server.address().port}`;
+  const anchor = index.snapshots.v2.snippets.find(row => row.name === 'pairDevice');
+  const input = { id: anchor.id, version: anchor.version, contentHash: anchor.contentHash, query: 'awaits policyCheck' };
+  const post = body => fetch(base + '/api/watch', { method: 'POST', body });
+  const response = await post(JSON.stringify(input)); assert.equal(response.status, 200);
+  assert.equal((await response.json()).firstObservedRegression.to, 'v2');
+  assert.equal((await (await fetch(base + '/api/status')).json()).capabilities.behaviorWatch, true);
+  for (const body of ['{', 'null', '[]', '{}', JSON.stringify({ ...input, contentHash: 'stale' }), JSON.stringify({ ...input, query: 'regression' })]) assert.equal((await post(body)).status, 400);
+  assert.equal((await post('x'.repeat(9000))).status, 413);
+});
 test('HTTP demo serves assets, search, validation and bounded request bodies', async t => {
   const { index } = await buildDemo(), server = createServer(index);
   await new Promise(resolve => server.listen(0, '127.0.0.1', resolve));

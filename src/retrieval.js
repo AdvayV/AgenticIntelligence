@@ -97,7 +97,7 @@ export async function search(index, query, options = {}) {
     const related = neighbors(index, c.row).map(edge => ({ direction: edge.direction, kind: edge.kind, line: edge.line, target: edge.target,
       id: edge.snippet.id, name: edge.snippet.name, file: edge.snippet.file, startLine: edge.snippet.startLine, version: edge.snippet.version }));
     return {
-      rank: i + 1, id: c.row.id, name: c.row.name, file: c.row.file, startLine: c.row.startLine, endLine: c.row.endLine,
+      rank: i + 1, id: c.row.id, contentHash: c.row.contentHash, name: c.row.name, file: c.row.file, startLine: c.row.startLine, endLine: c.row.endLine,
       version: c.row.version, commit: c.row.commit, code: c.row.code, score: Number(c.score.toFixed(6)),
       signals: { lexical: Number(c.lexical.toFixed(4)), vector: Number(c.dense.toFixed(4)) },
       evidence: c.evidence, history: c.history, counterexample, related,

@@ -6,6 +6,7 @@ const make = (tag, text, className) => {
   return element;
 };
 const HELP = {
+  watch: { title: 'Keep a behavior in view as the code changes.', body: 'A watch follows the pinned function through conservative lineage links and checks a parsed static rule at each indexed snapshot. It never substitutes a more similar function. Unknown evidence and ambiguous links remain unverified.', example: 'Pin pairDevice, check “awaits policyCheck”: v1 holds, v2 breaks, v3 restores it through a rename. Reindex and restart before checking new source.' },
   lineage: { title: 'Follow behavior through a refactor.', body: 'When a symbol disappears and another appears, we compare preserved AST structure and call targets. A unique, separated match can link a rename or move. Ambiguous matches stay unlinked.', example: 'connectDevice in devices/connect.js becomes pairDevice in flows/pair.js. This is an inferred structural match, not a proof of identity.' },
   timeline: { title: 'Each stop is an indexed source version.', body: 'Select a point to inspect its exact source without losing your search. This timeline follows supported symbol links through the indexed snapshots; missing or ambiguous history stops the chain.', example: 'A highlighted point is the retrieved version. Changes describe the transition from the preceding indexed snapshot.' },
   contrast: { title: 'Why the similar version is not the answer.', body: 'The counterexample is real source from a neighboring version. Its highlighted evidence contradicts at least one requested static pattern. It helps you inspect what similarity ranking alone can miss.', example: 'An awaited permission call conflicts with a request for a version that no longer directly awaits it.' },
@@ -128,6 +129,18 @@ function resultCard(result) {
   badge.setAttribute('aria-controls', 'help-panel');
   header.append(make('span', String(result.rank).padStart(2, '0'), 'rank-marker'), metadata, badge);
   card.append(header);
+  if (supportsWatch && result.contentHash) {
+    const pin = make('button', 'Watch behavior', 'watch-pin'); pin.type = 'button'; pin.dataset.help = 'watch';
+    pin.addEventListener('click', () => {
+      watchAnchor = { id: result.id, version: result.version, contentHash: result.contentHash };
+      $('watch-anchor').textContent = 'Pinned: ' + result.name + ' · ' + result.version + ' · ' + result.file;
+      const awaitChange = result.history?.changes.find(item => ['removed_await', 'added_await'].includes(item.type));
+      const awaitEvidence = result.evidence.find(item => item.kind === 'await');
+      $('watch-query').value = awaitChange ? 'awaits ' + awaitChange.target : awaitEvidence ? 'awaits ' + awaitEvidence.target : '';
+      $('watch-form').hidden = false; $('watch-query').focus(); $('behavior-watch').scrollIntoView?.({ block: 'center', behavior: 'auto' });
+    });
+    card.append(pin);
+  }
   if (result.rank === 1 && result.timeline?.length > 1) {
     const timeline = make('div', undefined, 'version-timeline');
     timeline.setAttribute('aria-label', 'Inspect symbol history');
@@ -342,6 +355,9 @@ async function initialize() {
     const data = await response.json();
     if (!response.ok) throw new Error('Index unavailable');
     supportsStreaming = data.capabilities?.streaming === true;
+    supportsWatch = data.capabilities?.behaviorWatch === true;
+    $('behavior-watch').hidden = !supportsWatch;
+    if (supportsWatch) { renderWatches(); for (const watch of watches) void refreshWatch(watch); }
     for (const version of data.versions) {
       const option = make('option', version); option.value = version; $('version').append(option);
     }
@@ -355,4 +371,75 @@ async function initialize() {
     $('error').hidden = false;
   }
 }
+let supportsWatch = false, watchAnchor;
+const watchStorageKey = 'codestrata-behavior-watches-v1';
+let watches = [];
+try {
+  const saved = JSON.parse(localStorage.getItem(watchStorageKey) ?? '[]');
+  if (Array.isArray(saved)) watches = saved.filter(item => item && ['id', 'version', 'contentHash', 'query'].every(key => typeof item[key] === 'string' && item[key].length > 0 && item[key].length <= 2000)).slice(0, 10).map(item => ({ id: item.id, version: item.version, contentHash: item.contentHash, query: item.query }));
+} catch { /* Invalid or unavailable storage does not prevent a fresh watch. */ }
+function watchMessage(text) { $('watch-message').textContent = text; $('watch-message').hidden = !text; }
+function persistWatches() {
+  try { localStorage.setItem(watchStorageKey, JSON.stringify(watches.map(({ id, version, contentHash, query }) => ({ id, version, contentHash, query })))); }
+  catch { watchMessage('Browser storage is unavailable. Watches will last only for this page session.'); }
+}
+function renderWatches() {
+  $('watch-list').replaceChildren();
+  const labels = { supported: 'Holds', contradicted: 'Broken', unknown: 'Needs inspection', unlinked: 'Unlinked' };
+  for (const watch of watches) {
+    const card = make('article', undefined, 'watch-card'); card.append(make('h4', watch.query));
+    card.append(make('p', 'Anchor: ' + watch.version + (watch.report ? ' · ' + watch.report.anchor.name : ''), 'watch-note'));
+    if (watch.pending) card.append(make('p', 'Checking indexed history…', 'watch-note'));
+    if (watch.error) card.append(make('p', watch.error, 'watch-error'));
+    if (watch.report) {
+      const report = watch.report;
+      card.append(make('p', 'Parsed checks: ' + report.constraints.map(item => item.kind === 'await' ? (item.expected ? 'direct await of ' : 'no direct await of ') + item.target : item.kind === 'order' ? item.first + ' before ' + item.second : item.kind === 'guard' ? (item.expected ? 'guard present: ' : 'guard absent: ') + item.target : 'literal ' + item.value).join('; '), 'watch-note'));
+      const summary = report.transitions.map(item => (item.type === 'regression' ? 'Regression' : 'Restoration') + ': ' + item.from + ' → ' + item.to).join(' · ');
+      card.append(make('p', summary || 'No confirmed transition between adjacent indexed snapshots.', 'watch-summary'));
+      const grid = make('div', undefined, 'watch-points');
+      for (const point of report.points) {
+        const cell = make('div', undefined, 'watch-point ' + point.status);
+        const button = make(point.id ? 'button' : 'span', point.version + ' · ' + labels[point.status], 'watch-state');
+        if (point.id) { button.type = 'button'; button.dataset.snippet = point.id; button.dataset.version = point.version; }
+        cell.append(button, make('strong', point.name ?? 'No linked function'));
+        if (point.link?.confidence === 'inferred-structural-match') cell.append(make('small', 'Inferred rename / move'));
+        const details = make('details'); details.append(make('summary', 'Evidence'));
+        for (const evidence of point.evidence) details.append(make('p', evidence.details + (evidence.lines.length ? ' · lines ' + evidence.lines.join(', ') : '')));
+        if (point.reason) details.append(make('p', point.reason));
+        cell.append(details); grid.append(cell);
+      }
+      card.append(grid, make('p', 'Checked ' + new Date(report.checkedAt).toLocaleString() + ' · indexed snapshots only', 'watch-note'));
+    }
+    const actions = make('div', undefined, 'watch-actions');
+    const recheck = make('button', 'Recheck'); recheck.type = 'button'; recheck.disabled = Boolean(watch.pending); recheck.addEventListener('click', () => { void refreshWatch(watch); });
+    const download = make('button', 'Export evidence'); download.type = 'button'; download.disabled = !watch.report || Boolean(watch.pending);
+    download.addEventListener('click', () => {
+      const url = URL.createObjectURL(new Blob([JSON.stringify(watch.report, null, 2)], { type: 'application/json' }));
+      const link = make('a'); link.href = url; link.download = 'codestrata-behavior-watch.json'; document.body.append(link); link.click(); link.remove(); setTimeout(() => URL.revokeObjectURL(url), 1000);
+    });
+    const remove = make('button', 'Remove'); remove.type = 'button'; remove.addEventListener('click', () => { watches = watches.filter(item => item !== watch); persistWatches(); renderWatches(); });
+    actions.append(recheck, download, remove); card.append(actions); $('watch-list').append(card);
+  }
+}
+async function refreshWatch(watch) {
+  if (watch.pending) return;
+  watch.pending = true; watch.error = ''; watch.report = undefined; renderWatches();
+  try {
+    const response = await fetch('/api/watch', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ id: watch.id, version: watch.version, contentHash: watch.contentHash, query: watch.query }) });
+    const data = await response.json(); if (!response.ok) throw new Error(data.error ?? 'Watch check failed');
+    watch.report = data;
+  } catch (error) { watch.error = error.message; }
+  finally { watch.pending = false; if (watches.includes(watch)) renderWatches(); }
+}
+$('watch-form').addEventListener('submit', async event => {
+  event.preventDefault(); if (!watchAnchor) return;
+  const query = $('watch-query').value.trim(); if (!query) return;
+  watchMessage('');
+  let watch = watches.find(item => item.id === watchAnchor.id && item.contentHash === watchAnchor.contentHash && item.query === query);
+  if (!watch) {
+    if (watches.length >= 10) { watchMessage('Remove a watch before adding another (limit: 10).'); return; }
+    watch = { ...watchAnchor, query }; watches.push(watch); persistWatches();
+  }
+  await refreshWatch(watch);
+});
 await initialize();

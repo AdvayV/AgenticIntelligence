@@ -1,4 +1,33 @@
 @charset "UTF-8";
+.behavior-watch { margin: 0 0 24px; padding: 24px; border: 1px solid #dcd4fa; border-radius: 22px; background: linear-gradient(125deg, #fff, #f6f3ff); box-shadow: 0 8px 30px #6c4ce409; }
+.watch-heading { display: flex; align-items: center; justify-content: space-between; gap: 12px; }
+.watch-heading h3 { margin: 4px 0; font-size: 23px; letter-spacing: -.7px; }
+.watch-intro { color: #555970; line-height: 1.65; font-size: 14px; }
+.behavior-watch button, .watch-pin { border: 1px solid #d9d3ee; border-radius: 10px; background: #fff; color: #5433cb; padding: 9px 12px; font: inherit; font-size: 12px; cursor: pointer; }
+.behavior-watch button:hover, .watch-pin:hover { background: #ece6ff; border-color: #a38bdd; }
+.behavior-watch button:disabled { opacity: .5; cursor: default; }
+.watch-pin { margin: 0 24px 16px; }
+#watch-form { margin: 20px 0; padding-top: 16px; border-top: 1px solid #e1daef; }
+#watch-anchor { overflow-wrap: anywhere; color: #555970; font-size: 12px; }
+#watch-form label { display: block; font-size: 13px; font-weight: 650; margin-bottom: 8px; }
+.watch-input-row { display: flex; gap: 8px; }
+#watch-query { min-width: 0; flex: 1; padding: 12px; border: 1px solid #cfc5e8; border-radius: 10px; font: inherit; background: white; color: #202136; }
+#watch-save { background: #6c4ce4; color: white; }
+.watch-note { font-size: 11px; color: #62677c; line-height: 1.65; overflow-wrap: anywhere; }
+.watch-card { border-top: 1px solid #e1daef; padding: 18px 0 4px; margin-top: 14px; }
+.watch-card h4 { margin: 0; font-size: 17px; overflow-wrap: anywhere; }
+.watch-summary { font-size: 13px; font-weight: 650; color: #5433cb; }
+.watch-points { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(170px, 100%), 1fr)); gap: 10px; }
+.watch-point { min-width: 0; padding: 13px; border-radius: 14px; background: #f0f1f5; border: 1px solid #dcdde5; overflow-wrap: anywhere; }
+.watch-point.supported { background: #edf9f3; border-color: #b5dfc8; }
+.watch-point.contradicted { background: #fff1e9; border-color: #f0cab0; }
+.watch-point strong, .watch-point small { display: block; margin-top: 8px; font-size: 12px; }
+.watch-point small { color: #62677c; font-size: 10px; }
+.watch-point details { margin-top: 12px; font-size: 11px; line-height: 1.6; }
+.watch-point summary { cursor: pointer; }
+.watch-actions { display: flex; flex-wrap: wrap; gap: 8px; margin: 12px 0; }
+.watch-error, #watch-message { font-size: 13px; color: #9b3c24; overflow-wrap: anywhere; }
+@media (max-width: 680px) { .behavior-watch { padding: 17px; } .watch-input-row { flex-direction: column; } .watch-heading { align-items: flex-start; } }
 :root {
   color-scheme: light;
   --bg: #f7f8fc;

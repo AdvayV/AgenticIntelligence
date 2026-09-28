@@ -1,4 +1,37 @@
 import { test, expect } from '@playwright/test';
+import { readFile } from 'node:fs/promises';
+
+test('Behavior Watch follows a refactor, exports evidence and persists across reloads', async ({ page }, testInfo) => {
+  const failures = []; page.on('pageerror', error => failures.push(error.message));
+  await page.goto('/');
+  await page.getByRole('button', { name: 'Investigate the refactor' }).click();
+  await expect(page.locator('.card-title').first()).toHaveText('pairDevice');
+  await page.getByRole('button', { name: 'Watch behavior', exact: true }).first().click();
+  await expect(page.locator('#watch-query')).toHaveValue('awaits policyCheck');
+  await page.getByRole('button', { name: 'Save and check' }).click();
+  await expect(page.locator('.watch-summary')).toHaveText('Regression: v1 → v2 · Restoration: v2 → v3');
+  await expect(page.locator('.watch-state')).toHaveText(['v1 · Holds', 'v2 · Broken', 'v3 · Holds']);
+  await page.getByRole('button', { name: 'v1 · Holds', exact: true }).click();
+  await expect(page.locator('#inspector-title')).toContainText('connectDevice');
+  const downloadEvent = page.waitForEvent('download');
+  await page.getByRole('button', { name: 'Export evidence' }).click();
+  const download = await downloadEvent;
+  const report = JSON.parse(await readFile(await download.path(), 'utf8'));
+  expect(report.schema).toBe('codestrata.behavior-watch.v1'); expect(report.points[1].status).toBe('contradicted');
+  await page.reload(); await expect(page.locator('.watch-summary')).toContainText('Restoration');
+  await page.getByRole('button', { name: 'Recheck', exact: true }).click();
+  await expect(page.locator('.watch-summary')).toContainText('Regression');
+  expect(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth + 1)).toBe(true);
+  await page.locator('#behavior-watch').screenshot({ path: testInfo.outputPath('behavior-watch.png'), animations: 'disabled' });
+  await page.route('**/api/watch', route => route.fulfill({ status: 400, contentType: 'application/json', body: JSON.stringify({ error: 'Pinned source has changed. Search again.' }) }));
+  await page.getByRole('button', { name: 'Recheck', exact: true }).click();
+  await expect(page.locator('.watch-error')).toContainText('Pinned source has changed');
+  await expect(page.getByRole('button', { name: 'Export evidence' })).toBeDisabled();
+  await expect(page.locator('.watch-summary')).toHaveCount(0);
+  await page.getByRole('button', { name: 'Remove', exact: true }).click();
+  await page.reload(); await expect(page.locator('#behavior-watch')).toBeVisible();
+  await expect(page.locator('.watch-card')).toHaveCount(0); expect(failures).toEqual([]);
+});
 
 test('investigate a refactor, inspect history and navigate an imported helper', async ({ page }, testInfo) => {
   const failures = [];

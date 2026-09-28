@@ -5,6 +5,7 @@ import path from 'node:path';
 import { buildDemo } from './demo.js';
 import { loadIndex, evolution } from './index.js';
 import { search } from './retrieval.js';
+import { checkBehaviorWatch } from './watch.js';
 import { neighbors } from './graph.js';
 import { createEmbedder } from './vector.js';
 const publicRoot = fileURLToPath(new URL('../public/', import.meta.url));
@@ -17,7 +18,7 @@ export function createServer(index, indexStats = []) {
       const url = new URL(request.url, 'http://localhost');
       response.setHeader('X-Content-Type-Options', 'nosniff');
       response.setHeader('Content-Security-Policy', "default-src 'self'; script-src 'self'; style-src 'self'; connect-src 'self'; frame-ancestors 'none'");
-      if (request.method === 'GET' && url.pathname === '/api/status') return json(200, { versions: index.versions, embedding: index.embedding, indexStats, capabilities: { streaming: true, history: true, callNavigation: true }, snippets: index.versions.reduce((n, v) => n + index.snapshots[v].snippets.length, 0), diagnostics: index.versions.flatMap(v => index.snapshots[v].diagnostics) });
+      if (request.method === 'GET' && url.pathname === '/api/status') return json(200, { versions: index.versions, embedding: index.embedding, indexStats, capabilities: { streaming: true, history: true, callNavigation: true, behaviorWatch: true }, snippets: index.versions.reduce((n, v) => n + index.snapshots[v].snippets.length, 0), diagnostics: index.versions.flatMap(v => index.snapshots[v].diagnostics) });
       if (request.method === 'GET' && url.pathname === '/api/snippet') {
         const version = url.searchParams.get('version'), id = url.searchParams.get('id');
         if (!index.versions.includes(version)) return json(404, { error: 'Unknown snapshot' });
@@ -26,7 +27,7 @@ export function createServer(index, indexStats = []) {
         return json(200, { id: snippet.id, name: snippet.name, code: snippet.code, file: snippet.file, version: snippet.version, startLine: snippet.startLine, endLine: snippet.endLine, commit: snippet.commit,
           history: evolution(index, snippet), calls: neighbors(index, snippet).map(edge => ({ direction: edge.direction, name: edge.snippet.name, file: edge.snippet.file, startLine: edge.snippet.startLine, id: edge.snippet.id, version: edge.snippet.version })) });
       }
-      if (request.method === 'POST' && ['/api/search', '/api/search/stream'].includes(url.pathname)) {
+      if (request.method === 'POST' && ['/api/search', '/api/search/stream', '/api/watch'].includes(url.pathname)) {
         const chunks = []; let bytes = 0;
         for await (const chunk of request) { bytes += chunk.length; if (bytes > 8192) return json(413, { error: 'Request too large' }); chunks.push(chunk); }
         let input;
@@ -38,6 +39,7 @@ export function createServer(index, indexStats = []) {
         const send = value => { if (!response.destroyed) response.write(JSON.stringify(value) + '\n'); };
         activeSearches++;
         try {
+          if (url.pathname === '/api/watch') return json(200, checkBehaviorWatch(index, input));
           const result = await search(index, input.query, { topK: input.topK ?? 5, version: input.version || undefined, mode: input.mode ?? 'codestrata', signal: controller.signal,
             onStep: streaming ? async step => {
               if (!response.headersSent) response.writeHead(200, { 'Content-Type': 'application/x-ndjson; charset=utf-8', 'Cache-Control': 'no-store', 'X-Accel-Buffering': 'no' });
