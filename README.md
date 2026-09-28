@@ -113,6 +113,11 @@ python -m pip install -r requirements-eval.txt
 python scripts/compare_encoders.py
 python scripts/evaluate_mteb.py --mode bge
 
+# Separate code-trained selection and official run (CPU; may take hours)
+python scripts/audit_apps_dataset.py
+python scripts/compare_code_encoder.py
+python scripts/evaluate_mteb.py --mode jina --raw --batch-size 8 --output evaluation-results/appsretrieval_jina.json
+
 npx playwright install chromium firefox
 npm run test:browser
 ```

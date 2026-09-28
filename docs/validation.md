@@ -70,4 +70,4 @@ The official independent encoder does not test query-dependent historical eviden
 
 Run README commands. Evaluation outputs go to evaluation-results; reviewed snapshots are checked into docs/results. MTEB raw artifacts can be attached to the final judged release after team submission assets are ready.
 
-Sources: [BGE model card](https://huggingface.co/Xenova/bge-small-en-v1.5), [MTEB evaluation interface](https://docs.mteb.org/get_started/usage/running_the_evaluation/), [CoIR](https://github.com/CoIR-team/coir).
+Sources: [BGE model card](https://huggingface.co/Xenova/bge-small-en-v1.5), [Jina Code model card](https://huggingface.co/jinaai/jina-embeddings-v2-base-code), [MTEB evaluation interface](https://docs.mteb.org/get_started/usage/running_the_evaluation/), [CoIR](https://github.com/CoIR-team/coir).

@@ -44,10 +44,13 @@ jobs:
         with:
           python-version: '3.12'
       - run: python scripts/verify_submission.py
-      - run: sudo apt-get update && sudo apt-get install -y --no-install-recommends libreoffice-impress poppler-utils
+      - run: sudo apt-get update && sudo apt-get install -y --no-install-recommends libreoffice-impress libreoffice-writer poppler-utils
       - run: mkdir rendered && libreoffice -env:UserInstallation=file:///tmp/codestrata-lo --headless --convert-to pdf --outdir rendered docs/CodeStrata-Submission-Draft.pptx
       - run: test "$(pdfinfo rendered/CodeStrata-Submission-Draft.pdf | awk '/Pages:/ {print $2}')" = 12
       - run: pdftoppm -scale-to 1400 -png rendered/CodeStrata-Submission-Draft.pdf rendered/slide
+      - run: libreoffice -env:UserInstallation=file:///tmp/codestrata-lo --headless --convert-to pdf --outdir rendered docs/CodeStrata-AI-Disclosure-Draft.docx
+      - run: test "$(pdfinfo rendered/CodeStrata-AI-Disclosure-Draft.pdf | awk '/Pages:/ {print $2}')" -ge 1
+      - run: pdftoppm -scale-to 1400 -png rendered/CodeStrata-AI-Disclosure-Draft.pdf rendered/disclosure
       - uses: actions/upload-artifact@v4
         if: always()
         with:
