@@ -1,10 +1,10 @@
 # CodeStrata
 
-**Find the version where behavior changed, even after the function was renamed and moved.**
+**Investigate where behavior changed across JavaScript versions, including some renamed or moved functions.**
 
-A CPU-only code investigation workspace for Samsung PRISM Theme 01. Ask **"Where did device pairing stop waiting for policyCheck?"** CodeStrata finds `pairDevice@v2`, links it to `connectDevice@v1`, shows the removed direct `await`, and opens the imported helper. Every result includes source, file/line locations, version identity, and inspectable evidence.
+A CPU-only code investigation workspace for Samsung PRISM Theme 01. In the prepared demo, ask **"Where did device pairing stop waiting for policyCheck?"** CodeStrata finds `pairDevice@v2`, links it to `connectDevice@v1`, shows the removed direct `await`, and opens the imported helper. Results include source, file/line locations, and version identity; supported structural questions also include inspectable evidence.
 
-The distinctive idea is **counterexample-guided evolutionary retrieval**: display the matching implementation beside a nearby version that contradicts the requested behavior. A bounded local agent searches, inspects static facts, follows import/version links, and streams its actual decisions.
+The distinctive idea is **evidence-backed evolutionary retrieval with neighboring counterexamples**: display a matching implementation beside a nearby version that contradicts the requested behavior. A bounded local agent searches, inspects static facts, follows import/version links, and streams its actual decisions. Counterexamples are checked after results are ranked; they explain a result but do not select or rerank it.
 
 ## Run locally
 
@@ -18,7 +18,7 @@ npm start
 
 Open **http://127.0.0.1:3000** and click **Investigate the refactor**. On PowerShell, use `npm.cmd` if execution policy blocks `npm.ps1`.
 
-The light workspace has animated version layers, a clickable timeline, synchronized code comparisons, imported-helper navigation, and a side guide that explains controls on hover, focus, or tap. Motion can be paused and respects reduced-motion preferences. The default demo contains 25 snippets across three versions.
+The light workspace has animated version layers, a clickable timeline, synchronized code comparisons, imported-helper navigation, and a side guide that explains controls on hover, focus, or tap. Motion can be paused and respects reduced-motion preferences. The default demo contains 25 prepared snippets across three versions; it is a controlled walkthrough, not evidence of performance on arbitrary repositories.
 
 ### Learned CPU retrieval
 
@@ -29,13 +29,13 @@ npm ci --include=optional
 npm run start:semantic
 ```
 
-The first run downloads quantized `Xenova/bge-small-en-v1.5` into `.cache/models`. CPU inference uses two threads by default; set `CODESTRATA_THREADS` (1?16) or `CODESTRATA_MODEL_CACHE` to customize. MiniLM remains available through `--embedding minilm`. BGE samples at most four overlapping source windows, including the tail; very long functions can still lose intermediate evidence in embeddings.
+The first run downloads quantized `Xenova/bge-small-en-v1.5` into `.cache/models`. CPU inference uses two threads by default; set `CODESTRATA_THREADS` (1 to 16) or `CODESTRATA_MODEL_CACHE` to customize. MiniLM remains available through `--embedding minilm`. BGE samples at most four overlapping source windows, including the tail; very long functions can still lose intermediate evidence in embeddings.
 
 A separate optional code-trained encoder is available with `npm run index -- --repo /path/to/repo --version working --embedding jina --out .codestrata/code.json` and `npm run search -- --out .codestrata/code.json --query "find the changed function"`. It downloads quantized `jinaai/jina-embeddings-v2-base-code` on first use and uses 768-dimensional vectors. The training-only AppsRetrieval selection subset reached NDCG@10 0.7096; no full official Jina result is available yet. See [validation](docs/validation.md) for the official BGE result. The index and search modes must match. Jina averages at most three source windows; unusually long files can still lose intermediate content in the embedding.
 
 ## Investigate your repository
 
-Only JavaScript/JSX is analyzed. Repository code is read, never executed.
+Only JavaScript/JSX is analyzed; TypeScript and Python source are outside the application's parser. Repository code is read, never executed. Indexing is a CLI step: the browser does not upload or index a repository.
 
 ```sh
 npm run index -- --repo /path/to/repo --version working
@@ -50,8 +50,9 @@ npm run search -- --out .codestrata/history.json --query "Where did pairing stop
 ```
 
 Use a separate index for each embedding mode. Reindexing replaces a snapshot, removes deleted files, and reuses unchanged analyses/vectors. Explicit refs follow insertion order; use a fresh index when changing chronological ordering.
+The `--embedding bge` example requires the optional dependencies installed under **Learned CPU retrieval**. Omit that flag to use the offline feature-hash mode.
 
-Set `CODESTRATA_INDEX` to an index path before `npm start` to browse your code. `HOST` defaults to localhost; `PORT` defaults to 3000.
+To browse your own indexed repository, set `CODESTRATA_INDEX` to the generated file **before starting a new server process**. For example, after the history command above, run `CODESTRATA_INDEX=.codestrata/history.json npm start` on macOS/Linux. In PowerShell, run `$env:CODESTRATA_INDEX = '.codestrata/history.json'` followed by `npm.cmd start`. Without this setting, the server opens the prepared demo. `HOST` defaults to localhost; `PORT` defaults to 3000.
 
 | API | Purpose |
 |---|---|
@@ -79,7 +80,7 @@ flowchart LR
   D -->|Stop| O[Source + timeline + counterexample]
 ```
 
-The deterministic planner supports constrained await, order, guard, and exact-literal questions. **It does not use an LLM or understand arbitrary English.** The agent is the bounded search/inspect/refine policy; trace events describe actual work. Unsupported patterns produce warnings or uncertain evidence.
+The deterministic planner supports constrained await, order, guard, and exact-literal questions. **It does not use an LLM or understand arbitrary English.** The agent is the bounded search/inspect/refine policy; trace events describe actual work. Phrase matching is limited: in the prepared demo, "Where did Bluetooth settings stop waiting for permission checking?" returns the correct `v2` with supported evidence, while replacing "permission checking" with "authorization" currently returns `v1` with uncertain evidence. Use callable names when possible and treat `uncertain` or `semantic-match` results as leads to inspect, not verified behavior changes.
 
 Lineage uses unique same-file symbols, then conservative mutual structural matching for removed/added functions. Ambiguous copies and duplicate symbols remain unresolved. Simple local ESM import links support navigation, not cross-function execution proofs.
 
@@ -89,10 +90,10 @@ See [validation and raw artifacts](docs/validation.md) for setup and limitations
 
 - **Controlled version challenge:** 8 demo-related queries, 1,025 snippets. CodeStrata achieves 8/8 correct top results and NDCG@10 1.0. This is synthetic development evidence.
 - **Real code:** 60 frozen, source-reviewed queries on pinned Async and Express snapshots. BGE hybrid NDCG@10 is 0.6717 and 0.8577; code-trained Jina yields 0.6500 and 0.9262 respectively. Labels are AI-assisted, not independent human judgments.
-- **Official AppsRetrieval:** full MTEB BGE test run completed on CPU. **NDCG@10 0.0505; MRR@10 0.043363.** This is a weak screening baseline. The encoder evaluation does not test historical reranking.
+- **Official AppsRetrieval:** full MTEB BGE test run completed on CPU. **NDCG@10 0.0505; MRR@10 0.043363.** This is a weak screening baseline. The test contains Python tasks and solutions, unlike the JavaScript version-investigation demo; that mismatch is a plausible contributor to the gap, not a proven explanation. The encoder evaluation does not test historical reranking.
 - **Code-encoder development check:** Jina q8 scored NDCG@10 0.7096 on a 128-query, 1,000-document training-only subset. This is model-selection evidence, not an official test score.
 
-The demonstrated strength is behavior/version discrimination. Broad code-retrieval accuracy still needs improvement for a strong P0 submission.
+The controlled demo demonstrates behavior/version discrimination on its prepared cases. Broad code-retrieval accuracy remains unproven, and no full official Jina test result is available. Do not compare the training-only Jina score with the official BGE score as if they came from the same evaluation.
 
 ## Verification
 
@@ -113,7 +114,7 @@ python -m pip install -r requirements-eval.txt
 python scripts/compare_encoders.py
 python scripts/evaluate_mteb.py --mode bge
 
-# Separate code-trained selection and official run (CPU; may take hours)
+# Optional code-trained selection and full official evaluation (not yet reported; CPU run may take hours)
 python scripts/audit_apps_dataset.py
 python scripts/compare_code_encoder.py
 python scripts/evaluate_mteb.py --mode jina --raw --batch-size 8 --output evaluation-results/appsretrieval_jina.json
