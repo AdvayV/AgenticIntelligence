@@ -31,7 +31,7 @@ npm run start:semantic
 
 The first run downloads quantized `Xenova/bge-small-en-v1.5` into `.cache/models`. CPU inference uses two threads by default; set `CODESTRATA_THREADS` (1 to 16) or `CODESTRATA_MODEL_CACHE` to customize. MiniLM remains available through `--embedding minilm`. BGE samples at most four overlapping source windows, including the tail; very long functions can still lose intermediate evidence in embeddings.
 
-A separate optional code-trained encoder is available with `npm run index -- --repo /path/to/repo --version working --embedding jina --out .codestrata/code.json` and `npm run search -- --out .codestrata/code.json --query "find the changed function"`. It downloads quantized `jinaai/jina-embeddings-v2-base-code` on first use and uses 768-dimensional vectors. The training-only AppsRetrieval selection subset reached NDCG@10 0.7096; no full official Jina result is available yet. See [validation](docs/validation.md) for the official BGE result. The index and search modes must match. Jina averages at most three source windows; unusually long files can still lose intermediate content in the embedding.
+A separate optional code-trained encoder is available with `npm run index -- --repo /path/to/repo --version working --embedding jina --out .codestrata/code.json` and `npm run search -- --out .codestrata/code.json --query "find the changed function"`. It downloads quantized `jinaai/jina-embeddings-v2-base-code` on first use and uses 768-dimensional vectors. Its full official AppsRetrieval run with raw code reached NDCG@10 0.15711 and MRR@10 0.133675; see [validation](docs/validation.md) and the [unmodified MTEB result](docs/results/appsretrieval_jina.json). The earlier training-only selection subset scored 0.7096 and is not comparable to the full test. The index and search modes must match. Jina averages at most three source windows; unusually long files can still lose intermediate content in the embedding.
 
 ## Investigate your repository
 
@@ -90,10 +90,10 @@ See [validation and raw artifacts](docs/validation.md) for setup and limitations
 
 - **Controlled version challenge:** 8 demo-related queries, 1,025 snippets. CodeStrata achieves 8/8 correct top results and NDCG@10 1.0. This is synthetic development evidence.
 - **Real code:** 60 frozen, source-reviewed queries on pinned Async and Express snapshots. BGE hybrid NDCG@10 is 0.6717 and 0.8577; code-trained Jina yields 0.6500 and 0.9262 respectively. Labels are AI-assisted, not independent human judgments.
-- **Official AppsRetrieval:** full MTEB BGE test run completed on CPU. **NDCG@10 0.0505; MRR@10 0.043363.** This is a weak screening baseline. The test contains Python tasks and solutions, unlike the JavaScript version-investigation demo; that mismatch is a plausible contributor to the gap, not a proven explanation. The encoder evaluation does not test historical reranking.
+- **Official AppsRetrieval:** full MTEB CPU runs on the same test split yielded **Jina code q8 NDCG@10 0.15711, MRR@10 0.133675** and **BGE q8 NDCG@10 0.0505, MRR@10 0.043363**. Jina is the stronger submission candidate, though its competitiveness against other entrants is unknown. The test contains Python tasks and solutions, unlike the JavaScript version-investigation demo. Independent encoder evaluation does not test historical reranking.
 - **Code-encoder development check:** Jina q8 scored NDCG@10 0.7096 on a 128-query, 1,000-document training-only subset. This is model-selection evidence, not an official test score.
 
-The controlled demo demonstrates behavior/version discrimination on its prepared cases. Broad code-retrieval accuracy remains unproven, and no full official Jina test result is available. Do not compare the training-only Jina score with the official BGE score as if they came from the same evaluation.
+The controlled demo demonstrates behavior/version discrimination on its prepared cases. Jina improves official independent-encoder retrieval substantially over BGE, but broad repository retrieval and the historical reranker remain separate claims. Do not compare the training-only Jina score with either official result as if they came from the same evaluation.
 
 ## Verification
 
@@ -114,7 +114,7 @@ python -m pip install -r requirements-eval.txt
 python scripts/compare_encoders.py
 python scripts/evaluate_mteb.py --mode bge
 
-# Optional code-trained selection and full official evaluation (not yet reported; CPU run may take hours)
+# Reproduce code-trained selection and full official evaluation (CPU run may take hours)
 python scripts/audit_apps_dataset.py
 python scripts/compare_code_encoder.py
 python scripts/evaluate_mteb.py --mode jina --raw --batch-size 8 --output evaluation-results/appsretrieval_jina.json

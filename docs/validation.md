@@ -1,10 +1,10 @@
 # Validation ? CodeStrata 0.2.0
 
-Baseline runs were measured on 27 September 2026; the Jina selection and real-repository rerun were measured on 28 September. Hardware: Windows, Intel i5-1135G7 (8 logical processors), 8 GB RAM, Node 22.23.2. Neural inference runs on CPU with two threads. Timings are single local measurements, not load tests.
+Baseline runs were measured on 27 September 2026; the Jina selection, real-repository rerun, and full official Jina run were measured on 28 September. Hardware: Windows, Intel i5-1135G7 (8 logical processors), 8 GB RAM, Node 22.23.2. Neural inference runs on CPU with two threads. Timings are single local measurements, not load tests.
 
 ## Regression and integration
 
-77 Node tests pass locally; the previous 76-test revision passed GitHub Linux/Windows. They cover source locations, conservative control-flow evidence, rename/move ambiguity, copy/deletion behavior, import aliases and shadowing, documentation extraction, cache invalidation, vector validation, bounded inspection, cancellation, HTTP streaming, UTF-8 splitting, UI interactions, and failure handling. The persistent Python/Node bridge and Docker image passed GitHub CI. All six browser checks pass across Chromium, Firefox, and a mobile viewport, including no horizontal page overflow. [Verified workflow](https://github.com/AdvayV/AgenticIntelligence/actions/runs/36407794742).
+77 Node tests pass locally and on GitHub Linux/Windows. They cover source locations, conservative control-flow evidence, rename/move ambiguity, copy/deletion behavior, import aliases and shadowing, documentation extraction, cache invalidation, vector validation, bounded inspection, cancellation, HTTP streaming, UTF-8 splitting, UI interactions, and failure handling. The persistent Python/Node bridge and Docker image passed GitHub CI. All six browser checks pass across Chromium, Firefox, and a mobile viewport, including no horizontal page overflow. [Verified workflow](https://github.com/AdvayV/AgenticIntelligence/actions/runs/36441133814).
 
 ## Controlled development challenge
 
@@ -52,7 +52,18 @@ Learned embeddings improve these sets, while feature hashing harms broad semanti
 
 ## Official AppsRetrieval ? full test
 
-[Unmodified MTEB task JSON](results/appsretrieval_results.json). MTEB 2.21.8; dataset revision f22508f96b7a36c2415181ed8bb76f76e04ae2d5. 3,765 test queries and 8,765 corpus items. Selected configuration: BGE q8, bounded windows, independent behavior-enriched encoding, query instruction, CPU inference. Full evaluation took 2,577.27 seconds (about 43 minutes).
+Both runs used MTEB 2.21.8 and dataset revision f22508f96b7a36c2415181ed8bb76f76e04ae2d5: 3,765 test queries and 8,765 corpus items. The JSON files are unmodified MTEB task outputs.
+
+| Independent CPU encoder | NDCG@10 | MRR@10 | Recall@10 | Evaluation time |
+|---|---:|---:|---:|---:|
+| [BGE small q8](results/appsretrieval_results.json) | 0.05050 | 0.043363 | 0.07384 | 2,577 s |
+| [Jina code q8, raw input](results/appsretrieval_jina.json) | **0.15711** | **0.133675** | **0.23320** | 10,211 s |
+
+Jina improves NDCG@10 by about 3.11 times over this BGE configuration. It is the stronger official result available for submission, but a competitive screening rank is not known. The Jina output matches the MTEB cached task JSON byte-for-byte. It uses the code-trained model with raw inputs, mean pooling, up to three source windows per document, and a 2,048-token cap per window. This is independent encoding, not query-dependent reranking.
+
+### Earlier BGE baseline
+
+[Unmodified MTEB task JSON](results/appsretrieval_results.json). Configuration: BGE q8, bounded windows, independent behavior-enriched encoding, query instruction, CPU inference. Full evaluation took 2,577.27 seconds (about 43 minutes).
 
 | Metric | Official value |
 |---|---:|
@@ -60,11 +71,11 @@ Learned embeddings improve these sets, while feature hashing harms broad semanti
 | MRR@10 | **0.043363** |
 | Recall@10 | 0.07384 |
 
-**This is a weak screening baseline.** The train-sample/test gap has not been explained conclusively. Adapter ordering and query/document routing were inspected; export used MTEB's supported serializer after a datetime serialization error. Cached scoring results were preserved. No test-label tuning or successful-accuracy claim is made.
+**This is a weak baseline, superseded by the Jina run above.** The BGE train-sample/test gap has not been explained conclusively. Adapter ordering and query/document routing were inspected; export used MTEB's supported serializer after a datetime serialization error. Cached scoring results were preserved. No test-label tuning was performed.
 
 [Dataset-only audit](results/appsretrieval-dataset-audit.json): all 3,765 test questions describe Python programming tasks, with median length 1,601 characters; all 8,765 documents are Python solutions, with median length 332 characters. This differs from the application's JavaScript version-investigation demo. BGE is a general text encoder with a 512-token cap, and the JavaScript AST enrichment rarely applies to the Python code. These are plausible contributors to the low score, not a proved decomposition of its cause. The audit reads text and metadata only, never test relevance labels.
 
-The official independent encoder does not test query-dependent historical evidence reranking. A code-specific encoder is integrated, but a completed full official evaluation is not yet available; broader development data remain future work.
+Neither official encoder run tests query-dependent historical evidence reranking. Jina's full-test improvement does not validate the version-change demo; broader development data remain future work.
 
 ## Reproduce
 
