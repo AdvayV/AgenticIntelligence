@@ -97,6 +97,15 @@ test('invalid embedding batches do not publish a partial version or change its e
   assert.deepEqual(index.versions, []); assert.equal(index.embedding, null); assert.deepEqual(index.vectors, {});
 });
 
+test('index accepts validated code-encoder vectors with 768 dimensions', async () => {
+  const index = emptyIndex();
+  await indexVersion(index, { version: 'v', files: { 'a.js': source }, embedder: {
+    name: 'test-code-768', dimension: 768, encode: async texts => texts.map(() => Array(768).fill(0.01)),
+  } });
+  const key = index.snapshots.v.snippets[0].vectorKey;
+  assert.equal(index.vectors[key].length, 768);
+});
+
 test('documentation contributes to retrieval without leaking across unrelated declarations', async () => {
   const index = emptyIndex();
   await indexVersion(index, { version: '*', files: { 'a.js': '/** Telemetry aggregation. */\nexport function collect() { return 1; }\nconst unrelated = 1;\nexport function other() { return unrelated; }' } });

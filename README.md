@@ -127,4 +127,4 @@ The image runs the offline demo; learned-model downloads and Python evaluation a
 
 Static syntax evidence cannot prove runtime races, security guarantees, or cross-file control flow. Complex branches, duplicate callees, deferred awaits, and dynamic dispatch remain conservative. Exact CPU scans and heuristic lineage target small repositories; monorepo throughput is unvalidated. Caches retain obsolete entries and concurrent index writers are unsupported. Public deployment needs authentication and resource isolation.
 
-See [architecture](docs/architecture.md), [five-minute demo](docs/demo-script.md), [editable submission deck](docs/CodeStrata-Submission-Draft.pptx), [submission checklist](docs/submission-checklist.md), and [AI disclosure record](docs/ai-usage.md).
+See [architecture](docs/architecture.md), [five-minute demo](docs/demo-script.md), [editable submission deck](docs/CodeStrata-Submission-Draft.pptx), [filled disclosure draft awaiting signature](docs/CodeStrata-AI-Disclosure-Draft.docx), [submission checklist](docs/submission-checklist.md), and [AI usage record](docs/ai-usage.md).

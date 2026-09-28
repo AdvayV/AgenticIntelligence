@@ -13,11 +13,12 @@ export function featureVector(text, size = 384) {
 }
 export const cosine = (a, b) => a.reduce((sum, v, i) => sum + v * (b[i] ?? 0), 0);
 
-export const embeddingModes = ['features', 'minilm', 'bge'];
+export const embeddingModes = ['features', 'minilm', 'bge', 'jina'];
 export function embeddingMode(name) {
   if (name === 'feature-hash-384') return 'features';
   if (name?.startsWith('Xenova/all-MiniLM-L6-v2:')) return 'minilm';
   if (name?.startsWith('Xenova/bge-small-en-v1.5:')) return 'bge';
+  if (name?.startsWith('jinaai/jina-embeddings-v2-base-code:')) return 'jina';
   throw new Error(`Unsupported index embedding: ${name}`);
 }
 export function validateVectors(vectors, count, dimension = 384) {
@@ -35,32 +36,34 @@ export function textWindows(text, width = 1200, overlap = 160, limit = 4) {
 }
 const learnedEmbedders = new Map();
 export async function createEmbedder(mode = 'features') {
-  if (mode === 'features') return { name: 'feature-hash-384', encode: async texts => texts.map(t => featureVector(t)) };
+  if (mode === 'features') return { name: 'feature-hash-384', dimension: 384, encode: async texts => texts.map(t => featureVector(t)) };
   if (!embeddingModes.includes(mode)) throw new Error(`Unknown embedding mode: ${mode}`);
   if (!learnedEmbedders.has(mode)) learnedEmbedders.set(mode, (async () => {
     const { pipeline, env } = await import('@huggingface/transformers');
     env.cacheDir = path.resolve(process.env.CODESTRATA_MODEL_CACHE ?? '.cache/models');
-    const model = mode === 'bge' ? 'Xenova/bge-small-en-v1.5' : 'Xenova/all-MiniLM-L6-v2';
+    const model = mode === 'bge' ? 'Xenova/bge-small-en-v1.5' : mode === 'jina' ? 'jinaai/jina-embeddings-v2-base-code' : 'Xenova/all-MiniLM-L6-v2';
     const threads = Number(process.env.CODESTRATA_THREADS ?? 2);
     if (!Number.isInteger(threads) || threads < 1 || threads > 16) throw new Error('CODESTRATA_THREADS must be between 1 and 16');
     const extract = await pipeline('feature-extraction', model, { device: 'cpu', dtype: 'q8', session_options: { intraOpNumThreads: threads, interOpNumThreads: 1 } });
-    return { name: model + (mode === 'bge' ? ':q8:windows-v1' : ':q8'), encode: async (texts, { kind = 'document' } = {}) => {
+    const dimension = mode === 'jina' ? 768 : 384;
+    return { name: model + (mode === 'bge' ? ':q8:windows-v1' : mode === 'jina' ? ':q8:windows-v1' : ':q8'), dimension, encode: async (texts, { kind = 'document' } = {}) => {
       if (!texts.length) return [];
-      const groups = texts.map(text => mode === 'bge' && kind !== 'query' ? textWindows(text) : [text]);
+      const groups = texts.map(text => mode === 'bge' && kind !== 'query' ? textWindows(text) : mode === 'jina' && kind !== 'query' ? textWindows(text, 5000, 400, 3) : [text]);
       const flat = groups.flat().map(text => mode === 'bge' && kind === 'query' ? 'Represent this sentence for searching relevant passages: ' + text : text);
       const vectors = [];
-      for (let i = 0; i < flat.length; i += 8) {
-        const output = await extract(flat.slice(i, i + 8), { pooling: 'mean', normalize: true, truncation: true, max_length: mode === 'bge' ? 512 : 256 });
+      const batch = mode === 'jina' ? 2 : 8;
+      for (let i = 0; i < flat.length; i += batch) {
+        const output = await extract(flat.slice(i, i + batch), { pooling: 'mean', normalize: true, truncation: true, max_length: mode === 'jina' ? 2048 : mode === 'bge' ? 512 : 256 });
         vectors.push(...output.tolist());
       }
       let offset = 0;
       return validateVectors(groups.map(group => {
-        const mean = Array(384).fill(0);
+        const mean = Array(dimension).fill(0);
         for (const vector of vectors.slice(offset, offset + group.length)) vector.forEach((v, i) => { mean[i] += v; });
         offset += group.length;
         const norm = Math.hypot(...mean) || 1;
         return mean.map(v => v / norm);
-      }), texts.length);
+      }), texts.length, dimension);
     } };
   })().catch(error => { learnedEmbedders.delete(mode); throw error; }));
   return learnedEmbedders.get(mode);

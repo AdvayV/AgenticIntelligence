@@ -91,7 +91,7 @@ export async function indexVersion(index, { version, files, commit = null, embed
   const entries = [...pendingVectors.entries()], completedVectors = {};
   for (let offset = 0; offset < entries.length; offset += 16) {
     const batch = entries.slice(offset, offset + 16);
-    const vectors = validateVectors(await embedder.encode(batch.map(([, text]) => text)), batch.length);
+    const vectors = validateVectors(await embedder.encode(batch.map(([, text]) => text)), batch.length, embedder.dimension ?? 384);
     batch.forEach(([key], i) => { completedVectors[key] = vectors[i]; });
   }
   Object.assign(index.vectors, completedVectors);

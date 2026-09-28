@@ -36,6 +36,23 @@ jobs:
       - run: npm ci --omit=optional
       - run: python -m pip install numpy
       - run: python scripts/evaluate_mteb.py --smoke
+  submission:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - run: python scripts/verify_submission.py
+      - run: sudo apt-get update && sudo apt-get install -y --no-install-recommends libreoffice-impress poppler-utils
+      - run: mkdir rendered && libreoffice -env:UserInstallation=file:///tmp/codestrata-lo --headless --convert-to pdf --outdir rendered docs/CodeStrata-Submission-Draft.pptx
+      - run: test "$(pdfinfo rendered/CodeStrata-Submission-Draft.pdf | awk '/Pages:/ {print $2}')" = 12
+      - run: pdftoppm -scale-to 1400 -png rendered/CodeStrata-Submission-Draft.pdf rendered/slide
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: submission-render
+          path: rendered/
   browser:
     runs-on: ubuntu-latest
     steps:

@@ -44,8 +44,9 @@ class EncoderBridge:
                 self.process.wait()
 
     def encode(self, texts, kind="document"):
+        dimension = 768 if self.mode == "jina" else 384
         if not texts:
-            return np.empty((0, 384), dtype=np.float32)
+            return np.empty((0, dimension), dtype=np.float32)
         payload = {"texts": texts, "mode": self.mode, "enrich": self.enrich, "kind": kind}
         serialized = json.dumps(payload, ensure_ascii=True)
         key = hashlib.sha256(("encoder-v2:" + serialized).encode()).hexdigest()
@@ -66,7 +67,7 @@ class EncoderBridge:
             if "error" in response:
                 raise RuntimeError(response["error"])
             values = np.asarray(response["vectors"], dtype=np.float32)
-        if values.shape != (len(texts), 384) or not np.isfinite(values).all():
+        if values.shape != (len(texts), dimension) or not np.isfinite(values).all():
             raise ValueError("Invalid embedding matrix")
         if target and not target.exists():
             target.parent.mkdir(parents=True, exist_ok=True)
@@ -84,7 +85,7 @@ def encode_texts(texts, mode="features", enrich=True):
 
 def main():
     parser = argparse.ArgumentParser()
-    parser.add_argument("--mode", choices=["features", "minilm", "bge"], default="bge")
+    parser.add_argument("--mode", choices=["features", "minilm", "bge", "jina"], default="bge")
     parser.add_argument("--raw", action="store_true", help="Disable behavior enrichment")
     parser.add_argument("--smoke", action="store_true")
     parser.add_argument("--batch-size", type=int, default=16)
@@ -98,9 +99,9 @@ def main():
     try:
         if args.smoke:
             vectors = bridge.encode(["permission check", "async function a() { await checkPermission(); }", "def f(x):\n    return x + 1"])
-            assert vectors.shape == (3, 384)
+            assert vectors.shape == (3, 768 if mode == "jina" else 384)
             assert np.allclose(np.linalg.norm(vectors, axis=1), 1, atol=1e-5)
-            assert bridge.encode(["a second batch"], kind="query").shape == (1, 384)
+            assert bridge.encode(["a second batch"], kind="query").shape == (1, 768 if mode == "jina" else 384)
             print("Persistent CPU encoder passed: JavaScript, natural language, fallback, and repeated batches.")
             return
 
@@ -121,7 +122,7 @@ def main():
             def encode(self, inputs, *, task_metadata, hf_split, hf_subset, prompt_type=None, **kwargs):
                 kind = "query" if "query" in str(prompt_type).lower() else "document"
                 batches = [bridge.encode(list(batch["text"]), kind) for batch in inputs]
-                return np.concatenate(batches, axis=0) if batches else np.empty((0, 384), dtype=np.float32)
+                return np.concatenate(batches, axis=0) if batches else np.empty((0, 768 if mode == "jina" else 384), dtype=np.float32)
 
         task = mteb.get_task("AppsRetrieval")
         results = mteb.evaluate(CodeStrataEncoder(), [task], encode_kwargs={"batch_size": args.batch_size}, cache=mteb.ResultCache(cache_path=ROOT / ".cache" / "mteb"))

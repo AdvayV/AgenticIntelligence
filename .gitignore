@@ -12,3 +12,4 @@ __pycache__/
 evaluation-results/
 test-results/
 playwright-report/
+rendered/

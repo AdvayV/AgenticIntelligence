@@ -25,7 +25,7 @@ async function main() {
     const result = await search(await loadIndex(indexFile), option('query'), { topK: Number(option('top-k', 10)), version: option('version'), mode: option('mode', 'codestrata') });
     console.log(JSON.stringify(result, null, 2));
   } else {
-    console.log('CodeStrata\n  npm run demo\n  npm run index -- --repo PATH --history 20\n  npm run search -- --query "calls validateInput before executeTool"\n  npm start\nOptions: --out FILE --embedding features|minilm|bge --version LABEL --top-k N --refs older,newer');
+    console.log('CodeStrata\n  npm run demo\n  npm run index -- --repo PATH --history 20\n  npm run search -- --query "calls validateInput before executeTool"\n  npm start\nOptions: --out FILE --embedding features|minilm|bge|jina --version LABEL --top-k N --refs older,newer');
     if (command) process.exitCode = 1;
   }
 }
