@@ -61,7 +61,7 @@ Both runs used MTEB 2.21.8 and dataset revision f22508f96b7a36c2415181ed8bb76f76
 | [BGE small q8](results/appsretrieval_results.json) | 0.05050 | 0.043363 | 0.07384 | 2,577 s |
 | [Jina code q8, raw input](results/appsretrieval_jina.json) | **0.15711** | **0.133675** | **0.23320** | 10,211 s |
 
-Jina improves NDCG@10 by about 3.11 times over this BGE configuration. It is the stronger official result available for submission, but a competitive screening rank is not known. The Jina output matches the MTEB cached task JSON byte-for-byte. It uses the code-trained model with raw inputs, mean pooling, up to three source windows per document, and a 2,048-token cap per window. This is independent encoding, not query-dependent reranking.
+Jina improves NDCG@10 by about 3.11 times over this BGE configuration. It is the stronger of the two full-test results; its standing against other systems is unknown. The Jina output matches the MTEB cached task JSON byte-for-byte. It uses the code-trained model with raw inputs, mean pooling, up to three source windows per document, and a 2,048-token cap per window. This is independent encoding, not query-dependent reranking.
 
 ### Earlier BGE baseline
 
@@ -81,6 +81,17 @@ Neither official encoder run tests query-dependent historical evidence reranking
 
 ## Reproduce
 
-Run README commands. Evaluation outputs go to evaluation-results; reviewed snapshots are checked into docs/results.
+Run the README commands for the application and controlled challenge. For the full encoder evaluation, use an isolated Python environment and the optional Node encoders:
+
+```sh
+npm ci --include=optional
+python -m venv .venv
+# Activate .venv, then:
+python -m pip install -r requirements-eval.txt
+python scripts/audit_apps_dataset.py
+python scripts/evaluate_mteb.py --mode jina --raw --batch-size 8 --output evaluation-results/appsretrieval_jina.json
+```
+
+Evaluation outputs go to `evaluation-results`; reviewed snapshots are checked into `docs/results`. The first model run downloads weights, and the full test takes hours on CPU.
 
 Sources: [BGE model card](https://huggingface.co/Xenova/bge-small-en-v1.5), [Jina Code model card](https://huggingface.co/jinaai/jina-embeddings-v2-base-code), [MTEB evaluation interface](https://docs.mteb.org/get_started/usage/running_the_evaluation/), [CoIR](https://github.com/CoIR-team/coir).

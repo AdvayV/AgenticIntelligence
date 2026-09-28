@@ -40,7 +40,7 @@ test('straight-line invocation order is supported and reversed order contradicte
   assert.equal(evidence('function a() { first(); second(); }', 'calls first before second')[0].status, 'supported');
   assert.equal(evidence('function a() { second(); first(); }', 'calls first before second')[0].status, 'contradicted');
 });
-test('supports the organizer tool-order phrasing and single-letter symbols', () => {
+test('supports natural tool-order phrasing and single-letter symbols', () => {
   assert.equal(evidence('function x() { XYZ(); ABC(); }', 'which files call tool XYZ before tool ABC?')[0].status, 'supported');
   assert.equal(evidence('function x() { A(); B(); }', 'calls A before B')[0].status, 'supported');
 });

@@ -33,7 +33,7 @@ Retained originals with new copies, competing matches, duplicate symbols, and de
 
 ## CPU representations
 
-Features are deterministic hashes, not trained embeddings. MiniLM and BGE use quantized general-text models through Transformers.js. BGE mean-pools at most four overlapping 1,200-character windows, including the tail, and uses instructed queries. Very long functions may lose intermediate text. Model inference uses 512 tokens per BGE window and two CPU threads by default.
+Features are deterministic hashes, not trained embeddings. MiniLM and BGE use quantized general-text models through Transformers.js. BGE mean-pools at most four overlapping 1,200-character windows, including the tail, and uses instructed queries. The optional Jina code encoder uses quantized `jinaai/jina-embeddings-v2-base-code` with 768-dimensional vectors and averages at most three source windows. Very long functions may lose intermediate text in either learned representation. Model inference uses 512 tokens per BGE window and two CPU threads by default.
 
 Model loading is lazy and retryable. Indexing uses bounded batches. A persistent JSON-lines Node worker serves the Python adapter, with validated NumPy caches keyed by input/configuration. Official encoding preserves corpus order and independently encodes each item.
 
