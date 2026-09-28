@@ -37,9 +37,12 @@ def verify_deck():
         joined = ' '.join(text)
         for required in ['Advay Vivek', 'Kaavish Gogia', '24BCT0136', '24BCT0103',
                          'advay.vivek2024@vitstudent.ac.in', 'kaavish.gogia2024@vitstudent.ac.in',
-                         'Vellore Institute of Technology', '0.0505', 'pairDevice', 'BM25 + CPU vectors']:
+                         'Vellore Institute of Technology', '0.0505', 'pairDevice',
+                         'BM25 + CPU vectors', 'Jina Code']:
             assert required in joined, required
         assert 'TEAM TO COMPLETE' not in joined
+        assert 'Finish team identity' not in joined
+        assert 'Prioritize a code-specific encoder' not in joined
     print('Presentation: 12 slides, team details, results, and canvas bounds verified.')
 
 
@@ -60,9 +63,16 @@ def verify_results():
     assert official['task_name'] == 'AppsRetrieval'
     assert official['mteb_version'] == '2.21.8'
     assert official['scores']['test'][0]['ndcg_at_10'] == 0.0505
-    for name in ['challenge.json', 'repositories.json', 'encoder-development.json']:
+    for name in ['challenge.json', 'encoder-development.json']:
         json.loads((folder / name).read_text(encoding='utf-8'))
-    print('Evaluation artifacts: official MTEB JSON and development results verified.')
+    code = json.loads((folder / 'code-encoder-development.json').read_text(encoding='utf-8'))
+    assert code['mode'] == 'jina' and code['queries'] == 128 and code['documents'] == 1000
+    assert code['ndcg_at_10'] > 0.70
+    audit = json.loads((folder / 'appsretrieval-dataset-audit.json').read_text(encoding='utf-8'))
+    assert audit['test_queries']['count'] == 3765 and audit['all_documents']['count'] == 8765
+    repos = json.loads((folder / 'repositories.json').read_text(encoding='utf-8'))
+    assert repos['queries'] == 60 and all('jina' in repo['measurements'] for repo in repos['repositories'])
+    print('Evaluation artifacts: official MTEB JSON, dataset audit, and development results verified.')
 
 
 if __name__ == '__main__':

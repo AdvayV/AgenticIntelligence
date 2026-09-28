@@ -80,10 +80,13 @@ export async function indexVersion(index, { version, files, commit = null, embed
       const ordinal = occurrences.get(snippet.name) ?? 0;
       occurrences.set(snippet.name, ordinal + 1);
       const lineage = `${file}::${snippet.name}::${ordinal}`;
-      const vectorText = embedder.name.startsWith('jinaai/jina-embeddings-v2-base-code:')
+      const isCodeEncoder = embedder.name.startsWith('jinaai/jina-embeddings-v2-base-code:');
+      const vectorText = isCodeEncoder
         ? (snippet.documentation ? snippet.documentation + '\n' : '') + snippet.code
         : (snippet.documentation ? snippet.documentation + '\n' : '') + snippet.code + '\n' + snippet.behaviorText;
-      const vectorKey = hash(`${embedder.name}\0${vectorText}`);
+      const vectorKey = isCodeEncoder
+        ? hash(`${embedder.name}\0${vectorText}`)
+        : hash(`${embedder.name}\0${snippet.documentation ?? ''}\0${snippet.code}\0${snippet.behaviorText}`);
       if (!index.vectors[vectorKey] && !pendingVectors.has(vectorKey)) {
         pendingVectors.set(vectorKey, vectorText);
         stats.embeddedSnippets++;
