@@ -1,0 +1,5 @@
+# Optional Python dependencies for the full MTEB AppsRetrieval evaluation.
+# The default CodeStrata application uses Node.js and does not need Python.
+mteb==2.21.8
+numpy>=1.26
+pyarrow>=20,<24
