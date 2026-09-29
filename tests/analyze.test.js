@@ -44,6 +44,24 @@ test('supports natural tool-order phrasing and single-letter symbols', () => {
   assert.equal(evidence('function x() { XYZ(); ABC(); }', 'which files call tool XYZ before tool ABC?')[0].status, 'supported');
   assert.equal(evidence('function x() { A(); B(); }', 'calls A before B')[0].status, 'supported');
 });
+test('prototype-named query tokens do not crash constraint matching', () => {
+  assert.equal(evidence('function f() { policyCheck(); }', 'awaits constructor')[0].status, 'unknown');
+  assert.equal(evidence('async function f() { await constructor(); }', 'awaits constructor')[0].status, 'supported');
+});
+test('awaiting a computed expression does not certify its inner invocations', () => {
+  for (const expression of ['(permission(), finish())', '!permission()', '{ value: permission() }', 'permission() + 1']) {
+    for (const query of ['awaits permission', 'without awaiting permission']) {
+      assert.equal(evidence(`async function f() { await (${expression}); }`, query)[0].status, 'unknown', expression);
+    }
+  }
+  assert.equal(evidence('async function f() { await (permission()); }', 'awaits permission')[0].status, 'supported');
+});
+test('nested blocks cannot hide branch or early-return uncertainty from order checks', () => {
+  for (const code of ['function f(x) { { if (x) first(); else second(); } }', 'function f() { { first(); return; } second(); }']) {
+    assert.equal(evidence(code, 'calls first before second')[0].status, 'unknown');
+  }
+  assert.equal(evidence('function f() { first(); return second(); }', 'calls first before second')[0].status, 'supported');
+});
 for (const [label, code] of [
   ['exclusive branches', 'function a(x) { if (x) first(); else second(); }'],
   ['early return', 'function a() { first(); return; second(); }'],

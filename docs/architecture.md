@@ -8,6 +8,8 @@ Snapshots store lexical postings and source rows. Content-addressed analyses inc
 
 ## Bounded retrieval agent
 
+After an analyzer update, rerun indexing for every saved snapshot and restart the server. The analyzer cache key is versioned, so reindexing refreshes changed facts even when source files are unchanged; restarting alone does not rewrite a previously saved index.
+
 1. Parse supported await, guard, order, and exact-literal constraints; warn on unsupported structural phrasing.
 2. Fuse persistent BM25 postings and normalized vector ranks.
 3. Inspect candidates for supported, contradicted, or unknown constraints.

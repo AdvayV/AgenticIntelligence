@@ -58,6 +58,12 @@ test('ambiguous renames stay unlinked', async () => {
   const index = await fixture({ v1: 'async function old() { await policyCheck(); }', v2: 'async function one() { policyCheck(); } async function two() { policyCheck(); }' });
   assert.equal(checkBehaviorWatch(index, pin(index.snapshots.v1.snippets[0])).points[1].status, 'unlinked');
 });
+test('computed awaits do not invent watch regressions or restorations', async () => {
+  const index = await fixture({ v1: 'async function f() { policyCheck(); }', v2: 'async function f() { await !policyCheck(); }', v3: 'async function f() { await policyCheck(); }' });
+  const report = checkBehaviorWatch(index, pin(index.snapshots.v1.snippets[0]));
+  assert.deepEqual(report.points.map(row => row.status), ['contradicted', 'unknown', 'supported']);
+  assert.deepEqual(report.transitions, []);
+});
 test('call order watches detect reversal but do not certify repeated or branched calls', async () => {
   const index = await fixture({ v1: 'function f() { validate(); execute(); }', v2: 'function f() { execute(); validate(); }', v3: 'function f() { validate(); execute(); validate(); }', v4: 'function f(x) { if (x) validate(); else execute(); }' });
   const report = checkBehaviorWatch(index, pin(index.snapshots.v1.snippets[0], 'calls validate before execute'));

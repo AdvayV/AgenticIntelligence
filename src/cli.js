@@ -4,7 +4,13 @@ import { search } from './retrieval.js';
 import { buildDemo, demoQueries } from './demo.js';
 import { createEmbedder, embeddingMode } from './vector.js';
 const [command, ...args] = process.argv.slice(2);
-function option(name, fallback) { const i = args.indexOf(`--${name}`); return i < 0 ? fallback : args[i + 1]; }
+function option(name, fallback) {
+  const i = args.indexOf(`--${name}`);
+  if (i < 0) return fallback;
+  const value = args[i + 1];
+  if (!value || value.startsWith('--')) throw new Error(`Option --${name} requires a value`);
+  return value;
+}
 async function main() {
   const indexFile = path.resolve(option('out', '.codestrata/index.json'));
   if (command === 'demo') {

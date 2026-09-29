@@ -8,7 +8,7 @@ export function targetMatches(target, phrase) {
   const targetTokens = tokenize(target);
   const queryTokens = tokenize(phrase).filter(t => !fillers.has(t));
   if (!queryTokens.length) return false;
-  return queryTokens.every(t => targetTokens.includes(t) || (aliases[t] ?? []).some(x => targetTokens.includes(x)));
+  return queryTokens.every(t => targetTokens.includes(t) || (Object.hasOwn(aliases, t) ? aliases[t] : []).some(x => targetTokens.includes(x)));
 }
 
 export function planQuery(query) {

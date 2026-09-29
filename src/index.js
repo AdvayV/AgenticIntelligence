@@ -68,7 +68,7 @@ export async function indexVersion(index, { version, files, commit = null, embed
   const previousFiles = index.files[version] ?? {};
   stats.deletedFiles = Object.keys(previousFiles).filter(f => !(f in files)).length;
   for (const [file, source] of Object.entries(files).sort(([a], [b]) => a.localeCompare(b))) {
-    const key = hash(`analyzer-v5\0${file}\0${source}`);
+    const key = hash(`analyzer-v6\0${file}\0${source}`);
     manifest[file] = key;
     if (!index.analyses[key]) { index.analyses[key] = analyzeFile(source, file); stats.parsedFiles++; }
     else stats.reusedFiles++;

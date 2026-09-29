@@ -33,6 +33,11 @@ export function createServer(index, indexStats = []) {
         let input;
         try { input = JSON.parse(Buffer.concat(chunks).toString('utf8')); } catch { return json(400, { error: 'Invalid JSON' }); }
         if (!input || typeof input !== 'object' || Array.isArray(input)) return json(400, { error: 'Expected a search object' });
+        if (url.pathname !== '/api/watch') {
+          if (input.topK != null && (typeof input.topK !== 'number' || !Number.isInteger(input.topK) || input.topK < 1 || input.topK > 100)) return json(400, { error: 'topK must be an integer between 1 and 100' });
+          if (input.version != null && typeof input.version !== 'string') return json(400, { error: 'version must be text' });
+          if (input.mode != null && !['codestrata', 'hybrid', 'lexical'].includes(input.mode)) return json(400, { error: 'Unknown retrieval mode' });
+        }
         if (activeSearches >= 2) return json(429, { error: 'Two CPU searches are already running. Please try again shortly.' });
         const streaming = url.pathname.endsWith('/stream'), controller = new AbortController();
         response.on('close', () => { if (!response.writableEnded) controller.abort(); });

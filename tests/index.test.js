@@ -5,7 +5,18 @@ import os from 'node:os';
 import path from 'node:path';
 import { execFileSync } from 'node:child_process';
 import { emptyIndex, indexVersion, allSnippets, evolution, saveIndex, loadIndex, directoryFiles, gitFiles } from '../src/index.js';
+import { analyzeFile, hash } from '../src/analyze.js';
 const files = { 'a.js': 'async function a() { await permission(); settings(); }' };
+test('reindexing invalidates cached facts from the previous analyzer', async () => {
+  const index = emptyIndex(), source = 'async function f() { await !permission(); }';
+  const stale = analyzeFile(source, 'a.js');
+  stale.snippets[0].facts.calls[0].awaited = true;
+  stale.snippets[0].facts.calls[0].uncertain = false;
+  index.analyses[hash(`analyzer-v5\0a.js\0${source}`)] = stale;
+  const stats = await indexVersion(index, { version: 'v', files: { 'a.js': source } });
+  assert.equal(stats.parsedFiles, 1);
+  assert.equal(index.snapshots.v.snippets[0].facts.calls[0].uncertain, true);
+});
 test('unchanged files and vectors are reused across versions', async () => {
   const index = emptyIndex(); await indexVersion(index, { version: 'old', files });
   const stats = await indexVersion(index, { version: 'new', files });

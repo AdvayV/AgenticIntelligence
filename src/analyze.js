@@ -50,11 +50,9 @@ function normalize(node) {
   return tokens.join(' ');
 }
 function containsUnsupported(node) {
-  let unknown = false;
-  walk(node, n => {
-    if (['ForStatement', 'WhileStatement', 'DoWhileStatement', 'ForOfStatement', 'ForInStatement', 'SwitchStatement', 'TryStatement', 'ConditionalExpression', 'LogicalExpression', 'ThrowStatement', 'BreakStatement', 'ContinueStatement'].includes(n.type)) unknown = true;
-  });
-  return unknown;
+  if (!node?.type || functionTypes.has(node.type)) return false;
+  if (['IfStatement', 'ReturnStatement', 'ForStatement', 'WhileStatement', 'DoWhileStatement', 'ForOfStatement', 'ForInStatement', 'SwitchStatement', 'TryStatement', 'ConditionalExpression', 'LogicalExpression', 'ThrowStatement', 'BreakStatement', 'ContinueStatement'].includes(node.type)) return true;
+  return children(node).some(containsUnsupported);
 }
 function factsFor(fn, source) {
   const calls = [], guards = [], literals = [];
@@ -89,7 +87,9 @@ function factsFor(fn, source) {
     const complex = ['ForStatement', 'WhileStatement', 'DoWhileStatement', 'ForOfStatement', 'ForInStatement', 'SwitchStatement', 'TryStatement', 'ConditionalExpression', 'LogicalExpression', 'ThrowStatement', 'BreakStatement', 'ContinueStatement'].includes(node.type);
     if (complex) uncertain = true;
     if (node.type === 'AwaitExpression') {
-      visit(node.argument, { ...context, awaited: true });
+      // Awaiting a computed value does not directly await every call that built it.
+      const direct = ['CallExpression', 'OptionalCallExpression'].includes(node.argument.type);
+      visit(node.argument, { ...context, awaited: direct, uncertain: context.uncertain || !direct });
       return;
     }
     if (node.type === 'CallExpression' || node.type === 'OptionalCallExpression') {
@@ -111,8 +111,7 @@ function factsFor(fn, source) {
   visit(fn);
   // Early returns / branching need CFG analysis; order certificates are restricted.
   const linear = fn.body.type === 'BlockStatement' && fn.body.body.every((stmt, i, all) =>
-    !containsUnsupported(stmt) && stmt.type !== 'IfStatement' &&
-    (stmt.type !== 'ReturnStatement' || i === all.length - 1));
+    !containsUnsupported(stmt.type === 'ReturnStatement' && i === all.length - 1 ? stmt.argument : stmt));
   return { calls, guards, literals, linear, uncertain, locals: [...locals] };
 }
 

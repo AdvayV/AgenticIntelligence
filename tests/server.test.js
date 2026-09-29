@@ -2,6 +2,36 @@ import test from 'node:test';
 import assert from 'node:assert/strict';
 import { createServer } from '../src/server.js';
 import { buildDemo } from '../src/demo.js';
+import { emptyIndex } from '../src/index.js';
+
+test('search endpoints reject malformed option types and remain usable after errors', async t => {
+  const { index } = await buildDemo(), server = createServer(index);
+  await new Promise(resolve => server.listen(0, '127.0.0.1', resolve));
+  t.after(() => new Promise(resolve => server.close(resolve)));
+  const base = `http://127.0.0.1:${server.address().port}`;
+  for (const endpoint of ['/api/search', '/api/search/stream']) {
+    for (const options of [{ topK: true }, { topK: [1] }, { topK: '3' }, { topK: 0 }, { topK: 101 }, { mode: false }, { version: 0 }, { version: [] }]) {
+      const response = await fetch(base + endpoint, { method: 'POST', body: JSON.stringify({ query: 'awaits constructor', ...options }) });
+      assert.equal(response.status, 400, JSON.stringify(options));
+      assert.ok((await response.json()).error);
+    }
+  }
+  const valid = await fetch(base + '/api/search', { method: 'POST', body: JSON.stringify({ query: 'awaits constructor' }) });
+  assert.equal(valid.status, 200);
+  assert.ok(Array.isArray((await valid.json()).results));
+});
+
+test('an empty index returns an empty streamed result without loading an encoder', async t => {
+  const server = createServer(emptyIndex());
+  await new Promise(resolve => server.listen(0, '127.0.0.1', resolve));
+  t.after(() => new Promise(resolve => server.close(resolve)));
+  const base = `http://127.0.0.1:${server.address().port}`;
+  const response = await fetch(base + '/api/search/stream', { method: 'POST', body: JSON.stringify({ query: 'awaits policyCheck' }) });
+  assert.equal(response.status, 200);
+  const events = (await response.text()).trim().split('\n').map(line => JSON.parse(line));
+  assert.equal(events.at(-1).type, 'result');
+  assert.deepEqual(events.at(-1).data.results, []);
+});
 test('watch endpoint validates pins, rules and bounded bodies', async t => {
   const { index } = await buildDemo(), server = createServer(index);
   await new Promise(resolve => server.listen(0, '127.0.0.1', resolve));
