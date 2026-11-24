@@ -1,98 +1,90 @@
 # CodeStrata
 
-**Find the function version where behavior changed, then turn that finding into a repeatable check.**
+**Find where a JavaScript function changed and see the lines that explain it.**
 
-CodeStrata is a CPU-first code intelligence workspace for JavaScript and JSX repositories. It searches code across indexed versions, inspects the source behind each result, and shows evidence for changes such as a removed direct `await`, a changed call order, or a guard that disappeared. It can follow a function through some renames and file moves while keeping ambiguous links explicitly unresolved.
+CodeStrata searches a project's Git history for changes in how a function is written. Ask a question such as “Where did device pairing stop waiting for the policy check?” and it shows the matching versions, highlights the relevant source, and lets you save the rule to check again after you add more commits.
 
-**Theme:** 01 - Agentic Code Intelligence. **Team:** CodeStrata, Vellore Institute of Technology (VIT University). **Contributors:** Advay Vivek (24BCT0136, [email](mailto:advay.vivek2024@vitstudent.ac.in)) and Kaavish Gogia (24BCT0103, [email](mailto:kaavish.gogia2024@vitstudent.ac.in)).
+[Try the demo](#try-the-demo) · [Use your own repository](#use-your-own-repository) · [How it works](#how-it-works) · [Validation](#validation)
 
-**Submission files:** [18-slide PowerPoint](submission-documents/VITUniversity_CodeStrata.pptx), [PDF](submission-documents/VITUniversity_CodeStrata.pdf), and [completed AI disclosure](submission-documents/CodeStrata-AI-Disclosure.docx). The demo video is being recorded; its YouTube or Drive link will be added here when available. The evaluated code and result artifacts are in this repository. The final submission tag is `PRISM_GENAI_HACKATHON_Y2026`.
+## One change across three versions
 
-## The problem
+In the built-in demo, a function moves to a new file and gets a new name. It still calls `policyCheck`, but the refactor drops the `await`. A search for the call alone would find all three versions. CodeStrata compares how the call is made and shows where the wait disappeared.
 
-A code search can find a familiar name in the wrong version. After a refactor, the same behavior may live under a new name or path, and two nearly identical functions may differ by a single `await`. A ranked snippet alone does not tell a developer where the behavior changed or whether a nearby version contradicts the answer.
+| Version | Source | What CodeStrata finds |
+| --- | --- | --- |
+| v1 | `devices/connect.js` · `connectDevice` | `await policyCheck(device)` — **Holds** |
+| v2 | `flows/pair.js` · `pairDevice` | `policyCheck(device)` — **Broken** |
+| v3 | `flows/pair.js` · `pairDevice` | `await policyCheck(device)` — **Holds** |
 
-## How CodeStrata solves it
+**Holds** and **Broken** describe whether the source matches the saved rule. The demo checks for a direct `await`. Runtime behavior requires separate testing.
 
-1. **Index versions of real source.** Babel extracts functions, exact file and line locations, calls, direct awaits, guards, literals, and local import relationships. Indexing reads repository code; it does not execute it.
-2. **Investigate a behavior question.** A bounded local agent combines lexical and vector retrieval, parses supported structural constraints, inspects candidate evidence, and expands into related versions when needed. Its actual decisions stream into the workspace.
-3. **Show the competing version.** A result can appear beside a neighboring implementation that contradicts the requested pattern. The source, line highlights, and lineage confidence stay visible. Counterexamples explain a ranked result; they do not choose or rerank it.
-4. **Save a Behavior Watch.** Pin a result and a static rule. CodeStrata checks the same linked function across indexed snapshots, marks where the rule holds or breaks, and exports the source-backed report. Missing or ambiguous links stay unverified.
-
-The combination of version-aware retrieval, explicit counterexamples, conservative refactor tracking, and saved behavior checks is the project's distinguishing workflow. It takes a developer from *“where did this change?”* to a check they can revisit after the next index update. The planner and agent are deterministic; no hosted model, GPU, or API key is required for the default workspace.
-
-## Architecture
-
-```mermaid
-flowchart LR
-  S["Git snapshots or working tree"] --> A["Babel analysis: functions, locations, behavior facts"]
-  A --> I["Cached lexical and vector index"]
-  A --> L["Conservative lineage and import links"]
-  Q["Behavior question"] --> P["Local constraint planner"]
-  P --> R["Bounded retrieval agent"]
-  I --> R
-  R --> E["Inspect support, contradiction, or uncertainty"]
-  L --> E
-  E --> D{"Enough evidence?"}
-  D -->|Expand within budget| R
-  D -->|Stop| O["Source, timeline, counterexample, decision trace"]
-  O --> W["Pin result and static rule"]
-  L --> W
-  W --> H["Behavior Watch across linked snapshots"]
-  H --> J["Inspectable evidence and JSON export"]
-```
-
-The index is built by the CLI. The local server exposes search, source inspection, and watch checks to the browser. The light interface has an animated version view, timeline, side explanations on hover/focus/tap, and a reduced-motion control. [Architecture details](docs/architecture.md) explain the modules and evidence boundaries.
+![CodeStrata’s Behavior Watch shows the policy check awaited in v1 and v3, with the direct await missing in v2](docs/images/behavior-watch.png)
 
 ## Try the demo
 
-Requires Node 22.22.2+ on the 22 release line, Node 24.15+, or Node 26+. Python is **not** needed for the default app; [requirements.txt](requirements.txt) is only for reproducing the optional MTEB evaluation. No GPU, hosted model, or API key is needed for the default demo.
+You need Git and Node.js **22.22.2+ on the 22 release line, 24.15+ on the 24 release line, or 26+**. After installing the dependencies, the default demo runs locally on a CPU and needs no API key or Python.
 
 ```sh
+git clone https://github.com/AdvayV/AgenticIntelligence.git
+cd AgenticIntelligence
 npm ci --omit=optional
-npm test
 npm start
 ```
 
-`npm ci` installs the packages from the committed lockfile; `--omit=optional` keeps the first run CPU-only and offline after install. The server defaults to port 3000. If that port is occupied, set `PORT` before `npm start` (for example, `$env:PORT = '3001'` in PowerShell). The sample index is prepared automatically for the demo. For container execution, run `docker build -t codestrata .` and `docker run --rm -p 3000:3000 codestrata`, then open the same URL.
+1. Open [http://127.0.0.1:3000](http://127.0.0.1:3000) and select **Investigate the refactor**. The first result is `pairDevice@v2`.
+2. In the first result, compare the highlighted line with the v1 example, which still has the `await`. Select `connectDevice` on the timeline to open its source.
+3. Select **Watch behavior** on the result. Keep the rule `awaits policyCheck` and select **Save and check**. The watch shows **v1 Holds → v2 Broken → v3 Holds**. Select a point to inspect its source, or select **Export evidence** to download the report as JSON.
 
-Open **http://127.0.0.1:3000** and click **Investigate the refactor**. The prepared three-version example finds `pairDevice@v2`, links it to `connectDevice@v1`, and shows that the direct `await policyCheck()` in v1 is absent in v2 and restored in v3. Click **Watch behavior**, keep the suggested rule `awaits policyCheck`, then **Save and check** to see **v1 Holds → v2 Broken → v3 Holds**. Open any point for exact source or export the JSON report. On PowerShell, use `npm.cmd` if the execution policy blocks `npm.ps1`.
+On Windows PowerShell, use `npm.cmd` in place of `npm` if the execution policy blocks `npm.ps1`. If port 3000 is busy, set `$env:PORT = '3001'` in PowerShell or run `PORT=3001 npm start` in Bash, then open port 3001 in your browser.
 
-The example contains 25 synthetic snippets and is designed to expose a specific behavior change. “Broken” means the saved static rule is contradicted in that snapshot; it does not claim a runtime failure.
+<details>
+<summary>Run with Docker</summary>
 
-### Five-minute judge walkthrough
+```sh
+docker build -t codestrata .
+docker run --rm -p 127.0.0.1:3000:3000 codestrata
+```
 
-1. Open the light workspace and click **Investigate the refactor**. Ask where pairing stopped awaiting `policyCheck`.
-2. Open `pairDevice@v2`, inspect the highlighted source, and compare its `connectDevice@v1` counterexample. The direct `await` is present in v1, absent in v2, and restored in v3.
-3. Open the agent trace to show the plan, ranked retrieval, source inspection, and stop decision. Follow the imported `policyCheck` helper and the inferred rename/move link.
-4. Pin `awaits policyCheck` with **Watch behavior**. Show the three linked states, open exact evidence for a point, and export the report.
-5. Explain the boundary: these are static source facts, not a claim that a runtime failure occurred. Show the measured results and their scopes below.
+Open [http://127.0.0.1:3000](http://127.0.0.1:3000) after the container starts.
+
+</details>
 
 ## Use your own repository
 
+From the CodeStrata folder, point the indexer at a local JavaScript or JSX Git repository. Replace the path and function names with ones from your project.
+
 ```sh
-npm run index -- --repo /path/to/repo --history 20 --out .codestrata/history.json
-npm run search -- --out .codestrata/history.json --query "Where did pairing stop waiting for policyCheck?" --top-k 3
+npm run index -- --repo "/path/to/repo" --history 20 --out .codestrata/history.json
+npm run search -- --out .codestrata/history.json --query "calls validateInput before executeTool" --top-k 3
 ```
 
-Start the browser with `CODESTRATA_INDEX=.codestrata/history.json npm start` on macOS/Linux. In PowerShell, set `$env:CODESTRATA_INDEX = '.codestrata/history.json'` and run `npm.cmd start`. Restart the server after reindexing so watches use the updated source. The default index uses offline feature hashing. Optional quantized BGE and Jina code encoders run on CPU with `npm ci --include=optional`; see [architecture](docs/architecture.md) for model details. Indexes must be built and searched with the same embedding mode.
+To open that index in the browser, run `CODESTRATA_INDEX=.codestrata/history.json npm start` on macOS or Linux. In PowerShell, run `$env:CODESTRATA_INDEX = '.codestrata/history.json'` and then `npm.cmd start`. Reindex and restart when you want to include newer commits.
 
-## Evidence and limits
+## How it works
 
-| Evaluation | Result | What it measures |
-|---|---:|---|
-| Controlled version challenge | 8/8 correct top result; NDCG@10 1.0 | Synthetic version discrimination on development examples |
-| Pinned Async and Express repositories | BGE NDCG@10 0.6717 / 0.8577 | 60 source-reviewed, partly AI-assisted labels; single-snapshot retrieval |
-| Full MTEB AppsRetrieval test | Jina code q8 NDCG@10 0.15711 | Independent encoder retrieval on Python tasks and solutions; no version reranking |
+1. **Read the source.** Babel parses JavaScript and JSX and records functions, source lines, calls, and direct awaits from each indexed revision. CodeStrata only reads the indexed project's code.
+2. **Search and compare.** A local search process combines keyword and vector matches, examines the candidate source, and shows a nearby version when it provides a useful comparison. Its decision trace is visible in the app.
+3. **Follow the function.** CodeStrata can link some renamed or moved functions based on shared code structure. It leaves ambiguous matches unresolved.
+4. **Save a check.** A Behavior Watch follows the selected function through the linked versions and evaluates a rule such as `awaits policyCheck`. Each result points back to the relevant source.
 
-These evaluations test different things and should not be combined into one accuracy claim. [Validation methods and raw results](docs/validation.md) include the BGE baseline, model settings, and limitations. The current implementation has limited natural-language paraphrase matching; use callable names when possible. JavaScript/JSX is supported, while TypeScript and Python parsing are outside the app. Complex branches, repeated calls, deferred awaits, dynamic dispatch, and ambiguous refactors remain uncertain. Static evidence does not prove runtime behavior.
+The default search uses local feature vectors and a deterministic planner. See how the index and optional CPU models work. [Architecture notes](docs/architecture.md)
 
-The [official Jina AppsRetrieval JSON](docs/results/appsretrieval_jina.json) and [BGE baseline JSON](docs/results/appsretrieval_results.json) are generated MTEB task outputs. The full test contains 3,765 Python queries and 8,765 solutions. It evaluates independent CPU encoders, not historical version reranking. Jina's 0.15711 NDCG@10 exceeds the tested BGE configuration's 0.0505; broader competitive standing is unknown. The [controlled challenge](docs/results/challenge.json) tests version discrimination but uses development queries overlapping the demo. The [real-repository artifact](docs/results/repositories.json) uses pinned Async and Express snapshots with 60 source-reviewed, partly AI-assisted labels.
+**Scope.** The parser supports JavaScript and JSX. Queries work best when you name a function or call. Complex branches, delayed awaits, repeated calls, and ambiguous refactors can leave a result unverified. [Evidence rules](docs/architecture.md)
 
-## Reproduce and inspect
+## Validation
 
-The default app needs Node only. For optional full encoder evaluation, use Python 3.11+ in a virtual environment and install `pip install -r requirements.txt`, then run the commands in [validation](docs/validation.md). The first optional model run downloads weights and the full CPU test takes hours. The application itself runs with the default feature-hash vectors; optional quantized BGE and Jina require `npm ci --include=optional` and matching index/search embedding modes.
+| Check | Measured result | Scope |
+| --- | --- | --- |
+| Version challenge | 8 of 8 correct first results | Synthetic development examples that overlap the demo |
+| Async and Express retrieval | 0.6717 and 0.8577 NDCG@10 with BGE | 60 source-reviewed, partly AI-assisted queries across two pinned repositories |
+| MTEB AppsRetrieval | 0.15711 NDCG@10 with Jina code q8 | Encoder benchmark on Python retrieval tasks |
 
-The implementation separates [`src/`](src/) source analysis, indexing, retrieval, lineage, watch checks, and the local server from [`public/`](public/) presentation. It streams a real decision trace and exposes source locations, counterexamples, and uncertainties. The [architecture notes](docs/architecture.md) describe cache invalidation, request budgets, conservative links, and watch-state semantics. Evidence is generated from source syntax without executing the indexed repository.
+NDCG@10 measures how well the first ten search results are ranked. Each row covers a different test. [Validation methods and raw results](docs/validation.md)
 
-Run `npm run check`, `npm test`, `npm run evaluate`, and `npm run test:browser` for local verification. The browser suite requires `npx playwright install chromium firefox` once. [GitHub Actions](https://github.com/AdvayV/AgenticIntelligence/actions) runs Node tests on Linux and Windows, browser checks, the encoder bridge, and Docker smoke checks.
+Run `npm run check`, `npm test`, and `npm run evaluate` for local checks. For browser tests, install the browsers with `npx playwright install chromium firefox`, then run `npm run test:browser`. [GitHub Actions](https://github.com/AdvayV/AgenticIntelligence/actions/workflows/ci.yml)
+
+## Team and submission
+
+Built by **Advay Vivek** and **Kaavish Gogia** at **Vellore Institute of Technology** for the Agentic Code Intelligence track of the PRISM GenAI hackathon.
+
+[Submission PDF](submission-documents/VITUniversity_CodeStrata.pdf) · [Slides](submission-documents/VITUniversity_CodeStrata.pptx) · [AI disclosure](submission-documents/CodeStrata-AI-Disclosure.docx) · [Submission tag](https://github.com/AdvayV/AgenticIntelligence/tree/PRISM_GENAI_HACKATHON_Y2026)
