@@ -1,5 +1,7 @@
 # CodeStrata
 
+[![CPU verification](https://github.com/AdvayV/AgenticIntelligence/actions/workflows/ci.yml/badge.svg)](https://github.com/AdvayV/AgenticIntelligence/actions/workflows/ci.yml)
+
 **Find where a JavaScript function changed and see the lines that explain it.**
 
 CodeStrata searches a project's Git history for changes in how a function is written. Ask a question such as “Where did device pairing stop waiting for the policy check?” and it shows the matching versions, highlights the relevant source, and lets you save the rule to check again after you add more commits.
@@ -35,6 +37,8 @@ npm start
 2. In the first result, compare the highlighted line with the v1 example, which still has the `await`. Select `connectDevice` on the timeline to open its source.
 3. Select **Watch behavior** on the result. Keep the rule `awaits policyCheck` and select **Save and check**. The watch shows **v1 Holds → v2 Broken → v3 Holds**. Select a point to inspect its source, or select **Export evidence** to download the report as JSON.
 
+For a terminal-only check, run `npm run demo` to build the example index and `npm run evaluate` to write the synthetic challenge report to `evaluation-results/challenge.json`.
+
 On Windows PowerShell, use `npm.cmd` in place of `npm` if the execution policy blocks `npm.ps1`. If port 3000 is busy, set `$env:PORT = '3001'` in PowerShell or run `PORT=3001 npm start` in Bash, then open port 3001 in your browser.
 
 <details>
@@ -51,7 +55,7 @@ Open [http://127.0.0.1:3000](http://127.0.0.1:3000) after the container starts.
 
 ## Use your own repository
 
-From the CodeStrata folder, point the indexer at a local JavaScript or JSX Git repository. Replace the path and function names with ones from your project.
+From the CodeStrata folder, point the indexer at a local JavaScript or JSX Git repository. Replace the path and function names with ones from your project. The `--history` option walks the first-parent chain from `HEAD`. Changes from a merged branch can appear at the merge commit. Use `--refs <older>,<newer>` to compare specific commits or tags.
 
 ```sh
 npm run index -- --repo "/path/to/repo" --history 20 --out .codestrata/history.json
